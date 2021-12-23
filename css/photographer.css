@@ -78,3 +78,12 @@ form input {
 #message {
     height: 136px;
 }
+
+.hidden-for-at {
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -10000px;
+    width: 1px;
+}
