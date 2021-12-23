@@ -25,11 +25,41 @@
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
 				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+					<div id="firstNameInput">
+						<label for="firstName">Prénom</label>
+						<input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        />
+                    </div>
+                    <div id="lastNameInput">
+                        <label for="lastName">Nom</label>
+						<input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        />
+                    </div>
+                    <div id="emailInput">
+                        <label for="email">Email</label>
+						<input
+                        type="email"
+                        id="email"
+                        name="email"
+                        />
+                    </div>
+                    <div id="messageInput">
+                        <label for="message">Votre message</label>
+						<input
+                        type="text"
+                        id="message"
+                        name="message"
+                        />
 					</div>
-          <button class="contact_button">Envoyer</button>
+                    <div>
+                        <button class="contact_button">Envoyer</button>
+                    </div>
 				</form>
 			</div>
 		</div>
