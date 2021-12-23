@@ -21,6 +21,11 @@
     cursor: pointer;
 }
 
+.contact_button:hover, .contact_button:focus {
+    color: #312E2E;
+    background-color: #D3573C;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
