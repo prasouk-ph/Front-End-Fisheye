@@ -1,5 +1,5 @@
 function photographerFactory(data) {
-    const { name, portrait, city } = data;
+    const { name, portrait, city, country } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
@@ -10,7 +10,7 @@ function photographerFactory(data) {
         img.setAttribute("src", picture)
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        h3.textContent = city;
+        h3.textContent = `${city}, ${country}`;
         article.appendChild(img);
         article.appendChild(h2);
         article.appendChild(h3);
