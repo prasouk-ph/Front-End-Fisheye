@@ -14,7 +14,7 @@ function photographerFactory(data) {
         h2.textContent = name;
         h3.textContent = `${city}, ${country}`;
         description.textContent = tagline;
-        priceContainer.textContent = price;
+        priceContainer.textContent = `${price}€/jour`;
         article.appendChild(img);
         article.appendChild(h2);
         article.appendChild(h3);
