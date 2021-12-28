@@ -11,15 +11,19 @@ function photographerFactory(data) {
         const h3 = document.createElement( 'h3' );
         const slogan = document.createElement( 'p' );
         const priceContainer = document.createElement( 'p' );
+        const link = document.createElement( 'a' );
         h2.textContent = name;
         h3.textContent = `${city}, ${country}`;
         slogan.textContent = tagline;
         priceContainer.textContent = `${price}€/jour`;
+        link.href = "photographer.html";
+        link.textContent = "link"
         article.appendChild(img);
         article.appendChild(h2);
         article.appendChild(h3);
         article.appendChild(slogan);
         article.appendChild(priceContainer);
+        article.appendChild(link);
         return (article);
     }
     return { name, picture, getUserCardDOM }
