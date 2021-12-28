@@ -5,6 +5,10 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 
 header {
     display: flex;
@@ -65,4 +69,8 @@ h1 {
 
 .photographer_section article h2, .photographer_section article h3, .photographer_section article p {
     margin: 2px 0
+}
+
+.card-header {
+    text-align: center;
 }
