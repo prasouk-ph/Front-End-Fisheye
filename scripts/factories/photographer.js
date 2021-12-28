@@ -18,7 +18,7 @@ function photographerFactory(data) {
         h3.textContent = `${city}, ${country}`;
         slogan.textContent = tagline;
         priceContainer.textContent = `${price}€/jour`;
-        link.href = "photographer.html";
+        link.href = `photographer.html?id=${id}`;
         article.appendChild(headerCard);
         headerCard.appendChild(link);
         link.appendChild(img);
