@@ -57,23 +57,23 @@ h1 {
     border-radius: 50%;
 }
 
-.photographer_section article h3 {
+.card-content h3 {
     color: #901C1C;
     font-size: 80%;
 }
 
-.photographer_section article p:nth-of-type(1n) {
+.card-content p:nth-of-type(1n) {
     font-size: 60%;
 }
 
-.photographer_section article p:nth-of-type(2n) {
+.card-content p:nth-of-type(2n) {
     color: #525252;
 }
 
-.photographer_section article h2, .photographer_section article h3, .photographer_section article p {
-    margin: 2px 0
+.card-header h2, .card-content h3, .card-content p {
+    margin: 5px 0
 }
 
-.card-header {
+.card-header, .card-content {
     text-align: center;
 }

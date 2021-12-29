@@ -39,12 +39,13 @@ async function getMedia() {
 async function displayPhotographerData(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
 
-    const main = document.querySelector("#main");
-    const article = document.createElement( 'article' );
+    const photograpHeader = document.querySelector(".photograph-header");
     const h2 = document.createElement( 'h2' );
     h2.textContent = name;
-    article.appendChild(h2);
-    main.appendChild(article);
+    photograpHeader.appendChild(h2);
+    const h3 = document.createElement( 'h3' );
+    h3.textContent = `${city}, ${country}`;
+    photograpHeader.appendChild(h3);
 
     // const article = document.createElement( 'article' );
     // const headerCard = document.createElement( 'div' );
@@ -52,12 +53,12 @@ async function displayPhotographerData(data) {
     // const img = document.createElement( 'img' );
     // img.setAttribute("src", picture)
     // const h2 = document.createElement( 'h2' );
-    // const h3 = document.createElement( 'h3' );
+    
     // const slogan = document.createElement( 'p' );
     // const priceContainer = document.createElement( 'p' );
     // const link = document.createElement( 'a' );
     // h2.textContent = name;
-    // h3.textContent = `${city}, ${country}`;
+    
     // slogan.textContent = tagline;
     // priceContainer.textContent = `${price}€/jour`;
     // link.href = `photographer.html?id=${id}`;
