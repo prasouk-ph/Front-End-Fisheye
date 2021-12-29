@@ -1,15 +1,15 @@
 //Mettre le code JavaScript lié à la page photographer.html
-let photographerId = location.search.slice(4); // location search permit to get the url parameter, slice allow to keep only the id number
+let photographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
 
 async function init() {
     // Récupère les datas des photographes        
-    const { photographers } = await getPhotographers();
-    const { media } = await getMedia();
-    const currentPhotographer = photographers.filter((photograph) => photograph.id == photographerId)
-    const photographerMedia = media.filter((media) => media.photographerId == photographerId)
-    console.log(currentPhotographer);
-    console.log(photographerMedia);
-
+    const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
+    const { media } = await getMedia(); // collect every key/value from the key media
+    // filter allows to collect every key and value from array including key: photograph.id with value corresponding to the const photographerId
+    const currentPhotographerData = photographers.filter((photograph) => photograph.id == photographerId) 
+    const photographerMediaData = media.filter((media) => media.photographerId == photographerId)
+    displayPhotographerData(currentPhotographerData[0]);
+    // displayMedia(photographerMediaData);
 };
 
 init();
@@ -31,7 +31,50 @@ async function getMedia() {
     // convert json to js object
     const result = await response.json();
     return ({
-        // .photographers allow to select data from key photographers of json file
+        // .media allow to select data from key media of json file
         media: [...result.media]
     }) 
 }
+
+async function displayPhotographerData(data) {
+    const { name, portrait, city, country, tagline, price, id } = data;
+
+    const main = document.querySelector("#main");
+    const article = document.createElement( 'article' );
+    const h2 = document.createElement( 'h2' );
+    h2.textContent = name;
+    article.appendChild(h2);
+    main.appendChild(article);
+
+    // const article = document.createElement( 'article' );
+    // const headerCard = document.createElement( 'div' );
+    // headerCard.classList.add("card-header")
+    // const img = document.createElement( 'img' );
+    // img.setAttribute("src", picture)
+    // const h2 = document.createElement( 'h2' );
+    // const h3 = document.createElement( 'h3' );
+    // const slogan = document.createElement( 'p' );
+    // const priceContainer = document.createElement( 'p' );
+    // const link = document.createElement( 'a' );
+    // h2.textContent = name;
+    // h3.textContent = `${city}, ${country}`;
+    // slogan.textContent = tagline;
+    // priceContainer.textContent = `${price}€/jour`;
+    // link.href = `photographer.html?id=${id}`;
+    // article.appendChild(headerCard);
+    // headerCard.appendChild(link);
+    // link.appendChild(img);
+    // link.appendChild(h2);
+    // article.appendChild(h3);
+    // article.appendChild(slogan);
+    // article.appendChild(priceContainer);
+    // main.appendChild(article);
+
+    // const photographersSection = document.querySelector(".photographer_section");
+
+    // photographers.forEach((photographer) => {
+    //     const photographerModel = photographerFactory(photographer);
+    //     const userCardDOM = photographerModel.getUserCardDOM();
+    //     photographersSection.appendChild(userCardDOM);
+    // });
+};
