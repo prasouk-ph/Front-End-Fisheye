@@ -37,34 +37,44 @@ async function getMedia() {
 }
 
 async function displayPhotographerData(data) {
-    const { name, portrait, city, country, tagline, price, id } = data;
+    const { name, portrait, city, country, tagline } = data;
+    const picture = `assets/photographers/${portrait}`;
 
-    const photograpHeader = document.querySelector(".photograph-header");
+    const photographHeader = document.querySelector(".photograph-header");
+    const photographData = document.createElement( 'div' );
+    photographData.classList.add("photograph-data")
+    photographHeader.appendChild(photographData);
     const h2 = document.createElement( 'h2' );
     h2.textContent = name;
-    photograpHeader.appendChild(h2);
+    photographData.appendChild(h2);
     const h3 = document.createElement( 'h3' );
     h3.textContent = `${city}, ${country}`;
-    photograpHeader.appendChild(h3);
+    photographData.appendChild(h3);
+    const slogan = document.createElement( 'p' );
+    slogan.textContent = tagline;
+    photographData.appendChild(slogan);
+    const img = document.createElement( 'img' );
+    img.setAttribute("src", picture)
+    img.classList.add("photograph-portrait")
+    photographHeader.appendChild(img);
 
     // const article = document.createElement( 'article' );
     // const headerCard = document.createElement( 'div' );
     // headerCard.classList.add("card-header")
-    // const img = document.createElement( 'img' );
-    // img.setAttribute("src", picture)
+    
     // const h2 = document.createElement( 'h2' );
     
-    // const slogan = document.createElement( 'p' );
+    // 
     // const priceContainer = document.createElement( 'p' );
     // const link = document.createElement( 'a' );
     // h2.textContent = name;
     
-    // slogan.textContent = tagline;
+    
     // priceContainer.textContent = `${price}€/jour`;
     // link.href = `photographer.html?id=${id}`;
     // article.appendChild(headerCard);
     // headerCard.appendChild(link);
-    // link.appendChild(img);
+    
     // link.appendChild(h2);
     // article.appendChild(h3);
     // article.appendChild(slogan);

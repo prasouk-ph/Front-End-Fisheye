@@ -6,6 +6,30 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    align-items: center;
+}
+
+.photograph-portrait {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    order: 3;
+}
+
+.photograph-header h2 {
+    color: #D3573C;
+    font-size: 36px;
+}
+
+.photograph-header h3 {
+    color: #901C1C;
+}
+
+.photograph-header p {
+    color: #525252;
 }
 
 .contact_button {
@@ -19,6 +43,7 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    order: 2;
 }
 
 .contact_button:hover, .contact_button:focus {
