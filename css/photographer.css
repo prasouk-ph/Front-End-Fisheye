@@ -55,13 +55,30 @@ select {
     cursor: pointer;
 }
 
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin-top: 60px;
+}
 
+.card-container .card {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+    color: #901C1C;
+}
 
-
-
-
-
-
+.card-container .card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 
 .contact_button {
     font-size: 20px;
@@ -171,4 +188,5 @@ select {
 
 .heart-icon::after {
     content: attr(count);
+    padding-left: 5px;
 }
