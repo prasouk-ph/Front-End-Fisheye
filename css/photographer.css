@@ -32,7 +32,7 @@
     color: #525252;
 }
 
-.section-gallery {
+section {
     margin: 20px 100px;
 }
 
@@ -153,4 +153,22 @@ select {
     position: absolute;
     top: -10000px;
     width: 1px;
+}
+
+.photographer-extras {
+    background-color: #DB8876;
+    width: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: -webkit-fixed;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    border-radius: 5px;
+    font-size: 28px;
+}
+
+.heart-icon::after {
+    content: attr(count);
 }
