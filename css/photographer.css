@@ -39,7 +39,7 @@ section {
 .sort-form label {
     font-size: 20px;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 12px;
 }
 
 select {
@@ -174,7 +174,7 @@ select {
 
 .photographer-extras {
     background-color: #DB8876;
-    width: 400px;
+    width: 376px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -183,7 +183,7 @@ select {
     bottom: 0;
     right: 20px;
     border-radius: 5px;
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .heart-icon::after {
