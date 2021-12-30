@@ -32,6 +32,37 @@
     color: #525252;
 }
 
+.section-gallery {
+    margin: 20px 100px;
+}
+
+.sort-form label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+select {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -81,26 +112,26 @@
     text-align: center;
 }
 
-form {
+.modal-form {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
 }
 
-form label {
+.modal-form label {
     color: #312E2E;
     font-size: 36px;
 }
 
-form div {
+.modal-form div {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: self-start;
 }
 
-form input {
+.modal-form input {
     width: 100%;
     height: 68px;
     border: none;

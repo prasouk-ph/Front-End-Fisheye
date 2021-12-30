@@ -17,6 +17,22 @@
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+
+      <section class="section-gallery">
+        <form class="sort-form">
+            <label for="criterion">Trier par</label>
+            <select name="criterion" id="criterion">
+                <option value="popularity" selected>Popularité</option>
+                <option value="date">Date</option>
+                <option value="title">Titre</option>
+            </select>
+        </form>
+      </section>
+
+      <section class="card-container"> 
+
+      </section>
+
     </main>
     <div id="contact_modal">
         <div class="modal">
@@ -24,7 +40,7 @@
                 <h2>Contactez-moi</h2>
                 <img src="assets/icons/close.svg" onclick="closeModal()" />
             </header>
-            <form>
+            <form class="modal-form">
                 <div id="firstname-input">
                     <label for="firstname">Prénom</label>
                     <input

@@ -58,30 +58,6 @@ async function displayPhotographerData(data) {
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
 
-    // const article = document.createElement( 'article' );
-    // const headerCard = document.createElement( 'div' );
-    // headerCard.classList.add("card-header")
-    
-    // const h2 = document.createElement( 'h2' );
-    
-    // 
-    // const priceContainer = document.createElement( 'p' );
-    // const link = document.createElement( 'a' );
-    // h2.textContent = name;
-    
-    
-    // priceContainer.textContent = `${price}€/jour`;
-    // link.href = `photographer.html?id=${id}`;
-    // article.appendChild(headerCard);
-    // headerCard.appendChild(link);
-    
-    // link.appendChild(h2);
-    // article.appendChild(h3);
-    // article.appendChild(slogan);
-    // article.appendChild(priceContainer);
-    // main.appendChild(article);
-
-    // const photographersSection = document.querySelector(".photographer_section");
 
     // photographers.forEach((photographer) => {
     //     const photographerModel = photographerFactory(photographer);
