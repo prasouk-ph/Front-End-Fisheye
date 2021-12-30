@@ -41,7 +41,6 @@ async function getMedia() {
 async function displayPhotographerData(data) {
     const { name, portrait, city, country, tagline } = data;
     const picture = `assets/photographers/${portrait}`;
-    
     const photographHeader = document.querySelector(".photograph-header");
     const photographData = document.createElement( 'div' );
     photographData.classList.add("photograph-data")
@@ -59,42 +58,55 @@ async function displayPhotographerData(data) {
     img.setAttribute("src", picture)
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
-
-
-    // photographers.forEach((photographer) => {
-    //     const photographerModel = photographerFactory(photographer);
-    //     const userCardDOM = photographerModel.getUserCardDOM();
-    //     photographersSection.appendChild(userCardDOM);
-    // });
 };
 
 async function displayMedia(data, key) {
     const { date, id, image, likes, photographerId, price, title, video } = data;
 
+    // to generate new section tag
+    const gallery = document.querySelector(".section-gallery");
+    const cardContainer = document.createElement( 'div' );
+    cardContainer.classList.add("card-container");
+    gallery.appendChild(cardContainer);
+    
+    // to create media card
+    const card = document.createElement( 'div' );
+    card.classList.add("card");
+    cardContainer.appendChild(card);
+
     // when iterate, have to check if image key exist, if not video key should exist and will be use
     const picture = `assets/media/${key}/${image}`; 
     const preview = `assets/media/${key}/${video}`;
-    
-    console.log(data)
-;    // alert(image);
 
-    // const photographHeader = document.querySelector(".photograph-header");
-    // const photographData = document.createElement( 'div' );
-    // photographData.classList.add("photograph-data")
-    // photographHeader.appendChild(photographData);
-    // const h2 = document.createElement( 'h2' );
-    // h2.textContent = name;
-    // photographData.appendChild(h2);
-    // const h3 = document.createElement( 'h3' );
-    // h3.textContent = `${city}, ${country}`;
-    // photographData.appendChild(h3);
-    // const slogan = document.createElement( 'p' );
-    // slogan.textContent = tagline;
-    // photographData.appendChild(slogan);
-    // const img = document.createElement( 'img' );
-    // img.setAttribute("src", picture)
-    // img.classList.add("photograph-portrait")
-    // photographHeader.appendChild(img);
+    // to display media
+    switch (true) { 
+        case (data.hasOwnProperty('image')): // when (data has key 'image') is true
+        const img = document.createElement( 'img' );
+        img.setAttribute("src", picture);
+        card.appendChild(img);
+        break;
+        case (data.hasOwnProperty('video')): // when (data has key 'video') is true
+        const cardVideo = document.createElement( 'video' );
+        cardVideo.setAttribute("controls", "controls");
+        const sourceVideo = document.createElement( 'source' );
+        sourceVideo.setAttribute("src", preview);
+        sourceVideo.setAttribute("type", 'video/mp4');
+        cardVideo.appendChild(sourceVideo);
+        card.appendChild(cardVideo);        
+        break;
+    };
+
+    // to display card content
+    const cardContent = document.createElement( 'div' );
+    cardContent.classList.add("card-content");
+    card.appendChild(cardContent);
+    const h2 = document.createElement( 'h2' );
+    h2.textContent = title;
+    cardContent.appendChild(h2);
+    const icon = document.createElement( 'i' );
+    icon.classList.add("fas", "fa-heart", "heart-icon");
+    icon.setAttribute("count", likes);
+    cardContent.appendChild(icon);
 
 
     // photographers.forEach((photographer) => {
@@ -102,12 +114,4 @@ async function displayMedia(data, key) {
     //     const userCardDOM = photographerModel.getUserCardDOM();
     //     photographersSection.appendChild(userCardDOM);
     // });
-
-    // "id": 342550,
-	// 		"photographerId": 82,
-	// 		"title": "Fashion Yellow Beach",
-	// 		"image": "Fashion_Yellow_Beach.jpg",
-	// 		"likes": 62,
-	// 		"date": "2011-12-08",
-	// 		"price": 55
 };
