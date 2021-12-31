@@ -10,8 +10,8 @@ async function init() {
     const { name} = currentPhotographerData[0]
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId) // filter allows to collect all data from array when the array has the same photographId as the current photographer id
     displayPhotographerData(currentPhotographerData[0]);
-    displayMedia(photographerMediaData[0], name);
-    // console.log(photographerMediaData)
+    displayMedia(photographerMediaData, name);
+    // console.log(photographerMediaData);
 };
 
 init();
@@ -61,57 +61,53 @@ async function displayPhotographerData(data) {
 };
 
 async function displayMedia(data, key) {
-    const { date, id, image, likes, photographerId, price, title, video } = data;
-
+    // console.log(data[0]);
     // to generate new section tag
     const gallery = document.querySelector(".section-gallery");
     const cardContainer = document.createElement( 'div' );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
-    
-    // to create media card
-    const card = document.createElement( 'div' );
-    card.classList.add("card");
-    cardContainer.appendChild(card);
-
-    // when iterate, have to check if image key exist, if not video key should exist and will be use
-    const picture = `assets/media/${key}/${image}`; 
-    const preview = `assets/media/${key}/${video}`;
-
-    // to display media
-    switch (true) { 
-        case (data.hasOwnProperty('image')): // when (data has key 'image') is true
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture);
-        card.appendChild(img);
-        break;
-        case (data.hasOwnProperty('video')): // when (data has key 'video') is true
-        const cardVideo = document.createElement( 'video' );
-        cardVideo.setAttribute("controls", "controls");
-        const sourceVideo = document.createElement( 'source' );
-        sourceVideo.setAttribute("src", preview);
-        sourceVideo.setAttribute("type", 'video/mp4');
-        cardVideo.appendChild(sourceVideo);
-        card.appendChild(cardVideo);        
-        break;
-    };
-
-    // to display card content
-    const cardContent = document.createElement( 'div' );
-    cardContent.classList.add("card-content");
-    card.appendChild(cardContent);
-    const h2 = document.createElement( 'h2' );
-    h2.textContent = title;
-    cardContent.appendChild(h2);
-    const icon = document.createElement( 'i' );
-    icon.classList.add("fas", "fa-heart", "heart-icon");
-    icon.setAttribute("count", likes);
-    cardContent.appendChild(icon);
 
 
-    // photographers.forEach((photographer) => {
-    //     const photographerModel = photographerFactory(photographer);
-    //     const userCardDOM = photographerModel.getUserCardDOM();
-    //     photographersSection.appendChild(userCardDOM);
-    // });
+    data.forEach(media => {
+        const { date, id, image, likes, photographerId, price, title, video } = media;
+        // to create a new media card
+        const card = document.createElement( 'div' );
+        card.classList.add("card");
+        cardContainer.appendChild(card);
+
+        // when iterate, have to check if image key exist, if not video key should exist and will be use
+        const picture = `assets/media/${key}/${image}`; 
+        const preview = `assets/media/${key}/${video}`;
+
+        // to display media
+        switch (true) { 
+            case (media.hasOwnProperty('image')): // when (data has key 'image') is true
+            const img = document.createElement( 'img' );
+            img.setAttribute("src", picture);
+            card.appendChild(img);
+            break;
+            case (media.hasOwnProperty('video')): // when (data has key 'video') is true
+            const cardVideo = document.createElement( 'video' );
+            cardVideo.setAttribute("controls", "controls");
+            const sourceVideo = document.createElement( 'source' );
+            sourceVideo.setAttribute("src", preview);
+            sourceVideo.setAttribute("type", 'video/mp4');
+            cardVideo.appendChild(sourceVideo);
+            card.appendChild(cardVideo);        
+            break;
+        };
+
+        // to display card content
+        const cardContent = document.createElement( 'div' );
+        cardContent.classList.add("card-content");
+        card.appendChild(cardContent);
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = title;
+        cardContent.appendChild(h2);
+        const icon = document.createElement( 'i' );
+        icon.classList.add("fas", "fa-heart", "heart-icon");
+        icon.setAttribute("count", likes);
+        cardContent.appendChild(icon);
+    });
 };
