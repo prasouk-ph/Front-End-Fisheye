@@ -4,14 +4,14 @@ async function init() {
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
     const { media } = await getMedia(); // collect every key/value from the key media
     // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId
+    // or
+    // filter allows to collect all data from array when the array has the same photographId as the current photographer id
     const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId) ;
     const { name } = currentPhotographerData[0];
-    const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId); // filter allows to collect all data from array when the array has the same photographId as the current photographer id
+    const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId); 
     displayPhotographerData(currentPhotographerData[0]);
     displayMedia(photographerMediaData, name);
 };
-
-init();
 
 async function getPhotographers() {
     // import data from json
@@ -71,11 +71,9 @@ async function displayMedia(data, key) {
         card.classList.add("card");
         cardContainer.appendChild(card);
 
-        // when iterate, have to check if image key exist, if not video key should exist and will be use
+        // to display media ressource
         const picture = `assets/media/${key}/${image}`; 
         const preview = `assets/media/${key}/${video}`;
-
-        // to display media
         switch (true) { 
             case (media.hasOwnProperty('image')): // when (data has key 'image') is true
             const img = document.createElement( 'img' );
@@ -106,3 +104,5 @@ async function displayMedia(data, key) {
         cardContent.appendChild(icon);
     });
 };
+
+init();
