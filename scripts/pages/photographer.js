@@ -1,17 +1,14 @@
-//Mettre le code JavaScript lié à la page photographer.html
-let currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
-
 async function init() {
     // Récupère les datas des photographes        
+    const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
     const { media } = await getMedia(); // collect every key/value from the key media
     // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId
-    const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId) 
-    const { name} = currentPhotographerData[0]
-    const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId) // filter allows to collect all data from array when the array has the same photographId as the current photographer id
+    const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId) ;
+    const { name } = currentPhotographerData[0];
+    const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId); // filter allows to collect all data from array when the array has the same photographId as the current photographer id
     displayPhotographerData(currentPhotographerData[0]);
     displayMedia(photographerMediaData, name);
-    // console.log(photographerMediaData);
 };
 
 init();
@@ -61,13 +58,11 @@ async function displayPhotographerData(data) {
 };
 
 async function displayMedia(data, key) {
-    // console.log(data[0]);
     // to generate new section tag
     const gallery = document.querySelector(".section-gallery");
     const cardContainer = document.createElement( 'div' );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
-
 
     data.forEach(media => {
         const { date, id, image, likes, photographerId, price, title, video } = media;

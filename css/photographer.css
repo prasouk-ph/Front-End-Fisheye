@@ -70,8 +70,8 @@ select {
     flex-direction: column;
     border-radius: 5px;
     color: #901C1C;
-    max-width: 350px;
-    max-height: 300px;
+    width: 350px;
+    height: 300px;
 }
 
 .card img {
