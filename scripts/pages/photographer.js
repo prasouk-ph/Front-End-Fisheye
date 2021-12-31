@@ -36,7 +36,7 @@ async function getMedia() {
 }
 
 async function displayPhotographerData(data) {
-    const { name, portrait, city, country, tagline } = data;
+    const { name, portrait, city, country, tagline, price } = data;
     const picture = `assets/photographers/${portrait}`;
     const photographHeader = document.querySelector(".photograph-header");
     const photographData = document.createElement( 'div' );
@@ -57,6 +57,10 @@ async function displayPhotographerData(data) {
     img.setAttribute("src", picture)
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
+    const extraBox = document.querySelector(".photographer-extras");
+    const p = document.createElement( 'p' );
+    p.textContent = `${price}€ / jour`;
+    extraBox.appendChild(p);
 };
 
 async function displayMedia(data, key) {
@@ -67,7 +71,7 @@ async function displayMedia(data, key) {
     gallery.appendChild(cardContainer);
 
     data.forEach(media => {
-        const { date, id, image, likes, photographerId, price, title, video } = media;
+        const { date, image, likes, title, video } = media;
         // to create a new media card
         const card = document.createElement( 'div' );
         card.classList.add("card");
@@ -104,7 +108,13 @@ async function displayMedia(data, key) {
         icon.classList.add("fas", "fa-heart", "heart-icon");
         icon.setAttribute("count", likes);
         cardContent.appendChild(icon);
+
+        
     });
 };
 
 init();
+
+function addLike() {
+
+}
