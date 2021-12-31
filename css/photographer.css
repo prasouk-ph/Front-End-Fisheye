@@ -132,7 +132,7 @@ select {
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    text-align: left;
 }
 
 .modal-form {
@@ -196,3 +196,8 @@ select {
     content: attr(count);
     padding-left: 5px;
 }
+
+.modal_header {
+    margin-bottom: 50px;
+}
+

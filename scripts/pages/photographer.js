@@ -44,6 +44,8 @@ async function displayPhotographerData(data) {
     photographHeader.appendChild(photographData);
     const h2 = document.createElement( 'h2' );
     h2.textContent = name;
+    const modalLabel = document.querySelector(".modal_label");
+    modalLabel.innerHTML = `Contactez-moi <br>${name}`;
     photographData.appendChild(h2);
     const h3 = document.createElement( 'h3' );
     h3.textContent = `${city}, ${country}`;
