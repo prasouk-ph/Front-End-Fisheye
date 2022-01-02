@@ -19,7 +19,7 @@ async function getPhotographers() {
     // convert json to js object
     const result = await response.json();
     return ({
-        // .photographers allow to select data from key photographers of json file
+        // .photographers allow to select every data from key photographers of json file
         photographers: [...result.photographers]
     }) 
 }
@@ -88,7 +88,7 @@ async function displayMedia(data, key) {
             break;
             case (media.hasOwnProperty('video')): // when (data has key 'video') is true
             const cardVideo = document.createElement( 'video' );
-            cardVideo.setAttribute("controls", "controls");
+            // cardVideo.setAttribute("controls", "controls"); // without controls can't be played
             const sourceVideo = document.createElement( 'source' );
             sourceVideo.setAttribute("src", preview);
             sourceVideo.setAttribute("type", 'video/mp4');

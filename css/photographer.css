@@ -76,6 +76,7 @@ select {
     object-fit: cover;
     width: 21vw;
     height: 20vw;
+    border-radius: 5px;
 }
 
 .card-container .card-content {
@@ -200,4 +201,3 @@ select {
 .modal_header {
     margin-bottom: 50px;
 }
-
