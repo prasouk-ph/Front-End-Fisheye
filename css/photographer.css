@@ -201,3 +201,7 @@ select {
 .modal_header {
     margin-bottom: 50px;
 }
+
+.photographer-extras p {
+    order: 1;
+}

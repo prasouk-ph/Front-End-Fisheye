@@ -1,3 +1,5 @@
+let totalLikes = 0;
+
 async function init() {
     // Récupère les datas des photographes        
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
@@ -57,7 +59,10 @@ async function displayPhotographerData(data) {
     img.setAttribute("src", picture)
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
-    const extraBox = document.querySelector(".photographer-extras");
+    const main = document.querySelector("main");
+    const extraBox = document.createElement( 'div' );
+    extraBox.classList.add("photographer-extras");
+    main.appendChild(extraBox);
     const p = document.createElement( 'p' );
     p.textContent = `${price}€ / jour`;
     extraBox.appendChild(p);
@@ -69,6 +74,10 @@ async function displayMedia(data, key) {
     const cardContainer = document.createElement( 'div' );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
+    const icon = document.createElement( 'i' );
+    icon.classList.add("fas", "fa-heart", "heart-icon", "total-likes");
+    icon.setAttribute("count", totalLikes);
+    document.querySelector(".photographer-extras").appendChild(icon);
 
     data.forEach(media => {
         const { date, image, likes, title, video } = media;
@@ -107,21 +116,22 @@ async function displayMedia(data, key) {
         const icon = document.createElement( 'i' );
         icon.classList.add("fas", "fa-heart", "heart-icon");
         icon.setAttribute("count", likes);
+        totalLikes += (parseInt(icon.getAttribute("count")));
+        document.querySelector(".total-likes").setAttribute("count", totalLikes);
+        icon.addEventListener("click", addLike);
         cardContent.appendChild(icon);
 
-        
+        function addLike() {
+            let likesCount = icon.getAttribute("count");
+            let newCount = parseInt(likesCount) + 1;
+            totalLikes ++;
+            icon.setAttribute("count", newCount);
+            document.querySelector(".total-likes").setAttribute("count", totalLikes);
+        }
     });
 };
 
 init();
-
-function addLike() {
-
-}
-
-function sumLikes() {
-
-}
 
 function lightbox() {
 
