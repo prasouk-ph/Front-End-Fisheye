@@ -118,3 +118,15 @@ init();
 function addLike() {
 
 }
+
+function sumLikes() {
+
+}
+
+function lightbox() {
+
+}
+
+function sortMedia() {
+
+}
