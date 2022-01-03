@@ -5,10 +5,7 @@ async function init() {
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
     const { media } = await getMedia(); // collect every key/value from the key media
-    // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId
-    // or
-    // filter allows to collect all data from array when the array has the same photographId as the current photographer id
-    const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId) ;
+    const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
     const { name } = currentPhotographerData[0];
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
     const sortOptions = document.querySelector("#criterion");
@@ -73,19 +70,15 @@ async function getPhotographers() {
     // convert json to js object
     const result = await response.json();
     return ({
-        // .photographers allow to select every data from key photographers from json file
-        photographers: [...result.photographers]
+        photographers: [...result.photographers] // .photographers allow to select every data from key photographers from json file
     }) 
 }
 
 async function getMedia() {
-    // import data from json
-    const response = await fetch('data/photographers.json'); 
-    // convert json to js object
-    const result = await response.json();
+    const response = await fetch('data/photographers.json'); // import data from json
+    const result = await response.json(); // convert json to js object
     return ({
-        // .media allow to select every data from key media from json file
-        media: [...result.media]
+        media: [...result.media] // .media allow to select every data from key media from json file
     }) 
 }
 

@@ -13,8 +13,8 @@ function formValidate(event) {
     let lastName = document.querySelector("#lastname");
     let message = document.querySelector("#message");
     event.preventDefault();
-    console.log(firstName.value);
-    console.log(lastName.value);
-    console.log(message.value);
+    console.log(`Prénom : ${firstName.value}`);
+    console.log(`Nom : ${lastName.value}`);
+    console.log(`Message : ${message.value}`);
     closeModal();
 }

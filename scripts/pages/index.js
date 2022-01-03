@@ -1,11 +1,8 @@
     async function getPhotographers() {
-        // import data from json
-        const response = await fetch('data/photographers.json'); 
-        // convert json to js object
-        const result = await response.json();
+        const response = await fetch('./data/photographers.json'); // import data from json
+        const result = await response.json(); // convert json to js object
         return ({
-            // .photographers allow to select data from key photographers of json file
-            photographers: [...result.photographers]}) 
+            photographers: [...result.photographers]}) // .photographers allow to select data from key photographers of json file
     }
       
     async function displayData(photographers) {
