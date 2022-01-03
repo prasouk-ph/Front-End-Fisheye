@@ -1,6 +1,6 @@
 const gallery = document.querySelector(".section-gallery");
 
-async function init() {
+async function photographerInit() {
     // Récupère les datas des photographes        
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
@@ -177,7 +177,7 @@ async function displayMedia(data, key) {
     });
 };
 
-init();
+photographerInit();
 
 function lightbox() {
 
