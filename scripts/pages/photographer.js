@@ -54,13 +54,13 @@ async function init() {
         }
 
         switch (true) {
-            case (launcher.value == "title"):
+            case (sortOptions.value == "title"):
                 sortByTitle(photographerMediaData);
                 break
-            case (launcher.value == "date"):
+            case (sortOptions.value == "date"):
                 sortByDate(photographerMediaData);
                 break
-            case (launcher.value == "popularity"):
+            case (sortOptions.value == "popularity"):
                 sortByPopularity(photographerMediaData);
                 break
         }
