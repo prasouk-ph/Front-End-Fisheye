@@ -1,3 +1,5 @@
+const gallery = document.querySelector(".section-gallery");
+
 async function init() {
     // Récupère les datas des photographes        
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
@@ -9,8 +11,11 @@ async function init() {
     const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId) ;
     const { name } = currentPhotographerData[0];
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
+    const sortOptions = document.querySelector("#criterion");
+    sortOptions.addEventListener("change", sortMedia);
     displayPhotographerData(currentPhotographerData[0]);
-    sortByPopularity(photographerMediaData);    
+    sortMedia(photographerMediaData);
+    
 
     function sortByTitle(array) {
         array.sort(function(x, y) {
@@ -18,7 +23,7 @@ async function init() {
             if (x.title > y.title) return 1;
             return 0;
         });
-        displayMedia(photographerMediaData, name);
+        
     }
 
     function sortByDate(array) {
@@ -27,7 +32,6 @@ async function init() {
             if (x.date > y.date) return 1;
             return 0;
         });
-        displayMedia(photographerMediaData, name);
     }
 
     function sortByPopularity(array) {
@@ -36,15 +40,10 @@ async function init() {
             if (x.likes > y.likes) return 1;
             return 0;
         });
-        displayMedia(photographerMediaData, name);
     }
 
-    const sortOptions = document.querySelector("#criterion");
-    sortOptions.addEventListener("change", sortMedia);
-    
     function sortMedia() {
         const cardContainer = document.querySelector(".card-container");
-        const gallery = document.querySelector(".section-gallery");
         const extraBox = document.querySelector(".photographer-extras");
         const totalLikes = document.querySelector(".total-likes");
         
@@ -64,6 +63,7 @@ async function init() {
                 sortByPopularity(photographerMediaData);
                 break
         }
+        displayMedia(photographerMediaData, name);
     }
 };
 
@@ -122,7 +122,6 @@ async function displayPhotographerData(data) {
 
 async function displayMedia(data, key) {
     // to generate new section tag
-    const gallery = document.querySelector(".section-gallery");
     const cardContainer = document.createElement( 'div' );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
@@ -133,7 +132,7 @@ async function displayMedia(data, key) {
     document.querySelector(".photographer-extras").appendChild(icon);
 
     data.forEach(media => {
-        const { date, image, likes, title, video } = media;
+        const { image, likes, title, video } = media;
         // to create a new media card
         const card = document.createElement( 'div' );
         card.classList.add("card");
