@@ -1,5 +1,3 @@
-let totalLikes = 0;
-
 async function init() {
     // Récupère les datas des photographes        
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
@@ -10,9 +8,63 @@ async function init() {
     // filter allows to collect all data from array when the array has the same photographId as the current photographer id
     const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId) ;
     const { name } = currentPhotographerData[0];
-    const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId); 
+    const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
     displayPhotographerData(currentPhotographerData[0]);
-    displayMedia(photographerMediaData, name);
+    sortByPopularity(photographerMediaData);    
+
+    function sortByTitle(array) {
+        array.sort(function(x, y) {
+            if (x.title < y.title) return -1;
+            if (x.title > y.title) return 1;
+            return 0;
+        });
+        displayMedia(photographerMediaData, name);
+    }
+
+    function sortByDate(array) {
+        array.sort(function(x, y) {
+            if (x.date < y.date) return -1;
+            if (x.date > y.date) return 1;
+            return 0;
+        });
+        displayMedia(photographerMediaData, name);
+    }
+
+    function sortByPopularity(array) {
+        array.sort(function(x, y) {
+            if (x.likes < y.likes) return -1;
+            if (x.likes > y.likes) return 1;
+            return 0;
+        });
+        displayMedia(photographerMediaData, name);
+    }
+
+    const sortOptions = document.querySelector("#criterion");
+    sortOptions.addEventListener("change", sortMedia);
+    
+    function sortMedia() {
+        const cardContainer = document.querySelector(".card-container");
+        const gallery = document.querySelector(".section-gallery");
+        const extraBox = document.querySelector(".photographer-extras");
+        const totalLikes = document.querySelector(".total-likes");
+        
+        if (document.body.contains(cardContainer)) {
+            gallery.removeChild(cardContainer);
+            extraBox.removeChild(totalLikes);
+        }
+
+        switch (true) {
+            case (launcher.value == "title"):
+                sortByTitle(photographerMediaData);
+                break
+            case (launcher.value == "date"):
+                sortByDate(photographerMediaData);
+                break
+            case (launcher.value == "popularity"):
+                sortByPopularity(photographerMediaData);
+                break
+        }
+    }
 };
 
 async function getPhotographers() {
@@ -21,7 +73,7 @@ async function getPhotographers() {
     // convert json to js object
     const result = await response.json();
     return ({
-        // .photographers allow to select every data from key photographers of json file
+        // .photographers allow to select every data from key photographers from json file
         photographers: [...result.photographers]
     }) 
 }
@@ -32,7 +84,7 @@ async function getMedia() {
     // convert json to js object
     const result = await response.json();
     return ({
-        // .media allow to select data from key media of json file
+        // .media allow to select every data from key media from json file
         media: [...result.media]
     }) 
 }
@@ -74,9 +126,10 @@ async function displayMedia(data, key) {
     const cardContainer = document.createElement( 'div' );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
+    let totalLikesCount = 0;
     const icon = document.createElement( 'i' );
     icon.classList.add("fas", "fa-heart", "heart-icon", "total-likes");
-    icon.setAttribute("count", totalLikes);
+    icon.setAttribute("count", totalLikesCount);
     document.querySelector(".photographer-extras").appendChild(icon);
 
     data.forEach(media => {
@@ -116,17 +169,18 @@ async function displayMedia(data, key) {
         const icon = document.createElement( 'i' );
         icon.classList.add("fas", "fa-heart", "heart-icon");
         icon.setAttribute("count", likes);
-        totalLikes += (parseInt(icon.getAttribute("count")));
-        document.querySelector(".total-likes").setAttribute("count", totalLikes);
+        totalLikesCount += (parseInt(icon.getAttribute("count")));
+        const totalLikes = document.querySelector(".total-likes");
+        totalLikes.setAttribute("count", totalLikesCount);
         icon.addEventListener("click", addLike);
         cardContent.appendChild(icon);
 
         function addLike() {
             let likesCount = icon.getAttribute("count");
             let newCount = parseInt(likesCount) + 1;
-            totalLikes ++;
+            totalLikesCount ++;
             icon.setAttribute("count", newCount);
-            document.querySelector(".total-likes").setAttribute("count", totalLikes);
+            totalLikes.setAttribute("count", totalLikesCount);
         }
     });
 };
@@ -137,6 +191,7 @@ function lightbox() {
 
 }
 
-function sortMedia() {
 
-}
+
+
+
