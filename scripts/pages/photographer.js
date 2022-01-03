@@ -1,6 +1,6 @@
 const gallery = document.querySelector(".section-gallery");
 
-async function photographerinit() {
+async function init() {
     // Récupère les datas des photographes        
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
@@ -109,6 +109,7 @@ async function displayPhotographerData(data) {
     extraBox.classList.add("photographer-extras");
     main.appendChild(extraBox);
     const p = document.createElement( 'p' );
+    p.classList.add("price");
     p.textContent = `${price}€ / jour`;
     extraBox.appendChild(p);
 };
@@ -119,10 +120,11 @@ async function displayMedia(data, key) {
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
     let totalLikesCount = 0;
-    const icon = document.createElement( 'i' );
-    icon.classList.add("fas", "fa-heart", "heart-icon", "total-likes");
-    icon.setAttribute("count", totalLikesCount);
-    document.querySelector(".photographer-extras").appendChild(icon);
+    const totalLikes = document.createElement( 'p' );
+    totalLikes.classList.add("likes", "total-likes");
+    totalLikes.setAttribute("count", totalLikesCount);
+    totalLikes.textContent = totalLikesCount;
+    document.querySelector(".photographer-extras").appendChild(totalLikes);
 
     data.forEach(media => {
         const { image, likes, title, video } = media;
@@ -132,7 +134,7 @@ async function displayMedia(data, key) {
         cardContainer.appendChild(card);
 
         // to display media ressource
-        const picture = `assets/media/${key}/${image}`; 
+        const picture = `assets/media/${key}/${image}`;
         const preview = `assets/media/${key}/${video}`;
         switch (true) { 
             case (media.hasOwnProperty('image')): // when (data has key 'image') is true
@@ -158,21 +160,25 @@ async function displayMedia(data, key) {
         const h2 = document.createElement( 'h2' );
         h2.textContent = title;
         cardContent.appendChild(h2);
-        const icon = document.createElement( 'i' );
-        icon.classList.add("fas", "fa-heart", "heart-icon");
-        icon.setAttribute("count", likes);
-        totalLikesCount += (parseInt(icon.getAttribute("count")));
+        const likescount = document.createElement( 'p' );
+        likescount.classList.add("likes");
+        likescount.setAttribute("count", likes);
+        likescount.textContent = likes;
+        totalLikesCount += (parseInt(likescount.getAttribute("count")));
         const totalLikes = document.querySelector(".total-likes");
         totalLikes.setAttribute("count", totalLikesCount);
-        icon.addEventListener("click", addLike);
-        cardContent.appendChild(icon);
+        totalLikes.textContent = totalLikesCount;
+        likescount.addEventListener("click", addLike);
+        cardContent.appendChild(likescount);
 
         function addLike() {
-            let likesCount = icon.getAttribute("count");
-            let newCount = parseInt(likesCount) + 1;
+            let actualLikesCount = likescount.getAttribute("count");
+            let newCount = parseInt(actualLikesCount) + 1;
             totalLikesCount ++;
-            icon.setAttribute("count", newCount);
+            likescount.setAttribute("count", newCount);
+            likescount.textContent = newCount;
             totalLikes.setAttribute("count", totalLikesCount);
+            totalLikes.textContent = totalLikesCount;
         }
     });
 };
@@ -182,8 +188,6 @@ init();
 function lightbox() {
 
 }
-
-
 
 
 

@@ -197,15 +197,22 @@ textarea {
     font-size: 24px;
 }
 
-.heart-icon::after {
-    content: attr(count);
+.likes::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f004";
+    font-weight: bold;
     padding-left: 5px;
+    font-size: 24px;
+}
+
+.likes {
+    font-size: 24px;
 }
 
 .modal_header {
     margin-bottom: 50px;
 }
 
-.photographer-extras p {
+.price {
     order: 1;
 }

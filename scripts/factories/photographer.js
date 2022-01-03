@@ -14,6 +14,7 @@ function photographerFactory(data) {
         const h2 = document.createElement( 'h2' );
         const h3 = document.createElement( 'h3' );
         const slogan = document.createElement( 'p' );
+        slogan.classList.add("slogan");
         const priceContainer = document.createElement( 'p' );
         const link = document.createElement( 'a' );
         h2.textContent = name;
