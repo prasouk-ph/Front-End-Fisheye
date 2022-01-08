@@ -15,8 +15,8 @@ async function init() {
     const allMedia = Array.from(document.querySelectorAll(".media"));
     let actualIndex;
     allMedia.forEach(media => media.addEventListener("click", openLightbox))
-    
 
+    
     function sortByTitle(array) {
         array.sort(function(x, y) {
             if (x.title < y.title) return -1;
@@ -24,6 +24,7 @@ async function init() {
             return 0;
         });
     }
+
 
     function sortByDate(array) {
         array.sort(function(x, y) {
@@ -33,6 +34,7 @@ async function init() {
         });
     }
 
+
     function sortByPopularity(array) {
         array.sort(function(x, y) {
             if (x.likes < y.likes) return -1;
@@ -40,6 +42,7 @@ async function init() {
             return 0;
         });
     }
+
 
     function sortMedia() {
         const cardContainer = document.querySelector(".card-container");
@@ -66,74 +69,80 @@ async function init() {
     }
     
 
-  function openLightbox(event) {
-    const main = document.querySelector("#main");
-    const lightbox = document.createElement( 'div' );
-    lightbox.classList.add("lightbox");
-    main.after(lightbox);
-    const lightboxCloseButton = document.createElement( 'img' );
-    lightboxCloseButton.classList.add("lightbox__close");
-    lightboxCloseButton.setAttribute("src", "assets/icons/close.svg");
-    const lightboxNextButton = document.createElement( 'button' );
-    lightboxNextButton.classList.add("lightbox__next");
-    lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
-    const lightboxPreviousButton = document.createElement( 'button' );
-    lightboxPreviousButton.classList.add("lightbox__prev");
-    lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
-    const lightboxContainer = document.createElement( 'div' );
-    lightboxContainer.classList.add("lightbox__container");
-    lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
-    lightboxCloseButton.addEventListener("click", closeLightbox);
-    lightboxNextButton.addEventListener("click", nextMedia);
-    lightboxPreviousButton.addEventListener("click", previousMedia);
-    lightbox.style.display = "flex";
-    actualIndex = event.target.getAttribute("index");
-    displayMediaInLightbox(event.target.tagName);
+    function openLightbox(event) {
+        const main = document.querySelector("#main");
+        const lightbox = document.createElement( 'div' );
+        lightbox.classList.add("lightbox");
+        main.after(lightbox);
+        const lightboxCloseButton = document.createElement( 'img' );
+        lightboxCloseButton.classList.add("lightbox__close");
+        lightboxCloseButton.setAttribute("src", "assets/icons/close.svg");
+        const lightboxNextButton = document.createElement( 'button' );
+        lightboxNextButton.classList.add("lightbox__next");
+        lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
+        const lightboxPreviousButton = document.createElement( 'button' );
+        lightboxPreviousButton.classList.add("lightbox__prev");
+        lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
+        const lightboxContainer = document.createElement( 'div' );
+        lightboxContainer.classList.add("lightbox__container");
+        lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
+        actualIndex = event.target.getAttribute("index");
+        // event
+        lightboxCloseButton.addEventListener("click", closeLightbox);
+        lightboxNextButton.addEventListener("click", nextMedia);
+        lightboxPreviousButton.addEventListener("click", previousMedia);
 
-    function closeLightbox() {
-        lightbox.style.display = "none";
-    }
-      
-    function nextMedia() {
-        actualIndex++;
-        if (actualIndex > allMedia.length - 1) {
-            actualIndex = 0;
+        // Appearance
+        lightbox.style.display = "flex";
+        displayMediaInLightbox(event.target.tagName);
+
+
+        function closeLightbox() {
+            lightbox.style.display = "none";
         }
-        displayMediaInLightbox();
-    }
+        
 
-    function previousMedia() {
-        actualIndex--;
-        if (actualIndex < 0) {
-            actualIndex = allMedia.length - 1;
-        }
-        displayMediaInLightbox();
-    }
-
-    function displayMediaInLightbox() {
-        lightboxContainer.innerHTML = '';
-        if (allMedia[actualIndex].tagName == "IMG") {
-            let actualMedia = document.createElement( 'img' );
-            actualMedia.setAttribute("src", allMedia[actualIndex].src);
-            lightboxContainer.appendChild(actualMedia);
+        function nextMedia() {
+            actualIndex++;
+            if (actualIndex > allMedia.length - 1) {
+                actualIndex = 0;
+            }
+            displayMediaInLightbox();
         }
 
-        if (allMedia[actualIndex].tagName == "SOURCE") {
-            let actualMedia = document.createElement( 'video' );
-            actualMedia.setAttribute("src", allMedia[actualIndex].src);
-            actualMedia.setAttribute("type", 'video/mp4');
-            actualMedia.setAttribute("controls", 'controls');
-            lightboxContainer.appendChild(actualMedia);
+
+        function previousMedia() {
+            actualIndex--;
+            if (actualIndex < 0) {
+                actualIndex = allMedia.length - 1;
+            }
+            displayMediaInLightbox();
         }
 
-        const mediaTitle = document.createElement( 'h2' );
-        const titleAttr = allMedia[actualIndex].getAttribute("title")
-        mediaTitle.classList.add("media-title");
-        mediaTitle.textContent = titleAttr;
-        lightboxContainer.appendChild(mediaTitle);
-    }
-  }  
+
+        function displayMediaInLightbox() {
+            lightboxContainer.innerHTML = '';
+            if (allMedia[actualIndex].tagName == "IMG") {
+                let actualMedia = document.createElement( 'img' );
+                actualMedia.setAttribute("src", allMedia[actualIndex].src);
+                lightboxContainer.appendChild(actualMedia);
+            }
+            if (allMedia[actualIndex].tagName == "SOURCE") {
+                let actualMedia = document.createElement( 'video' );
+                actualMedia.setAttribute("src", allMedia[actualIndex].src);
+                actualMedia.setAttribute("type", 'video/mp4');
+                actualMedia.setAttribute("controls", 'controls');
+                lightboxContainer.appendChild(actualMedia);
+            }
+            const mediaTitle = document.createElement( 'h2' );
+            const titleAttr = allMedia[actualIndex].getAttribute("title")
+            mediaTitle.classList.add("media-title");
+            mediaTitle.textContent = titleAttr;
+            lightboxContainer.appendChild(mediaTitle);
+        }
+    }  
 };
+
 
 async function getPhotographers() {
     // import data from json
@@ -145,6 +154,7 @@ async function getPhotographers() {
     }) 
 }
 
+
 async function getMedia() {
     const response = await fetch('data/photographers.json'); // import data from json
     const result = await response.json(); // convert json to js object
@@ -152,6 +162,7 @@ async function getMedia() {
         media: [...result.media] // .media allow to select every data from key media from json file
     }) 
 }
+
 
 async function displayPhotographerData(data) {
     const { name, portrait, city, country, tagline, price } = data;
@@ -184,6 +195,7 @@ async function displayPhotographerData(data) {
     p.textContent = `${price}€ / jour`;
     extraBox.appendChild(p);
 };
+
 
 async function displayMedia(data, key) {
     // to generate new section tag
@@ -230,7 +242,6 @@ async function displayMedia(data, key) {
             card.appendChild(cardVideo);        
             break;
         };
-
         index++;
 
         // to display card content
@@ -250,6 +261,7 @@ async function displayMedia(data, key) {
         totalLikes.textContent = totalLikesCount;
         likescount.addEventListener("click", addLike);
         cardContent.appendChild(likescount);
+
 
         function addLike() {
             let actualLikesCount = likescount.getAttribute("count");
