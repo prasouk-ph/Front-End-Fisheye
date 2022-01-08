@@ -12,6 +12,9 @@ async function init() {
     sortOptions.addEventListener("change", sortMedia);
     displayPhotographerData(currentPhotographerData[0]);
     sortMedia(photographerMediaData);
+    const allMedia = Array.from(document.querySelectorAll(".media"));
+    let actualIndex;
+    allMedia.forEach(media => media.addEventListener("click", openLightbox))
     
 
     function sortByTitle(array) {
@@ -20,7 +23,6 @@ async function init() {
             if (x.title > y.title) return 1;
             return 0;
         });
-        
     }
 
     function sortByDate(array) {
@@ -62,6 +64,75 @@ async function init() {
         }
         displayMedia(photographerMediaData, name);
     }
+    
+
+  function openLightbox(event) {
+    const main = document.querySelector("#main");
+    const lightbox = document.createElement( 'div' );
+    lightbox.classList.add("lightbox");
+    main.after(lightbox);
+    const lightboxCloseButton = document.createElement( 'img' );
+    lightboxCloseButton.classList.add("lightbox__close");
+    lightboxCloseButton.setAttribute("src", "assets/icons/close.svg");
+    const lightboxNextButton = document.createElement( 'button' );
+    lightboxNextButton.classList.add("lightbox__next");
+    lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
+    const lightboxPreviousButton = document.createElement( 'button' );
+    lightboxPreviousButton.classList.add("lightbox__prev");
+    lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
+    const lightboxContainer = document.createElement( 'div' );
+    lightboxContainer.classList.add("lightbox__container");
+    lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
+    lightboxCloseButton.addEventListener("click", closeLightbox);
+    lightboxNextButton.addEventListener("click", nextMedia);
+    lightboxPreviousButton.addEventListener("click", previousMedia);
+    lightbox.style.display = "flex";
+    actualIndex = event.target.getAttribute("index");
+    displayMediaInLightbox(event.target.tagName);
+
+    function closeLightbox() {
+        lightbox.style.display = "none";
+    }
+      
+    function nextMedia() {
+        actualIndex++;
+        if (actualIndex > allMedia.length - 1) {
+            actualIndex = 0;
+        }
+        displayMediaInLightbox();
+    }
+
+    function previousMedia() {
+        actualIndex--;
+        if (actualIndex < 0) {
+            actualIndex = allMedia.length - 1;
+        }
+        displayMediaInLightbox();
+    }
+
+    function displayMediaInLightbox() {
+        lightboxContainer.innerHTML = '';
+        if (allMedia[actualIndex].tagName == "IMG") {
+            let actualMedia = document.createElement( 'img' );
+            actualMedia.setAttribute("src", allMedia[actualIndex].src);
+            lightboxContainer.appendChild(actualMedia);
+        }
+
+        if (allMedia[actualIndex].tagName == "SOURCE") {
+            let actualMedia = document.createElement( 'video' );
+            actualMedia.setAttribute("src", allMedia[actualIndex].src);
+            actualMedia.setAttribute("type", 'video/mp4');
+            actualMedia.setAttribute("controls", 'controls');
+            lightboxContainer.appendChild(actualMedia);
+        }
+
+        const mediaTitle = document.createElement( 'h2' );
+        const titleAttr = allMedia[actualIndex].getAttribute("title")
+        mediaTitle.classList.add("media-title");
+        mediaTitle.textContent = titleAttr;
+        lightboxContainer.appendChild(mediaTitle);
+    }
+  }  
 };
 
 async function getPhotographers() {
@@ -126,6 +197,7 @@ async function displayMedia(data, key) {
     totalLikes.textContent = totalLikesCount;
     document.querySelector(".photographer-extras").appendChild(totalLikes);
 
+    let index = 0;
     data.forEach(media => {
         const { image, likes, title, video } = media;
         // to create a new media card
@@ -140,6 +212,9 @@ async function displayMedia(data, key) {
             case (media.hasOwnProperty('image')): // when (data has key 'image') is true
             const img = document.createElement( 'img' );
             img.setAttribute("src", picture);
+            img.setAttribute("title", title);
+            img.setAttribute("index", index);
+            img.classList.add("media");
             card.appendChild(img);
             break;
             case (media.hasOwnProperty('video')): // when (data has key 'video') is true
@@ -148,10 +223,15 @@ async function displayMedia(data, key) {
             const sourceVideo = document.createElement( 'source' );
             sourceVideo.setAttribute("src", preview);
             sourceVideo.setAttribute("type", 'video/mp4');
+            sourceVideo.setAttribute("title", title);
+            sourceVideo.setAttribute("index", index);
+            sourceVideo.classList.add("media");
             cardVideo.appendChild(sourceVideo);
             card.appendChild(cardVideo);        
             break;
         };
+
+        index++;
 
         // to display card content
         const cardContent = document.createElement( 'div' );
@@ -183,70 +263,10 @@ async function displayMedia(data, key) {
     });
 };
 
+
+
+
+
+
 init();
 
-
-
-
-
-
-const lightbox = document.querySelector(".lightbox");
-const lightboxContainer = document.querySelector(".lightbox__container");
-const allMedia = Array.from(document.querySelectorAll(".media"));
-let actualIndex = 0;
-
-
-
-  function openLightbox(event) {
-    lightbox.style.display = "flex";
-    actualIndex = event.target.getAttribute("index");
-    displayMediaInLightbox(event.target.tagName);
-  }
-  
-  function nextMedia() {
-    actualIndex++;
-    if (actualIndex > allMedia.length - 1) {
-        actualIndex = 0;
-    }
-    console.log(actualIndex);
-    displayMediaInLightbox();
-  }
-
-  function previousMedia() {
-    actualIndex--;
-    if (actualIndex < 0) {
-        actualIndex = allMedia.length - 1;
-    }
-    console.log(actualIndex);
-    displayMediaInLightbox();
-  }
-
-  function displayMediaInLightbox() {
-    console.log(allMedia[actualIndex]);
-    lightboxContainer.innerHTML = '';
-    if (allMedia[actualIndex].tagName == "IMG") {
-        let actualMedia = document.createElement( 'img' );
-        actualMedia.setAttribute("src", allMedia[actualIndex].src);
-        lightboxContainer.appendChild(actualMedia);
-    }
-
-    if (allMedia[actualIndex].tagName == "VIDEO") {
-        let actualMedia = document.createElement( 'video' );
-        actualMedia.setAttribute("src", allMedia[actualIndex].src);
-        actualMedia.setAttribute("type", 'video/mp4');
-        actualMedia.setAttribute("controls", 'controls');
-        lightboxContainer.appendChild(actualMedia);
-    }
-
-    const mediaTitle = document.createElement( 'h2' );
-    const titleAttr = allMedia[actualIndex].getAttribute("title")
-    mediaTitle.classList.add("media-title");
-    mediaTitle.textContent = titleAttr;
-    lightboxContainer.appendChild(mediaTitle);
-  }
-
-  // Close the Modal
-  function closeLightbox() {
-    lightbox.style.display = "none";
-  }
-  
