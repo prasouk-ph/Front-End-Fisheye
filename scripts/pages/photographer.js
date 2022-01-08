@@ -17,8 +17,6 @@ async function init() {
     allMedia.forEach(media => media.addEventListener("click", openLightbox))
     const video = document.querySelector("video");
     video.addEventListener("click", openLightbox)
-    // const cards = document.querySelectorAll(".card");
-    // cards.forEach(card => card.addEventListener("click", openLightbox))
 
     
     function sortByTitle(array) {
@@ -98,7 +96,6 @@ async function init() {
 
         // Appearance
         lightbox.style.display = "flex";
-        // console.log(event.target.tagName);
         displayMediaInLightbox(event.target.tagName);
 
 
@@ -136,15 +133,6 @@ async function init() {
             }
             if (allMedia[actualIndex].tagName == "SOURCE") {
                 console.log(allMedia[actualIndex]);
-                let actualMedia = document.createElement( 'video' );
-                actualMedia.setAttribute("src", allMedia[actualIndex].src);
-                actualMedia.setAttribute("type", 'video/mp4');
-                actualMedia.setAttribute("controls", 'controls');
-                lightboxContainer.appendChild(actualMedia);
-            }
-            if (allMedia[actualIndex].tagName == "VIDEO") {
-                console.log(allMedia[actualIndex]);
-                alert("video");
                 let actualMedia = document.createElement( 'video' );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
                 actualMedia.setAttribute("type", 'video/mp4');
