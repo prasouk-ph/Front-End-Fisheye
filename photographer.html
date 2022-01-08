@@ -34,6 +34,36 @@
         </form>
       </section>
     </main>
+
+
+
+    <div class="mediaContainer">
+        <div class="mediaCard">
+          <img class="media" src="assets/media/Rhode Dubois/Animals_Majesty.jpg" index="0" title="Animals Majesty" onclick="openLightbox(event)">
+        </div>
+        <div class="mediaCard">
+          <img class="media" src="assets/media/Rhode Dubois/Event_ProductPitch.jpg" index="1" title="Pitch" onclick="openLightbox(event)">
+        </div>
+        <div class="mediaCard">
+          <img class="media" src="assets/media/Rhode Dubois/Fashion_Wings.jpg" index="2" title="Wings" onclick="openLightbox(event)">
+        </div>
+        <div class="mediaCard">
+          <video class="media" src="assets/media/Rhode Dubois/Animals_Puppiness.mp4" index="3" type="video/mp4" controls="controls" title="Puppy" onclick="openLightbox(event)">
+        </div>
+      </div>
+
+
+    <div class="lightbox">
+        <img class="lightbox__close" src="assets/icons/close.svg" onclick="closeLightbox()" />
+        <button class="lightbox__next" onclick="nextMedia()">&#10095</button>
+        <button class="lightbox__prev" onclick="previousMedia()">&#10094</button>
+    <div class="lightbox__container">
+    </div>
+    </div>
+
+   
+      
+
     <div id="contact_modal">
         <div class="modal">
             <header class="modal_header">

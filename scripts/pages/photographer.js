@@ -87,7 +87,7 @@ async function displayPhotographerData(data) {
     const picture = `assets/photographers/${portrait}`;
     const photographHeader = document.querySelector(".photograph-header");
     const photographData = document.createElement( 'div' );
-    photographData.classList.add("photograph-data")
+    photographData.classList.add("photograph-data");
     photographHeader.appendChild(photographData);
     const h2 = document.createElement( 'h2' );
     h2.textContent = name;
@@ -185,9 +185,68 @@ async function displayMedia(data, key) {
 
 init();
 
-function lightbox() {
-
-}
 
 
 
+
+
+const lightbox = document.querySelector(".lightbox");
+const lightboxContainer = document.querySelector(".lightbox__container");
+const allMedia = Array.from(document.querySelectorAll(".media"));
+let actualIndex = 0;
+
+
+
+  function openLightbox(event) {
+    lightbox.style.display = "flex";
+    actualIndex = event.target.getAttribute("index");
+    displayMediaInLightbox(event.target.tagName);
+  }
+  
+  function nextMedia() {
+    actualIndex++;
+    if (actualIndex > allMedia.length - 1) {
+        actualIndex = 0;
+    }
+    console.log(actualIndex);
+    displayMediaInLightbox();
+  }
+
+  function previousMedia() {
+    actualIndex--;
+    if (actualIndex < 0) {
+        actualIndex = allMedia.length - 1;
+    }
+    console.log(actualIndex);
+    displayMediaInLightbox();
+  }
+
+  function displayMediaInLightbox() {
+    console.log(allMedia[actualIndex]);
+    lightboxContainer.innerHTML = '';
+    if (allMedia[actualIndex].tagName == "IMG") {
+        let actualMedia = document.createElement( 'img' );
+        actualMedia.setAttribute("src", allMedia[actualIndex].src);
+        lightboxContainer.appendChild(actualMedia);
+    }
+
+    if (allMedia[actualIndex].tagName == "VIDEO") {
+        let actualMedia = document.createElement( 'video' );
+        actualMedia.setAttribute("src", allMedia[actualIndex].src);
+        actualMedia.setAttribute("type", 'video/mp4');
+        actualMedia.setAttribute("controls", 'controls');
+        lightboxContainer.appendChild(actualMedia);
+    }
+
+    const mediaTitle = document.createElement( 'h2' );
+    const titleAttr = allMedia[actualIndex].getAttribute("title")
+    mediaTitle.classList.add("media-title");
+    mediaTitle.textContent = titleAttr;
+    lightboxContainer.appendChild(mediaTitle);
+  }
+
+  // Close the Modal
+  function closeLightbox() {
+    lightbox.style.display = "none";
+  }
+  
