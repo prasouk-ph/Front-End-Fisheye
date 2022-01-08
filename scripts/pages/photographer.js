@@ -15,6 +15,10 @@ async function init() {
     const allMedia = Array.from(document.querySelectorAll(".media"));
     let actualIndex;
     allMedia.forEach(media => media.addEventListener("click", openLightbox))
+    const video = document.querySelector("video");
+    video.addEventListener("click", openLightbox)
+    // const cards = document.querySelectorAll(".card");
+    // cards.forEach(card => card.addEventListener("click", openLightbox))
 
     
     function sortByTitle(array) {
@@ -94,11 +98,13 @@ async function init() {
 
         // Appearance
         lightbox.style.display = "flex";
+        // console.log(event.target.tagName);
         displayMediaInLightbox(event.target.tagName);
 
 
         function closeLightbox() {
             lightbox.style.display = "none";
+            lightbox.remove();
         }
         
 
@@ -122,12 +128,23 @@ async function init() {
 
         function displayMediaInLightbox() {
             lightboxContainer.innerHTML = '';
+            console.log(allMedia[actualIndex]);
             if (allMedia[actualIndex].tagName == "IMG") {
                 let actualMedia = document.createElement( 'img' );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
                 lightboxContainer.appendChild(actualMedia);
             }
             if (allMedia[actualIndex].tagName == "SOURCE") {
+                console.log(allMedia[actualIndex]);
+                let actualMedia = document.createElement( 'video' );
+                actualMedia.setAttribute("src", allMedia[actualIndex].src);
+                actualMedia.setAttribute("type", 'video/mp4');
+                actualMedia.setAttribute("controls", 'controls');
+                lightboxContainer.appendChild(actualMedia);
+            }
+            if (allMedia[actualIndex].tagName == "VIDEO") {
+                console.log(allMedia[actualIndex]);
+                alert("video");
                 let actualMedia = document.createElement( 'video' );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
                 actualMedia.setAttribute("type", 'video/mp4');
@@ -236,8 +253,8 @@ async function displayMedia(data, key) {
             sourceVideo.setAttribute("src", preview);
             sourceVideo.setAttribute("type", 'video/mp4');
             sourceVideo.setAttribute("title", title);
-            sourceVideo.setAttribute("index", index);
             sourceVideo.classList.add("media");
+            cardVideo.setAttribute("index", index); // should be on cardVideo and not sourceVideo
             cardVideo.appendChild(sourceVideo);
             card.appendChild(cardVideo);        
             break;
