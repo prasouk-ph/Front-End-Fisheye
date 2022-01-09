@@ -1,5 +1,6 @@
 const gallery = document.querySelector(".section-gallery");
 
+
 async function init() {
     // Récupère les datas des photographes
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
@@ -8,12 +9,53 @@ async function init() {
     const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
     const { name } = currentPhotographerData[0];
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
-    const sortOptions = document.querySelector("#criterion");
-    sortOptions.addEventListener("change", sortMedia);
+    const sortOptions = document.querySelector(".current_value");
     displayPhotographerData(currentPhotographerData[0]);
     sortMedia(photographerMediaData);
+    let sortOptionsChanges = new MutationObserver(mutationsReaction); // define behavior when element change
+    sortOptionsChanges.observe(sortOptions, {childList: true} ); // function observe is the same as event listener
 
-    
+    const currentValue = document.querySelector(".current_value");
+    const options = document.querySelector(".options");
+    const optionPopularity = document.querySelector("#popularity");
+    const optionDate = document.querySelector("#date");
+    const optionTitle = document.querySelector("#title");
+    const sortButtons = document.querySelectorAll(".button_sort");
+
+    sortButtons.forEach(button => button.addEventListener("click", select))
+    document.addEventListener("click", closeDropdown);
+
+
+    function select(event) {
+        let choice = event.target;
+        currentValue.textContent = choice.textContent;
+        optionPopularity.style.display = "flex";
+        optionDate.style.display = "flex";
+        optionTitle.style.display = "flex";
+        options.style.display = "block";
+        switch (true) {
+            case (optionPopularity.textContent == currentValue.textContent):
+                optionPopularity.style.display = "none";
+                break
+            case (optionDate.textContent == currentValue.textContent):
+                optionDate.style.display = "none";
+                break
+            case (optionTitle.textContent == currentValue.textContent):
+                optionTitle.style.display = "none";
+                break
+        }
+    }
+
+
+    function closeDropdown(event) {
+        if (event.target.className.includes("current_value")) {
+            options.style.display = "block";
+        } else {
+            options.style.display = "none";
+        }
+    }
+
+
     function sortByTitle(array) {
         array.sort(function(x, y) {
             if (x.title < y.title) return -1;
@@ -52,18 +94,28 @@ async function init() {
         }
 
         switch (true) {
-            case (sortOptions.value == "title"):
+            case (sortOptions.textContent == "Titre"):
                 sortByTitle(photographerMediaData);
                 break
-            case (sortOptions.value == "date"):
+            case (sortOptions.textContent == "Date"):
                 sortByDate(photographerMediaData);
                 break
-            case (sortOptions.value == "popularity"):
+            case (sortOptions.textContent == "Popularité"):
                 sortByPopularity(photographerMediaData);
                 break
         }
         displayMedia(photographerMediaData, name);
     }
+
+    
+    function mutationsReaction(mutationsList) {
+        for(let mutation of mutationsList) {
+            if (mutation.type == 'childList') {
+                console.log('Changes detected');
+                sortMedia();
+            }
+        }
+    };
 };
 
 
@@ -301,41 +353,3 @@ async function displayMedia(data, key) {
 
 
 init();
-
-const currentValue = document.querySelector(".current_value");
-const options = document.querySelector(".options");
-const optionPopularity = document.querySelector("#popularity");
-const optionDate = document.querySelector("#date");
-const optionTitle = document.querySelector("#title");
-const sortButtons = document.querySelectorAll(".button_sort");
-
-sortButtons.forEach(button => button.addEventListener("click", select))
-document.addEventListener("click", closeDropdown);
-
-function select(event) {
-    let choice = event.target;
-    currentValue.textContent = choice.textContent;
-    optionPopularity.style.display = "flex";
-    optionDate.style.display = "flex";
-    optionTitle.style.display = "flex";
-    options.style.display = "block";
-    switch (true) {
-        case (optionPopularity.textContent == currentValue.textContent):
-            optionPopularity.style.display = "none";
-            break
-        case (optionDate.textContent == currentValue.textContent):
-            optionDate.style.display = "none";
-            break
-        case (optionTitle.textContent == currentValue.textContent):
-            optionTitle.style.display = "none";
-            break
-    }
-}
-
-function closeDropdown(event) {
-    if (event.target.className.includes("current_value")) {
-        options.style.display = "block";
-    } else {
-        options.style.display = "none";
-    }
-}
