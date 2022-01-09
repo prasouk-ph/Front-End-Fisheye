@@ -37,8 +37,7 @@ function formValidate(event) {
 firstName.addEventListener("input", firstCheck);
 lastName.addEventListener("input", lastCheck);
 message.addEventListener("input", messageCheck);
-
-
+document.addEventListener("keydown", keyboardAccess);
 
 // input conditions
 function firstCheck() {
@@ -95,4 +94,11 @@ function inputValid(input) {
     input.setAttribute("data-error-visible", "false");
     // to remove the space create by the error
     input.removeAttribute("data-error");
+}
+
+
+function keyboardAccess(event) {
+    if (event.key == "Escape") {
+        closeModal();
+    }
 }
