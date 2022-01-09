@@ -15,8 +15,8 @@ async function init() {
     const allMedia = Array.from(document.querySelectorAll(".media"));
     let actualIndex;
     allMedia.forEach(media => media.addEventListener("click", openLightbox))
-    const video = document.querySelector("video");
-    video.addEventListener("click", openLightbox)
+    const mediaVideos = document.querySelectorAll("video");
+    mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
 
     
     function sortByTitle(array) {
@@ -93,6 +93,7 @@ async function init() {
         lightboxCloseButton.addEventListener("click", closeLightbox);
         lightboxNextButton.addEventListener("click", nextMedia);
         lightboxPreviousButton.addEventListener("click", previousMedia);
+        document.addEventListener("keydown", keyboardAccess);
 
         // Appearance
         lightbox.style.display = "flex";
@@ -120,6 +121,18 @@ async function init() {
                 actualIndex = allMedia.length - 1;
             }
             displayMediaInLightbox();
+        }
+
+        function keyboardAccess(event) {
+            if (event.key == 'Escape') {
+                closeLightbox();
+            }
+            if (event.key == 'ArrowLeft') {
+                previousMedia();
+            }
+            if (event.key == 'ArrowRight') {
+                nextMedia();
+            }
         }
 
 
