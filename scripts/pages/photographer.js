@@ -73,19 +73,19 @@ async function init() {
 
     function openLightbox(event) {
         const main = document.querySelector("#main");
-        const lightbox = document.createElement( 'div' );
+        const lightbox = document.createElement( "div" );
         lightbox.classList.add("lightbox");
         main.after(lightbox);
-        const lightboxCloseButton = document.createElement( 'img' );
+        const lightboxCloseButton = document.createElement( "img" );
         lightboxCloseButton.classList.add("lightbox__close");
         lightboxCloseButton.setAttribute("src", "assets/icons/close.svg");
-        const lightboxNextButton = document.createElement( 'button' );
+        const lightboxNextButton = document.createElement( "button" );
         lightboxNextButton.classList.add("lightbox__next");
         lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
-        const lightboxPreviousButton = document.createElement( 'button' );
+        const lightboxPreviousButton = document.createElement( "button" );
         lightboxPreviousButton.classList.add("lightbox__prev");
         lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
-        const lightboxContainer = document.createElement( 'div' );
+        const lightboxContainer = document.createElement( "div" );
         lightboxContainer.classList.add("lightbox__container");
         lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
         actualIndex = event.target.getAttribute("index");
@@ -124,35 +124,37 @@ async function init() {
         }
 
         function keyboardAccess(event) {
-            if (event.key == 'Escape') {
-                closeLightbox();
-            }
-            if (event.key == 'ArrowLeft') {
-                previousMedia();
-            }
-            if (event.key == 'ArrowRight') {
-                nextMedia();
+            switch (true) {
+                case (event.key == "Escape"):
+                    closeLightbox();
+                    break
+                case (event.key == "ArrowLeft"):
+                    previousMedia();
+                    break
+                case (event.key == "ArrowRight"):
+                    nextMedia();
+                    break
             }
         }
 
 
         function displayMediaInLightbox() {
-            lightboxContainer.innerHTML = '';
+            lightboxContainer.innerHTML = "";
             console.log(allMedia[actualIndex]);
             if (allMedia[actualIndex].tagName == "IMG") {
-                let actualMedia = document.createElement( 'img' );
+                let actualMedia = document.createElement( "img" );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
                 lightboxContainer.appendChild(actualMedia);
             }
             if (allMedia[actualIndex].tagName == "SOURCE") {
                 console.log(allMedia[actualIndex]);
-                let actualMedia = document.createElement( 'video' );
+                let actualMedia = document.createElement( "video" );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
-                actualMedia.setAttribute("type", 'video/mp4');
-                actualMedia.setAttribute("controls", 'controls');
+                actualMedia.setAttribute("type", "video/mp4");
+                actualMedia.setAttribute("controls", "controls");
                 lightboxContainer.appendChild(actualMedia);
             }
-            const mediaTitle = document.createElement( 'h2' );
+            const mediaTitle = document.createElement( "h2" );
             const titleAttr = allMedia[actualIndex].getAttribute("title")
             mediaTitle.classList.add("media-title");
             mediaTitle.textContent = titleAttr;
@@ -164,7 +166,7 @@ async function init() {
 
 async function getPhotographers() {
     // import data from json
-    const response = await fetch('data/photographers.json'); 
+    const response = await fetch("data/photographers.json"); 
     // convert json to js object
     const result = await response.json();
     return ({
@@ -174,7 +176,7 @@ async function getPhotographers() {
 
 
 async function getMedia() {
-    const response = await fetch('data/photographers.json'); // import data from json
+    const response = await fetch("data/photographers.json"); // import data from json
     const result = await response.json(); // convert json to js object
     return ({
         media: [...result.media] // .media allow to select every data from key media from json file
@@ -186,29 +188,29 @@ async function displayPhotographerData(data) {
     const { name, portrait, city, country, tagline, price } = data;
     const picture = `assets/photographers/${portrait}`;
     const photographHeader = document.querySelector(".photograph-header");
-    const photographData = document.createElement( 'div' );
+    const photographData = document.createElement( "div" );
     photographData.classList.add("photograph-data");
     photographHeader.appendChild(photographData);
-    const h2 = document.createElement( 'h2' );
+    const h2 = document.createElement( "h2" );
     h2.textContent = name;
     const modalLabel = document.querySelector(".modal_label");
     modalLabel.innerHTML = `Contactez-moi <br>${name}`;
     photographData.appendChild(h2);
-    const h3 = document.createElement( 'h3' );
+    const h3 = document.createElement( "h3" );
     h3.textContent = `${city}, ${country}`;
     photographData.appendChild(h3);
-    const slogan = document.createElement( 'p' );
+    const slogan = document.createElement( "p" );
     slogan.textContent = tagline;
     photographData.appendChild(slogan);
-    const img = document.createElement( 'img' );
+    const img = document.createElement( "img" );
     img.setAttribute("src", picture)
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
     const main = document.querySelector("main");
-    const extraBox = document.createElement( 'div' );
+    const extraBox = document.createElement( "div" );
     extraBox.classList.add("photographer-extras");
     main.appendChild(extraBox);
-    const p = document.createElement( 'p' );
+    const p = document.createElement( "p" );
     p.classList.add("price");
     p.textContent = `${price}€ / jour`;
     extraBox.appendChild(p);
@@ -217,11 +219,11 @@ async function displayPhotographerData(data) {
 
 async function displayMedia(data, key) {
     // to generate new section tag
-    const cardContainer = document.createElement( 'div' );
+    const cardContainer = document.createElement( "div" );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
     let totalLikesCount = 0;
-    const totalLikes = document.createElement( 'p' );
+    const totalLikes = document.createElement( "p" );
     totalLikes.classList.add("likes", "total-likes");
     totalLikes.setAttribute("count", totalLikesCount);
     totalLikes.textContent = totalLikesCount;
@@ -231,7 +233,7 @@ async function displayMedia(data, key) {
     data.forEach(media => {
         const { image, likes, title, video } = media;
         // to create a new media card
-        const card = document.createElement( 'div' );
+        const card = document.createElement( "div" );
         card.classList.add("card");
         cardContainer.appendChild(card);
 
@@ -239,20 +241,20 @@ async function displayMedia(data, key) {
         const picture = `assets/media/${key}/${image}`;
         const preview = `assets/media/${key}/${video}`;
         switch (true) { 
-            case (media.hasOwnProperty('image')): // when (data has key 'image') is true
-            const img = document.createElement( 'img' );
+            case (media.hasOwnProperty("image")): // when (data has key "image") is true
+            const img = document.createElement( "img" );
             img.setAttribute("src", picture);
             img.setAttribute("title", title);
             img.setAttribute("index", index);
             img.classList.add("media");
             card.appendChild(img);
             break;
-            case (media.hasOwnProperty('video')): // when (data has key 'video') is true
-            const cardVideo = document.createElement( 'video' );
-            // cardVideo.setAttribute("controls", "controls"); // without controls can't be played
-            const sourceVideo = document.createElement( 'source' );
+            case (media.hasOwnProperty("video")): // when (data has key "video") is true
+            const cardVideo = document.createElement( "video" );
+            // cardVideo.setAttribute("controls", "controls"); // without controls can"t be played
+            const sourceVideo = document.createElement( "source" );
             sourceVideo.setAttribute("src", preview);
-            sourceVideo.setAttribute("type", 'video/mp4');
+            sourceVideo.setAttribute("type", "video/mp4");
             sourceVideo.setAttribute("title", title);
             sourceVideo.classList.add("media");
             cardVideo.setAttribute("index", index); // should be on cardVideo and not sourceVideo
@@ -263,13 +265,13 @@ async function displayMedia(data, key) {
         index++;
 
         // to display card content
-        const cardContent = document.createElement( 'div' );
+        const cardContent = document.createElement( "div" );
         cardContent.classList.add("card-content");
         card.appendChild(cardContent);
-        const h2 = document.createElement( 'h2' );
+        const h2 = document.createElement( "h2" );
         h2.textContent = title;
         cardContent.appendChild(h2);
-        const likescount = document.createElement( 'p' );
+        const likescount = document.createElement( "p" );
         likescount.classList.add("likes");
         likescount.setAttribute("count", likes);
         likescount.textContent = likes;
