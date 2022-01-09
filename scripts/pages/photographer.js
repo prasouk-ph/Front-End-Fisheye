@@ -188,8 +188,8 @@ async function displayMedia(data, key) {
         
 
         function addLike() {
-            let actualLikesCount = likescount.getAttribute("count");
-            let newCount = parseInt(actualLikesCount) + 1;
+            let currentLikesCount = likescount.getAttribute("count");
+            let newCount = parseInt(currentLikesCount) + 1;
             totalLikesCount ++;
             likescount.setAttribute("count", newCount);
             likescount.textContent = newCount;
@@ -221,7 +221,7 @@ async function displayMedia(data, key) {
         const lightboxContainer = document.createElement( "div" );
         lightboxContainer.classList.add("lightbox__container");
         lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
-        let actualIndex = event.target.getAttribute("index");
+        let currentIndex = event.target.getAttribute("index");
         // event
         lightboxCloseButton.addEventListener("click", closeLightbox);
         lightboxNextButton.addEventListener("click", nextMedia);
@@ -240,18 +240,18 @@ async function displayMedia(data, key) {
         
 
         function nextMedia() {
-            actualIndex++;
-            if (actualIndex > allMedia.length - 1) {
-                actualIndex = 0;
+            currentIndex++;
+            if (currentIndex > allMedia.length - 1) {
+                currentIndex = 0;
             }
             displayMediaInLightbox();
         }
 
 
         function previousMedia() {
-            actualIndex--;
-            if (actualIndex < 0) {
-                actualIndex = allMedia.length - 1;
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = allMedia.length - 1;
             }
             displayMediaInLightbox();
         }
@@ -274,20 +274,20 @@ async function displayMedia(data, key) {
 
         function displayMediaInLightbox() {
             lightboxContainer.innerHTML = "";
-            if (allMedia[actualIndex].tagName == "IMG") {
-                let actualMedia = document.createElement( "img" );
-                actualMedia.setAttribute("src", allMedia[actualIndex].src);
-                lightboxContainer.appendChild(actualMedia);
+            if (allMedia[currentIndex].tagName == "IMG") {
+                let currentMedia = document.createElement( "img" );
+                currentMedia.setAttribute("src", allMedia[currentIndex].src);
+                lightboxContainer.appendChild(currentMedia);
             }
-            if (allMedia[actualIndex].tagName == "SOURCE") {
-                let actualMedia = document.createElement( "video" );
-                actualMedia.setAttribute("src", allMedia[actualIndex].src);
-                actualMedia.setAttribute("type", "video/mp4");
-                actualMedia.setAttribute("controls", "controls");
-                lightboxContainer.appendChild(actualMedia);
+            if (allMedia[currentIndex].tagName == "SOURCE") {
+                let currentMedia = document.createElement( "video" );
+                currentMedia.setAttribute("src", allMedia[currentIndex].src);
+                currentMedia.setAttribute("type", "video/mp4");
+                currentMedia.setAttribute("controls", "controls");
+                lightboxContainer.appendChild(currentMedia);
             }
             const mediaTitle = document.createElement( "h2" );
-            const titleAttr = allMedia[actualIndex].getAttribute("title")
+            const titleAttr = allMedia[currentIndex].getAttribute("title")
             mediaTitle.classList.add("media-title");
             mediaTitle.textContent = titleAttr;
             lightboxContainer.appendChild(mediaTitle);
@@ -302,3 +302,46 @@ async function displayMedia(data, key) {
 
 init();
 
+const dropdown = document.querySelector(".value");
+const currentValue = document.querySelector(".current_value");
+const options = document.querySelector(".options");
+const optionPopularity = document.querySelector("#popularity");
+const optionDate = document.querySelector("#date");
+const optionTitle = document.querySelector("#title");
+
+currentValue.addEventListener("click", select);
+optionPopularity.addEventListener("click", select);
+optionDate.addEventListener("click", select);
+optionTitle.addEventListener("click", select);
+document.addEventListener("click", closeDropdown);
+
+function select(event) {
+    let choice = event.target;
+    currentValue.textContent = choice.textContent;
+    optionPopularity.style.display = "flex";
+    optionDate.style.display = "flex";
+    optionTitle.style.display = "flex";
+    options.style.display = "block";
+    options.classList.add("active");
+    switch (true) {
+        case (optionPopularity.textContent == currentValue.textContent):
+            optionPopularity.style.display = "none";
+            break
+        case (optionDate.textContent == currentValue.textContent):
+            optionDate.style.display = "none";
+            break
+        case (optionTitle.textContent == currentValue.textContent):
+            optionTitle.style.display = "none";
+            break
+    }
+}
+
+function closeDropdown(event) {
+    if (event.target.className.includes("current_value")) {
+        options.style.display = "block";
+    
+    } else {
+        options.style.display = "none";
+        options.classList.remove("active");
+    }
+}

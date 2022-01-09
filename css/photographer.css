@@ -133,7 +133,7 @@ select {
     padding: 35px;
     margin: auto;
     position: absolute;
-    top: 5%;
+    top: 3%;
     left: 25%;
     animation-name: modalopen;
     animation-duration: 0.4s;
@@ -251,7 +251,6 @@ textarea {
     font-weight: bold;
     padding-left: 5px;
     font-size: 24px;
-    
 }
 
 .card .likes:active {
@@ -349,6 +348,16 @@ video ~ div::after {
     }
 }
 
+@keyframes dropdownopen {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+    }
+}
+
 @keyframes cardreveal {
     from {
       opacity: 0;
@@ -358,4 +367,52 @@ video ~ div::after {
       opacity: 1;
       transform: scale(1);
     }
+}
+
+
+.dropdown {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+}
+
+.options {
+    margin: 0;
+    padding: 0;
+    display: none;
+    animation-name: dropdownopen;
+    animation-duration: 0.4s;
+    position: absolute;
+    z-index: 2;
+}
+
+.option_value {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    padding: 10px;
+    
+}
+
+.current_value {
+    position: relative;
+}
+
+.current_value::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f078";
+    font-weight: bold;
+    font-size: 10px;
+    position: absolute;
+    right: 5px;
+}
+
+
+.current_value:focus::after {
+    content: "\f077";
 }
