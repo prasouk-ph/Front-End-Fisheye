@@ -351,7 +351,6 @@ video ~ div::after {
 @keyframes dropdownopen {
     from {
       opacity: 0;
-      transform: translateY(-50px);
     }
     to {
       opacity: 1;
@@ -378,6 +377,24 @@ video ~ div::after {
     position: relative;
 }
 
+
+.button_sort {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    cursor: pointer;
+}
+
+.button_sort:hover {
+    color: #312E2E;
+    background-color: #DB8876;
+}
+
 .options {
     margin: 0;
     padding: 0;
@@ -388,7 +405,7 @@ video ~ div::after {
     z-index: 2;
 }
 
-.option_value {
+.options_value {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -396,7 +413,18 @@ video ~ div::after {
     width: 150px;
     height: 50px;
     padding: 10px;
-    
+    font-weight: bold;
+    position: relative;
+}
+
+
+.options_value::after {
+    content: "";
+    height: 1px;
+    width: 140px;
+    background-color: white;
+    position: absolute;
+    top: 0;
 }
 
 .current_value {
@@ -411,7 +439,6 @@ video ~ div::after {
     position: absolute;
     right: 5px;
 }
-
 
 .current_value:focus::after {
     content: "\f077";

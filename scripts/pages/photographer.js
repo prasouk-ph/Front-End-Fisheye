@@ -302,17 +302,14 @@ async function displayMedia(data, key) {
 
 init();
 
-const dropdown = document.querySelector(".value");
 const currentValue = document.querySelector(".current_value");
 const options = document.querySelector(".options");
 const optionPopularity = document.querySelector("#popularity");
 const optionDate = document.querySelector("#date");
 const optionTitle = document.querySelector("#title");
+const sortButtons = document.querySelectorAll(".button_sort");
 
-currentValue.addEventListener("click", select);
-optionPopularity.addEventListener("click", select);
-optionDate.addEventListener("click", select);
-optionTitle.addEventListener("click", select);
+sortButtons.forEach(button => button.addEventListener("click", select))
 document.addEventListener("click", closeDropdown);
 
 function select(event) {
@@ -322,7 +319,6 @@ function select(event) {
     optionDate.style.display = "flex";
     optionTitle.style.display = "flex";
     options.style.display = "block";
-    options.classList.add("active");
     switch (true) {
         case (optionPopularity.textContent == currentValue.textContent):
             optionPopularity.style.display = "none";
@@ -339,9 +335,7 @@ function select(event) {
 function closeDropdown(event) {
     if (event.target.className.includes("current_value")) {
         options.style.display = "block";
-    
     } else {
         options.style.display = "none";
-        options.classList.remove("active");
     }
 }
