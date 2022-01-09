@@ -78,7 +78,7 @@ async function init() {
         main.after(lightbox);
         const lightboxCloseButton = document.createElement( "img" );
         lightboxCloseButton.classList.add("lightbox__close");
-        lightboxCloseButton.setAttribute("src", "assets/icons/close.svg");
+        lightboxCloseButton.setAttribute("src", "assets/icons/redclose.svg");
         const lightboxNextButton = document.createElement( "button" );
         lightboxNextButton.classList.add("lightbox__next");
         lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
@@ -140,14 +140,12 @@ async function init() {
 
         function displayMediaInLightbox() {
             lightboxContainer.innerHTML = "";
-            console.log(allMedia[actualIndex]);
             if (allMedia[actualIndex].tagName == "IMG") {
                 let actualMedia = document.createElement( "img" );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
                 lightboxContainer.appendChild(actualMedia);
             }
             if (allMedia[actualIndex].tagName == "SOURCE") {
-                console.log(allMedia[actualIndex]);
                 let actualMedia = document.createElement( "video" );
                 actualMedia.setAttribute("src", allMedia[actualIndex].src);
                 actualMedia.setAttribute("type", "video/mp4");

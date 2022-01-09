@@ -165,7 +165,31 @@ select {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 30px;
 }
+
+
+.input-field::after {
+    content: attr(data-error);
+    font-size: 10px;
+    color: #000047;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: right;
+    line-height: 0.3;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.input-field[data-error-visible="true"]::after {
+opacity: 1;
+}
+
+.input-field[data-error-visible="true"] input {
+border: 2px solid #000047;
+}
+
 
 #message {
     height: 136px;
@@ -222,32 +246,10 @@ textarea {
     order: 1;
 }
 
-
-
-
-
-
-
-
-.mediaContainer {
-    display: flex;
-    justify-content: center;
-}
-
-.mediaContainer img, .mediaContainer video {
-    width: 300px;
-    height: 300px;
-}
-
-.media-title {
-    color: #901C1C;
-}
-
-
 .lightbox {
     display: none;
     background-color: white;
-    z-index: 20;
+    z-index: 10;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -259,17 +261,16 @@ textarea {
 .lightbox .lightbox__close {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 10%;
     width: 42px;
     height: 42px;
     cursor: pointer;
-    border: 2px solid #901C1C;
 }
 
 .lightbox__next {
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 10%;
     color: #901C1C;
     background-color: transparent;
     font-size: 62px;
@@ -280,7 +281,7 @@ textarea {
 .lightbox__prev {
     position: absolute;
     top: 50%;
-    left: 20px;
+    left: 10%;
     color: #901C1C;
     background-color: transparent;
     font-size: 62px;
@@ -290,5 +291,12 @@ textarea {
 
 .lightbox img, .lightbox video {
     width: 70vw;
-    height: 90vh;
+    height: 88vh;
+    object-position: 50% 30%;
+}
+
+.media-title {
+    color: #901C1C;
+    position: absolute;
+    bottom: 0;
 }
