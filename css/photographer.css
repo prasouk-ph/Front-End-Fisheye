@@ -75,6 +75,8 @@ select {
 .card {
     position: relative;
     transition: 0.3s;
+    animation-name: cardreveal;
+    animation-duration: 0.4s;
 }
 
 .card:hover {
@@ -133,6 +135,8 @@ select {
     position: absolute;
     top: 5%;
     left: 25%;
+    animation-name: modalopen;
+    animation-duration: 0.4s;
 }
 
 .modal header {
@@ -236,16 +240,22 @@ textarea {
     font-size: 24px;
 }
 
+.likes {
+    font-size: 24px;
+    transition: 0.2s;
+}
+
 .likes::after {
     font-family: "Font Awesome 5 Free";
     content: "\f004";
     font-weight: bold;
     padding-left: 5px;
     font-size: 24px;
+    
 }
 
-.likes {
-    font-size: 24px;
+.card .likes:active {
+    transform: scale(1.2);
 }
 
 .modal_header {
@@ -266,6 +276,8 @@ textarea {
     top: 0;
     justify-content: center;
     align-items: center;
+    animation-name: modalopen;
+    animation-duration: 0.4s;
 }
 
 .lightbox .lightbox__close {
@@ -325,4 +337,25 @@ video ~ div::after {
 
 .card:hover > video ~ div::after {
     display: none;
+}
+
+@keyframes modalopen {
+    from {
+      opacity: 0;
+      transform: translateY(-150px);
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+@keyframes cardreveal {
+    from {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
 }

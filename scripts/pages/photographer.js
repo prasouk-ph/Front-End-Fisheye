@@ -9,7 +9,6 @@ async function init() {
     const { name } = currentPhotographerData[0];
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
     const sortOptions = document.querySelector("#criterion");
-    let actualIndex;
     sortOptions.addEventListener("change", sortMedia);
     displayPhotographerData(currentPhotographerData[0]);
     sortMedia(photographerMediaData);
@@ -222,7 +221,7 @@ async function displayMedia(data, key) {
         const lightboxContainer = document.createElement( "div" );
         lightboxContainer.classList.add("lightbox__container");
         lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
-        actualIndex = event.target.getAttribute("index");
+        let actualIndex = event.target.getAttribute("index");
         // event
         lightboxCloseButton.addEventListener("click", closeLightbox);
         lightboxNextButton.addEventListener("click", nextMedia);
@@ -257,7 +256,7 @@ async function displayMedia(data, key) {
             displayMediaInLightbox();
         }
 
-        
+
         function keyboardAccess(event) {
             switch (true) {
                 case (event.key == "Escape"):
