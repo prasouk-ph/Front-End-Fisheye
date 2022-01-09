@@ -1,7 +1,7 @@
 const gallery = document.querySelector(".section-gallery");
 
 async function init() {
-    // Récupère les datas des photographes        
+    // Récupère les datas des photographes
     const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
     const { media } = await getMedia(); // collect every key/value from the key media
@@ -9,14 +9,10 @@ async function init() {
     const { name } = currentPhotographerData[0];
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
     const sortOptions = document.querySelector("#criterion");
+    let actualIndex;
     sortOptions.addEventListener("change", sortMedia);
     displayPhotographerData(currentPhotographerData[0]);
     sortMedia(photographerMediaData);
-    const allMedia = Array.from(document.querySelectorAll(".media"));
-    let actualIndex;
-    allMedia.forEach(media => media.addEventListener("click", openLightbox))
-    const mediaVideos = document.querySelectorAll("video");
-    mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
 
     
     function sortByTitle(array) {
@@ -69,96 +65,6 @@ async function init() {
         }
         displayMedia(photographerMediaData, name);
     }
-    
-
-    function openLightbox(event) {
-        const main = document.querySelector("#main");
-        const lightbox = document.createElement( "div" );
-        lightbox.classList.add("lightbox");
-        main.after(lightbox);
-        const lightboxCloseButton = document.createElement( "img" );
-        lightboxCloseButton.classList.add("lightbox__close");
-        lightboxCloseButton.setAttribute("src", "assets/icons/redclose.svg");
-        const lightboxNextButton = document.createElement( "button" );
-        lightboxNextButton.classList.add("lightbox__next");
-        lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
-        const lightboxPreviousButton = document.createElement( "button" );
-        lightboxPreviousButton.classList.add("lightbox__prev");
-        lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
-        const lightboxContainer = document.createElement( "div" );
-        lightboxContainer.classList.add("lightbox__container");
-        lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
-        actualIndex = event.target.getAttribute("index");
-        // event
-        lightboxCloseButton.addEventListener("click", closeLightbox);
-        lightboxNextButton.addEventListener("click", nextMedia);
-        lightboxPreviousButton.addEventListener("click", previousMedia);
-        document.addEventListener("keydown", keyboardAccess);
-
-        // Appearance
-        lightbox.style.display = "flex";
-        displayMediaInLightbox(event.target.tagName);
-
-
-        function closeLightbox() {
-            lightbox.style.display = "none";
-            lightbox.remove();
-        }
-        
-
-        function nextMedia() {
-            actualIndex++;
-            if (actualIndex > allMedia.length - 1) {
-                actualIndex = 0;
-            }
-            displayMediaInLightbox();
-        }
-
-
-        function previousMedia() {
-            actualIndex--;
-            if (actualIndex < 0) {
-                actualIndex = allMedia.length - 1;
-            }
-            displayMediaInLightbox();
-        }
-
-        function keyboardAccess(event) {
-            switch (true) {
-                case (event.key == "Escape"):
-                    closeLightbox();
-                    break
-                case (event.key == "ArrowLeft"):
-                    previousMedia();
-                    break
-                case (event.key == "ArrowRight"):
-                    nextMedia();
-                    break
-            }
-        }
-
-
-        function displayMediaInLightbox() {
-            lightboxContainer.innerHTML = "";
-            if (allMedia[actualIndex].tagName == "IMG") {
-                let actualMedia = document.createElement( "img" );
-                actualMedia.setAttribute("src", allMedia[actualIndex].src);
-                lightboxContainer.appendChild(actualMedia);
-            }
-            if (allMedia[actualIndex].tagName == "SOURCE") {
-                let actualMedia = document.createElement( "video" );
-                actualMedia.setAttribute("src", allMedia[actualIndex].src);
-                actualMedia.setAttribute("type", "video/mp4");
-                actualMedia.setAttribute("controls", "controls");
-                lightboxContainer.appendChild(actualMedia);
-            }
-            const mediaTitle = document.createElement( "h2" );
-            const titleAttr = allMedia[actualIndex].getAttribute("title")
-            mediaTitle.classList.add("media-title");
-            mediaTitle.textContent = titleAttr;
-            lightboxContainer.appendChild(mediaTitle);
-        }
-    }  
 };
 
 
@@ -280,6 +186,7 @@ async function displayMedia(data, key) {
         likescount.addEventListener("click", addLike);
         cardContent.appendChild(likescount);
 
+        
 
         function addLike() {
             let actualLikesCount = likescount.getAttribute("count");
@@ -291,6 +198,102 @@ async function displayMedia(data, key) {
             totalLikes.textContent = totalLikesCount;
         }
     });
+
+    const allMedia = Array.from(document.querySelectorAll(".media"));
+    allMedia.forEach(media => media.addEventListener("click", openLightbox))
+    const mediaVideos = document.querySelectorAll("video");
+    mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
+
+
+    function openLightbox(event) {
+        const main = document.querySelector("#main");
+        const lightbox = document.createElement( "div" );
+        lightbox.classList.add("lightbox");
+        main.after(lightbox);
+        const lightboxCloseButton = document.createElement( "img" );
+        lightboxCloseButton.classList.add("lightbox__close");
+        lightboxCloseButton.setAttribute("src", "assets/icons/redclose.svg");
+        const lightboxNextButton = document.createElement( "button" );
+        lightboxNextButton.classList.add("lightbox__next");
+        lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
+        const lightboxPreviousButton = document.createElement( "button" );
+        lightboxPreviousButton.classList.add("lightbox__prev");
+        lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
+        const lightboxContainer = document.createElement( "div" );
+        lightboxContainer.classList.add("lightbox__container");
+        lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
+        actualIndex = event.target.getAttribute("index");
+        // event
+        lightboxCloseButton.addEventListener("click", closeLightbox);
+        lightboxNextButton.addEventListener("click", nextMedia);
+        lightboxPreviousButton.addEventListener("click", previousMedia);
+        document.addEventListener("keydown", keyboardAccess);
+        // Appearance
+        lightbox.style.display = "flex";
+        displayMediaInLightbox(event.target.tagName);
+
+
+        function closeLightbox() {
+            lightbox.style.display = "none";
+            lightbox.remove();
+            document.removeEventListener("keydown", keyboardAccess);
+        }
+        
+
+        function nextMedia() {
+            actualIndex++;
+            if (actualIndex > allMedia.length - 1) {
+                actualIndex = 0;
+            }
+            displayMediaInLightbox();
+        }
+
+
+        function previousMedia() {
+            actualIndex--;
+            if (actualIndex < 0) {
+                actualIndex = allMedia.length - 1;
+            }
+            displayMediaInLightbox();
+        }
+
+        
+        function keyboardAccess(event) {
+            switch (true) {
+                case (event.key == "Escape"):
+                    closeLightbox();
+                    break
+                case (event.key == "ArrowLeft"):
+                    previousMedia();
+                    break
+                case (event.key == "ArrowRight"):
+                    nextMedia();
+                    break
+            }
+        }
+
+
+        function displayMediaInLightbox() {
+            lightboxContainer.innerHTML = "";
+            if (allMedia[actualIndex].tagName == "IMG") {
+                let actualMedia = document.createElement( "img" );
+                actualMedia.setAttribute("src", allMedia[actualIndex].src);
+                lightboxContainer.appendChild(actualMedia);
+            }
+            if (allMedia[actualIndex].tagName == "SOURCE") {
+                let actualMedia = document.createElement( "video" );
+                actualMedia.setAttribute("src", allMedia[actualIndex].src);
+                actualMedia.setAttribute("type", "video/mp4");
+                actualMedia.setAttribute("controls", "controls");
+                lightboxContainer.appendChild(actualMedia);
+            }
+            const mediaTitle = document.createElement( "h2" );
+            const titleAttr = allMedia[actualIndex].getAttribute("title")
+            mediaTitle.classList.add("media-title");
+            mediaTitle.textContent = titleAttr;
+            lightboxContainer.appendChild(mediaTitle);
+        }
+    }  
 };
 
 
