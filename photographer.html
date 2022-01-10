@@ -13,7 +13,7 @@
   <body>
     <header>
         <a aria-label="Fisheye" href="index.html" >
-            <img src="assets/images/logo.png" class="logo" alt="logo - Page d'accueil"/>
+            <img src="assets/images/logo.png" class="logo" alt="logo - Page d'accueil" target="_self"/>
         </a>
     </header>
 
@@ -24,11 +24,11 @@
       </div>
 
       <section class="section-gallery">
-        <div class="dropdown">
+        <div class="dropdown" aria-haspopup="true">
             <span>Trier par</span>
             <div class="dropdown_content">
                 <button class="button_sort current_value">Popularité</button>
-                <div class="options">
+                <div class="options" aria-expanded="true">
                     <button id="popularity" class="button_sort options_value">Popularité</button>
                     <button id="date" class="button_sort options_value">Date</button>
                     <button id="title" class="button_sort options_value">Titre</button>
@@ -44,49 +44,71 @@
             <header class="modal_header">
                 <h2 class="modal_label">Contactez-moi</h2>
                 <button class="modal_button">
-                    <img class="button_close" src="assets/icons/close.svg" alt="bouton fermeture" onclick="closeModal()" />
+                    <img class="button_close" src="assets/icons/close.svg" alt="bouton de fermeture" onclick="closeModal()" />
                 </button>
             </header>
             <form class="modal-form">
-                <div id="firstname-input" class="input-field">
-                    <label for="firstname">Prénom</label>
-                    <input
-                    type="text"
-                    id="firstname"
-                    name="firstname"
-                    />
-                </div>
+                <!-- <fieldset>
+                    <legend>Vos coordonnées</legend> -->
+                    <div id="firstname-input" class="input-field">
+                        <label for="firstname">Prénom</label>
+                        <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        aria-label="prénom"
+                        aria-required="true"
+                        autocomplete="name"
+                        placeholder="exemple : Paul"
+                        aria-describedby="firstname-format"
+                        />
+                        <span id="firstname-format" class="hidden-for-at">Le prénom est obligatoire, veuillez le remplir avec du texte (exemple : "paul")</span>
+                    </div>
 
-                <div id="lastname-input" class="input-field">
-                    <label for="lastname">Nom</label>
-                    <input
-                    type="text"
-                    id="lastname"
-                    name="lastname"
-                    />
-                </div>
+                    <div id="lastname-input" class="input-field">
+                        <label for="lastname">Nom</label>
+                        <input
+                        type="text"
+                        id="lastname"
+                        name="lastname"
+                        aria-label="nom"
+                        aria-required="true"
+                        autocomplete="family-name"
+                        placeholder="exemple : Dupont"
+                        aria-describedby="lastname-format"
+                        />
+                        <span id="lastname-format" class="hidden-for-at">Le nom est obligatoire, veuillez le remplir avec du texte (exemple : "dupont")</span>
+                    </div>
 
-                <div id="email-input" class="input-field">
-                    <label for="email">Email</label>
-                    <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    />
-                    <span id="email-format" class="hidden-for-at">xxx@nomdedomaine</span>
-                </div>
+                    <div id="email-input" class="input-field">
+                        <label for="email">Email</label>
+                        <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="exemple : pauldupont@gmail.com"
+                        aria-describedby="email-format"
+                        />
+                        <span id="email-format" class="hidden-for-at">xxx@nomdedomaine (exemple : "pauldupont@gmail.com")</span>
+                    </div>
 
-                <div id="message-input" class="input-field">
-                    <label for="message">Votre message</label>
-                    <textarea
-                    id="message"
-                    name="message"
-                    ></textarea>
-                </div>
+                    <div id="message-input" class="input-field">
+                        <label for="message">Votre message</label>
+                        <textarea
+                        id="message"
+                        name="message"
+                        aria-label="message"
+                        aria-required="true"
+                        placeholder="exemple : J'adore votre travail !"
+                        aria-describedby="message-format"
+                        ></textarea>
+                        <span id="message-format" class="hidden-for-at">Le message est obligatoire, veuillez le remplir avec du texte (exemple : "J'adore votre travail !")</span>
+                    </div>
                 
-                <div>
-                    <button class="contact_button submit_button" type="submit" onclick="formValidate(event)">Envoyer</button>
-                </div>
+                    <div>
+                        <button class="contact_button submit_button" type="submit" onclick="formValidate(event)">Envoyer</button>
+                    </div>
+                <!-- </fieldset> -->
             </form>
         </div>
 	</div>

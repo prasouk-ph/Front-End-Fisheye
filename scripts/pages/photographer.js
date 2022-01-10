@@ -188,7 +188,7 @@ async function displayMedia(data, key) {
     data.forEach(media => {
         const { image, likes, title, video } = media;
         // to create a new media card
-        const card = document.createElement( "div" );
+        const card = document.createElement( "article" );
         card.classList.add("card");
         cardContainer.appendChild(card);
 
