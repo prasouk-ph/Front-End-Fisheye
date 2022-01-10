@@ -11,9 +11,9 @@
 
 
   <body>
-    <header>
-        <a aria-label="Fisheye" href="index.html" >
-            <img src="assets/images/logo.png" class="logo" alt="logo - Page d'accueil" target="_self"/>
+    <header role="banner">
+        <a aria-label="Fisheye" href="index.html" target="_self">
+            <img src="assets/images/logo.png" class="logo" alt="logo - Page d'accueil" />
         </a>
     </header>
 
@@ -24,14 +24,22 @@
       </div>
 
       <section class="section-gallery">
-        <div class="dropdown" aria-haspopup="true">
+        <div class="dropdown">
             <span>Trier par</span>
-            <div class="dropdown_content">
-                <button class="button_sort current_value">Popularité</button>
-                <div class="options" aria-expanded="true">
-                    <button id="popularity" class="button_sort options_value">Popularité</button>
-                    <button id="date" class="button_sort options_value">Date</button>
-                    <button id="title" class="button_sort options_value">Titre</button>
+            <div class="dropdown_content" >
+                <button class="button_sort current_value" aria-label="Menu de tri" aria-haspopup="true" aria-expanded="false" aria-controls="options">
+                    Popularité
+                </button>
+                <div class="options" role="list">
+                    <button id="popularity" class="button_sort options_value" role="listitem">
+                        Popularité
+                    </button>
+                    <button id="date" class="button_sort options_value" role="listitem">
+                        Date
+                    </button>
+                    <button id="title" class="button_sort options_value" role="listitem">
+                        Titre
+                    </button>
                 </div>
             </div>
             
@@ -39,17 +47,15 @@
       </section>
     </main>
 
-    <div id="contact_modal">
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-describedby="modal_title">
         <div class="modal">
             <header class="modal_header">
-                <h2 class="modal_label">Contactez-moi</h2>
+                <h2 id="modal_title" class="modal_label">Contactez-moi</h2>
                 <button class="modal_button">
                     <img class="button_close" src="assets/icons/close.svg" alt="bouton de fermeture" onclick="closeModal()" />
                 </button>
             </header>
             <form class="modal-form">
-                <!-- <fieldset>
-                    <legend>Vos coordonnées</legend> -->
                     <div id="firstname-input" class="input-field">
                         <label for="firstname">Prénom</label>
                         <input
@@ -106,9 +112,10 @@
                     </div>
                 
                     <div>
-                        <button class="contact_button submit_button" type="submit" onclick="formValidate(event)">Envoyer</button>
+                        <button class="contact_button submit_button" type="submit" onclick="formValidate(event)">
+                            Envoyer
+                        </button>
                     </div>
-                <!-- </fieldset> -->
             </form>
         </div>
 	</div>
