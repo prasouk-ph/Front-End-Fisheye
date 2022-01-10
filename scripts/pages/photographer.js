@@ -237,11 +237,21 @@ async function displayMedia(data, key) {
         totalLikes.setAttribute("count", totalLikesCount);
         totalLikes.textContent = totalLikesCount;
         likescount.addEventListener("click", addLike);
+        likescount.addEventListener("keydown", addLikeWithKeyboard);
         cardContent.appendChild(likescount);
 
         
-
         function addLike() {
+            let currentLikesCount = likescount.getAttribute("count");
+            let newCount = parseInt(currentLikesCount) + 1;
+            totalLikesCount ++;
+            likescount.setAttribute("count", newCount);
+            likescount.textContent = newCount;
+            totalLikes.setAttribute("count", totalLikesCount);
+            totalLikes.textContent = totalLikesCount;
+        }
+
+        function addLikeWithKeyboard() {
             let currentLikesCount = likescount.getAttribute("count");
             let newCount = parseInt(currentLikesCount) + 1;
             totalLikesCount ++;
@@ -254,9 +264,16 @@ async function displayMedia(data, key) {
 
     const allMedia = Array.from(document.querySelectorAll(".media"));
     allMedia.forEach(media => media.addEventListener("click", openLightbox))
+    allMedia.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
     const mediaVideos = document.querySelectorAll("video");
     mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
 
+
+    function openLightboxWithKeyboard(event) {
+        if (event.key == "Enter") {
+            openLightbox(event);
+        }
+    }
 
     function openLightbox(event) {
         const main = document.querySelector("#main");
