@@ -253,7 +253,8 @@ async function displayMedia(data, key) {
             totalLikes.textContent = totalLikesCount;
         }
 
-        function addLikeWithKeyboard() {
+        function addLikeWithKeyboard(event) {
+            if (event.key == "Enter") {
             let currentLikesCount = likescount.getAttribute("count");
             let newCount = parseInt(currentLikesCount) + 1;
             totalLikesCount ++;
@@ -261,6 +262,7 @@ async function displayMedia(data, key) {
             likescount.textContent = newCount;
             totalLikes.setAttribute("count", totalLikesCount);
             totalLikes.textContent = totalLikesCount;
+            }
         }
     });
 

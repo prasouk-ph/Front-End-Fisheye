@@ -117,7 +117,7 @@ select {
     background-color: #DB8876;
 }
 
-.submit_button:hover, .submit_button:focus {
+.submit_button:hover {
     color: white;
     background-color: #000047;
 }
