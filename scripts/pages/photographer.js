@@ -12,8 +12,7 @@ async function init() {
     const sortOptions = document.querySelector(".current_value");
     displayPhotographerData(currentPhotographerData[0]);
     sortMedia(photographerMediaData);
-    let sortOptionsChanges = new MutationObserver(mutationsReaction); // define behavior when element change
-    sortOptionsChanges.observe(sortOptions, {childList: true} ); // function observe is the same as event listener
+    
 
     const currentValue = document.querySelector(".current_value");
     const options = document.querySelector(".options");
@@ -24,6 +23,8 @@ async function init() {
 
     sortButtons.forEach(button => button.addEventListener("click", select))
     document.addEventListener("click", closeDropdown);
+    let sortOptionsListener = new MutationObserver(mutationsReaction); // behave like event listener, detect when element change, define instructions when change detected with function in parameter
+    sortOptionsListener.observe(sortOptions, { childList: true } ); // define the element to observe and the type of change, childlist true detect textContent
 
 
     function select(event) {
@@ -107,11 +108,10 @@ async function init() {
         displayMedia(photographerMediaData, name);
     }
 
-    
+
     function mutationsReaction(mutationsList) {
         for(let mutation of mutationsList) {
-            if (mutation.type == 'childList') {
-                console.log('Changes detected');
+            if (mutation.addedNodes.length > 0) { // when textContent change
                 sortMedia();
             }
         }
@@ -346,10 +346,6 @@ async function displayMedia(data, key) {
         }
     }  
 };
-
-
-
-
 
 
 init();
