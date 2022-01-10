@@ -30,6 +30,7 @@ async function init() {
     function select(event) {
         let choice = event.target;
         currentValue.textContent = choice.textContent;
+        currentValue.setAttribute("aria-expanded", "true");
         optionPopularity.style.display = "flex";
         optionDate.style.display = "flex";
         optionTitle.style.display = "flex";
@@ -53,6 +54,7 @@ async function init() {
             options.style.display = "block";
         } else {
             options.style.display = "none";
+            currentValue.setAttribute("aria-expanded", "false");
         }
     }
 

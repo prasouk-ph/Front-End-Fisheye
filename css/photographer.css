@@ -112,7 +112,7 @@ select {
     order: 2;
 }
 
-.contact_button:hover, .contact_button:focus {
+.contact_button:hover {
     color: #312E2E;
     background-color: #DB8876;
 }
@@ -442,6 +442,6 @@ video ~ div::after {
     right: 5px;
 }
 
-.current_value:focus::after {
+.current_value[aria-expanded="true"]::after {
     content: "\f077";
 }
