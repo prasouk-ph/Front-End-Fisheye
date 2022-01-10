@@ -1,6 +1,7 @@
 const firstName = document.querySelector("#firstname");
 const lastName = document.querySelector("#lastname");
 const message = document.querySelector("#message");
+const buttonClose = document.querySelector(".modal_button");
 
 
 function displayModal() {
@@ -38,6 +39,7 @@ firstName.addEventListener("input", firstCheck);
 lastName.addEventListener("input", lastCheck);
 message.addEventListener("input", messageCheck);
 document.addEventListener("keydown", keyboardAccess);
+buttonClose.addEventListener("keydown", closeWithEnter);
 
 // input conditions
 function firstCheck() {
@@ -99,6 +101,12 @@ function inputValid(input) {
 
 function keyboardAccess(event) {
     if (event.key == "Escape") {
+        closeModal();
+    }
+}
+
+function closeWithEnter(event) {
+    if (event.key == "Enter") {
         closeModal();
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -30,8 +30,8 @@
                 <button class="button_sort current_value">Popularité</button>
                 <div class="options">
                     <button id="popularity" class="button_sort options_value">Popularité</button>
-                    <button id="date"class="button_sort options_value">Date</button>
-                    <button id="title"class="button_sort options_value">Titre</button>
+                    <button id="date" class="button_sort options_value">Date</button>
+                    <button id="title" class="button_sort options_value">Titre</button>
                 </div>
             </div>
             
@@ -43,7 +43,9 @@
         <div class="modal">
             <header class="modal_header">
                 <h2 class="modal_label">Contactez-moi</h2>
-                <img class="button_close" src="assets/icons/close.svg" onclick="closeModal()" />
+                <button class="modal_button">
+                    <img class="button_close" src="assets/icons/close.svg" alt="bouton fermeture" onclick="closeModal()" />
+                </button>
             </header>
             <form class="modal-form">
                 <div id="firstname-input" class="input-field">
@@ -77,7 +79,6 @@
                 <div id="message-input" class="input-field">
                     <label for="message">Votre message</label>
                     <textarea
-                    type="textarea"
                     id="message"
                     name="message"
                     ></textarea>

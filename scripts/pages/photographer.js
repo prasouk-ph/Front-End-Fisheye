@@ -281,7 +281,7 @@ async function displayMedia(data, key) {
         document.addEventListener("keydown", keyboardAccess);
         // Appearance
         lightbox.style.display = "flex";
-        displayMediaInLightbox(event.target.tagName);
+        displayMediaInLightbox();
 
 
         function closeLightbox() {

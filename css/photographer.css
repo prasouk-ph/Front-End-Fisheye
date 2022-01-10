@@ -148,6 +148,11 @@ select {
     cursor: pointer;
 }
 
+.modal_button {
+    border: none;
+    background-color: transparent;
+}
+
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
