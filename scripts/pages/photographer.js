@@ -201,6 +201,7 @@ async function displayMedia(data, key) {
             img.setAttribute("src", picture);
             img.setAttribute("title", title);
             img.setAttribute("index", index);
+            img.setAttribute("tabindex", "0");
             img.classList.add("media");
             card.appendChild(img);
             break;
@@ -229,6 +230,7 @@ async function displayMedia(data, key) {
         const likescount = document.createElement( "p" );
         likescount.classList.add("likes");
         likescount.setAttribute("count", likes);
+        likescount.setAttribute("tabindex", "0");
         likescount.textContent = likes;
         totalLikesCount += (parseInt(likescount.getAttribute("count")));
         const totalLikes = document.querySelector(".total-likes");
