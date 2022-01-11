@@ -10,6 +10,8 @@ const optionDate = document.querySelector("#date");
 const optionTitle = document.querySelector("#title");
 const logoLink = document.querySelector(".logo_link");
 const contactButton = document.querySelector(".contact_button");
+const main = document.querySelector("#main");
+const header = document.querySelector("header");
 
 
 function displayModal() {
@@ -24,6 +26,9 @@ function displayModal() {
     const mediaVideos = document.querySelectorAll("video");
     const likesCount = document.querySelectorAll(".likes");
 	modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false");
+    main.setAttribute("aria-hidden", "true");
+    header.setAttribute("aria-hidden", "true");
     document.addEventListener("keydown", keyboardAccess);
     buttonClose.focus();
     currentValue.tabIndex = -1;
@@ -41,6 +46,9 @@ function displayModal() {
 
 function closeModal() {
     modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+    main.setAttribute("aria-hidden", "false");
+    header.setAttribute("aria-hidden", "false");
     const allMedia = (document.querySelectorAll(".media"));
     const mediaVideos = document.querySelectorAll("video");
     const likesCount = document.querySelectorAll(".likes");
