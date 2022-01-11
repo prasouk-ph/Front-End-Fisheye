@@ -13,6 +13,13 @@ const contactButton = document.querySelector(".contact_button");
 
 
 function displayModal() {
+    // to prevent opening when sort menu is open
+    const sortMenu = document.querySelector(".button_sort");
+    let result = sortMenu.getAttribute("aria-expanded");
+    if (result == "true") {
+        return
+    }
+    
     const allMedia = (document.querySelectorAll(".media"));
     const mediaVideos = document.querySelectorAll("video");
     const likesCount = document.querySelectorAll(".likes");
