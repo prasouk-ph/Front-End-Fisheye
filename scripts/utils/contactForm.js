@@ -7,6 +7,7 @@ const buttonClose = document.querySelector(".modal_button");
 function displayModal() {
     const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
+    buttonClose.focus();
 }
 
 

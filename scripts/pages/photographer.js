@@ -345,10 +345,8 @@ async function displayMedia(data, key) {
         lightboxPreviousButton.addEventListener("click", previousMedia);
         document.addEventListener("keydown", lightboxNavigationWithKeyboard);
         // Appearance
-        
-            
-         
         lightbox.style.display = "flex";
+        lightboxCloseButton.focus();
         displayMediaInLightbox();
         
 
@@ -390,6 +388,9 @@ async function displayMedia(data, key) {
         function lightboxNavigationWithKeyboard(event) {
             switch (true) {
                 case (event.key == "Escape"):
+                    closeLightbox();
+                    break
+                case (event.key == "Enter" && event.target.className.includes("lightbox__close")):
                     closeLightbox();
                     break
                 case (event.key == "ArrowLeft"):
