@@ -265,29 +265,6 @@ async function displayMedia(data, key) {
         likescount.addEventListener("click", addLike);
         likescount.addEventListener("keydown", addLikeWithKeyboard);
         cardContent.appendChild(likescount);
-
-        
-        function addLike() {
-            let currentLikesCount = likescount.getAttribute("count");
-            let newCount = parseInt(currentLikesCount) + 1;
-            totalLikesCount ++;
-            likescount.setAttribute("count", newCount);
-            likescount.textContent = newCount;
-            totalLikes.setAttribute("count", totalLikesCount);
-            totalLikes.textContent = totalLikesCount;
-        }
-
-        function addLikeWithKeyboard(event) {
-            if (event.key == "Enter") {
-            let currentLikesCount = likescount.getAttribute("count");
-            let newCount = parseInt(currentLikesCount) + 1;
-            totalLikesCount ++;
-            likescount.setAttribute("count", newCount);
-            likescount.textContent = newCount;
-            totalLikes.setAttribute("count", totalLikesCount);
-            totalLikes.textContent = totalLikesCount;
-            }
-        }
     });
 
     const allMedia = Array.from(document.querySelectorAll(".media"));
