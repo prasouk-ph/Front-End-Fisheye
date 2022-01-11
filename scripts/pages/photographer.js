@@ -28,14 +28,14 @@ async function init() {
     
 
     sortButtons.forEach(button => button.addEventListener("click", openDropdown))
-    document.addEventListener("click", closeDropdown);
+    
     let sortOptionsListener = new MutationObserver(mutationsReaction); // behave like event listener, detect when element change, define instructions when change detected with function in parameter
     sortOptionsListener.observe(sortOptions, { childList: true } ); // define the element to observe and the type of change, childlist true detect textContent
     
 
     function openDropdown(event) {
         let choice = event.target;
-        
+        document.addEventListener("click", closeDropdown);
         currentValue.textContent = choice.textContent;
         currentValue.setAttribute("aria-expanded", "true");
         optionPopularity.style.display = "flex";
@@ -46,7 +46,7 @@ async function init() {
         contactButton.tabIndex = -1;
         allMedia.forEach(media => media.tabIndex = -1);
         mediaVideos.forEach(media => media.tabIndex = -1);
-        likesCount.forEach(media => media.tabIndex = -1);
+        likesCount.forEach(likes => likes.tabIndex = -1);
 
         switch (true) {
             case (optionPopularity.textContent == currentValue.textContent):
@@ -66,14 +66,17 @@ async function init() {
         if (event.target.className.includes("current_value")) {
             options.style.display = "block";
         } else {
+            document.removeEventListener("keydown", closeDropdown);
+            document.removeEventListener("click", closeDropdown);
             options.style.display = "none";
             currentValue.setAttribute("aria-expanded", "false");
             logoLink.tabIndex = 0;
             contactButton.tabIndex = 0;
             allMedia.forEach(media => media.tabIndex = 0);
-            mediaVideos.forEach(media => media.tabIndex = 0);
-            likesCount.forEach(likes => likes.tabIndex = 0);
+            mediaVideos.forEach(media => media.tabIndex  = 0);
+            likesCount.forEach(likes => likes.tabIndex  = 0);
         }
+        
     }
 
 
@@ -292,6 +295,17 @@ async function displayMedia(data, key) {
     mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
     mediaVideos.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
 
+    const currentValue = document.querySelector(".current_value");
+    const options = document.querySelector(".options");
+    const optionPopularity = document.querySelector("#popularity");
+    const optionDate = document.querySelector("#date");
+    const optionTitle = document.querySelector("#title");
+    const sortButtons = document.querySelectorAll(".button_sort");
+    const logoLink = document.querySelector(".logo_link");
+    const contactButton = document.querySelector(".contact_button");
+    const likesCount = document.querySelectorAll(".likes");
+    // const totalLikes = document.querySelector(".total-likes");
+
 
     function openLightboxWithKeyboard(event) {
         if (event.key == "Enter") {
@@ -300,6 +314,13 @@ async function displayMedia(data, key) {
     }
 
     function openLightbox(event) {
+        // to prevent opening when sort menu is open
+        const sortMenu = document.querySelector(".button_sort");
+        let result = sortMenu.getAttribute("aria-expanded");
+        if (result == "true") {
+            return
+        }
+        
         const main = document.querySelector("#main");
         const lightbox = document.createElement( "div" );
         lightbox.classList.add("lightbox");
@@ -307,6 +328,7 @@ async function displayMedia(data, key) {
         const lightboxCloseButton = document.createElement( "img" );
         lightboxCloseButton.classList.add("lightbox__close");
         lightboxCloseButton.setAttribute("src", "assets/icons/redclose.svg");
+        lightboxCloseButton.tabIndex = 0;
         const lightboxNextButton = document.createElement( "button" );
         lightboxNextButton.classList.add("lightbox__next");
         lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
@@ -323,14 +345,27 @@ async function displayMedia(data, key) {
         lightboxPreviousButton.addEventListener("click", previousMedia);
         document.addEventListener("keydown", lightboxNavigationWithKeyboard);
         // Appearance
+        
+            
+         
         lightbox.style.display = "flex";
         displayMediaInLightbox();
-
+        
 
         function closeLightbox() {
-            lightbox.style.display = "none";
             lightbox.remove();
             document.removeEventListener("keydown", lightboxNavigationWithKeyboard);
+            currentValue.tabIndex = 0;
+            optionPopularity.tabIndex = 0;
+            optionDate.tabIndex = 0;
+            optionTitle.tabIndex = 0;
+            sortButtons.tabIndex = 0;
+            logoLink.tabIndex = 0;
+            contactButton.tabIndex = 0;
+            allMedia.forEach(media => media.tabIndex = 0);
+            mediaVideos.forEach(media => media.tabIndex = 0);
+            likesCount.forEach(media => media.tabIndex = 0);
+            totalLikes.tabIndex = -1
         }
         
 
@@ -386,6 +421,18 @@ async function displayMedia(data, key) {
             mediaTitle.classList.add("media-title");
             mediaTitle.textContent = titleAttr;
             lightboxContainer.appendChild(mediaTitle);
+
+            currentValue.tabIndex = -1;
+            options.tabIndex = -1;
+            optionPopularity.tabIndex = -1;
+            optionDate.tabIndex = -1;
+            optionTitle.tabIndex = -1;
+            sortButtons.tabIndex = -1;
+            logoLink.tabIndex = -1;
+            contactButton.tabIndex = -1;
+            allMedia.forEach(media => media.tabIndex = -1);
+            mediaVideos.forEach(media => media.tabIndex = -1);
+            likesCount.forEach(media => media.tabIndex = -1);
         }
     }  
 };
