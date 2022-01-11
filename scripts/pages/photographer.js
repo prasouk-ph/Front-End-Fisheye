@@ -272,6 +272,7 @@ async function displayMedia(data, key) {
     allMedia.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
     const mediaVideos = document.querySelectorAll("video");
     mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
+    mediaVideos.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
 
 
     function openLightboxWithKeyboard(event) {
