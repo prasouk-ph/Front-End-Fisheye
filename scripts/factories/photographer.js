@@ -1,5 +1,5 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, tagline, price, id } = data;
+    const { name, portrait, city, country, tagline, price, id, alt } = data;
 
     const picture = `assets/photographers/${portrait}`;
 
@@ -8,7 +8,8 @@ function photographerFactory(data) {
         const headerCard = document.createElement( 'div' );
         headerCard.classList.add("card-header")
         const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", alt);
         const cardContent = document.createElement( 'div' );
         cardContent.classList.add("card-content")
         const h2 = document.createElement( 'h2' );

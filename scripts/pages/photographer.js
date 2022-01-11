@@ -163,7 +163,7 @@ async function getMedia() {
 
 
 async function displayPhotographerData(data) {
-    const { name, portrait, city, country, tagline, price } = data;
+    const { name, portrait, city, country, tagline, price, alt } = data;
     const picture = `assets/photographers/${portrait}`;
     const photographHeader = document.querySelector(".photograph-header");
     const photographData = document.createElement( "div" );
@@ -181,7 +181,8 @@ async function displayPhotographerData(data) {
     slogan.textContent = tagline;
     photographData.appendChild(slogan);
     const img = document.createElement( "img" );
-    img.setAttribute("src", picture)
+    img.setAttribute("src", picture);
+    img.setAttribute("alt", alt);
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
     const main = document.querySelector("main");
@@ -209,7 +210,7 @@ async function displayMedia(data, key) {
 
     let index = 0;
     data.forEach(media => {
-        const { image, likes, title, video } = media;
+        const { image, likes, title, video, alt } = media;
         // to create a new media card
         const card = document.createElement( "article" );
         card.classList.add("card");
@@ -224,6 +225,7 @@ async function displayMedia(data, key) {
             img.setAttribute("src", picture);
             img.setAttribute("title", title);
             img.setAttribute("index", index);
+            img.setAttribute("alt", alt);
             img.tabIndex = 0;
             img.classList.add("media");
             card.appendChild(img);
@@ -414,6 +416,7 @@ async function displayMedia(data, key) {
             if (allMedia[currentIndex].tagName == "IMG") {
                 let currentMedia = document.createElement( "img" );
                 currentMedia.setAttribute("src", allMedia[currentIndex].src);
+                currentMedia.setAttribute("alt", allMedia[currentIndex].alt);
                 lightboxContainer.appendChild(currentMedia);
             }
             if (allMedia[currentIndex].tagName == "SOURCE") {
@@ -421,6 +424,7 @@ async function displayMedia(data, key) {
                 currentMedia.setAttribute("src", allMedia[currentIndex].src);
                 currentMedia.setAttribute("type", "video/mp4");
                 currentMedia.setAttribute("controls", "controls");
+                currentMedia.setAttribute("title", allMedia[currentIndex].title);
                 lightboxContainer.appendChild(currentMedia);
             }
             const mediaTitle = document.createElement( "h2" );
