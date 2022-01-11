@@ -203,7 +203,7 @@ async function displayMedia(data, key) {
             img.setAttribute("src", picture);
             img.setAttribute("title", title);
             img.setAttribute("index", index);
-            img.setAttribute("tabindex", "0");
+            img.tabIndex = 0;
             img.classList.add("media");
             card.appendChild(img);
             break;
@@ -216,6 +216,7 @@ async function displayMedia(data, key) {
             sourceVideo.setAttribute("title", title);
             sourceVideo.classList.add("media");
             cardVideo.setAttribute("index", index); // should be on cardVideo and not sourceVideo
+            cardVideo.tabIndex = 0;
             cardVideo.appendChild(sourceVideo);
             card.appendChild(cardVideo);        
             break;
@@ -232,7 +233,7 @@ async function displayMedia(data, key) {
         const likescount = document.createElement( "p" );
         likescount.classList.add("likes");
         likescount.setAttribute("count", likes);
-        likescount.setAttribute("tabindex", "0");
+        likescount.tabIndex = 0;
         likescount.textContent = likes;
         totalLikesCount += (parseInt(likescount.getAttribute("count")));
         const totalLikes = document.querySelector(".total-likes");
