@@ -321,9 +321,16 @@ async function displayMedia(data, key) {
         }
         
         const main = document.querySelector("#main");
+        const header = document.querySelector("header");
+        main.setAttribute("aria-hidden", "true");
+        header.setAttribute("aria-hidden", "true");
         const lightbox = document.createElement( "div" );
         lightbox.classList.add("lightbox");
         main.after(lightbox);
+        const lightboxTitle = document.createElement( "h2" );
+        lightboxTitle.setAttribute("aria-label", "Galerie");
+        lightboxTitle.classList.add("hidden-for-at");
+        lightboxTitle.textContent = "Galerie";
         const lightboxCloseButton = document.createElement( "img" );
         lightboxCloseButton.classList.add("lightbox__close");
         lightboxCloseButton.setAttribute("src", "assets/icons/redclose.svg");
@@ -336,7 +343,7 @@ async function displayMedia(data, key) {
         lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
         const lightboxContainer = document.createElement( "div" );
         lightboxContainer.classList.add("lightbox__container");
-        lightbox.append(lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
+        lightbox.append(lightboxTitle, lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
         let currentIndex = event.target.getAttribute("index");
         // event
         lightboxCloseButton.addEventListener("click", closeLightbox);

@@ -1,6 +1,9 @@
 const firstName = document.querySelector("#firstname");
+const firstNameError = document.querySelector("#firstname-format");
 const lastName = document.querySelector("#lastname");
+const lastNameError = document.querySelector("#lastname-format");
 const message = document.querySelector("#message");
+const messageError = document.querySelector("#message-format");
 const buttonClose = document.querySelector(".modal_button");
 const modal = document.querySelector("#contact_modal");
 const currentValue = document.querySelector(".current_value");
@@ -99,9 +102,11 @@ function firstCheck() {
     let input = document.querySelector("#firstname-input");
     if (value.length < 2 || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
+        firstNameError.setAttribute("aria-hidden", "false");
         return false;
     } else {
         inputValid(input);
+        firstNameError.setAttribute("aria-hidden", "true");
         return true;
     }
 }
@@ -113,9 +118,11 @@ function lastCheck() {
     let input = document.querySelector("#lastname-input");
     if (value.length < 2 || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
+        lastNameError.setAttribute("aria-hidden", "false");
         return false;
     } else {
         inputValid(input);
+        lastNameError.setAttribute("aria-hidden", "true");
         return true;
     }
 }
@@ -126,9 +133,11 @@ function messageCheck() {
     let input = document.querySelector("#message-input");
     if (value.length < 2) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
+        messageError.setAttribute("aria-hidden", "false");
         return false;
     } else {
         inputValid(input);
+        messageError.setAttribute("aria-hidden", "true");
         return true;
     }
 }
