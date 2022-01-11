@@ -2,18 +2,53 @@ const firstName = document.querySelector("#firstname");
 const lastName = document.querySelector("#lastname");
 const message = document.querySelector("#message");
 const buttonClose = document.querySelector(".modal_button");
+const modal = document.querySelector("#contact_modal");
+const currentValue = document.querySelector(".current_value");
+const options = document.querySelector(".options");
+const optionPopularity = document.querySelector("#popularity");
+const optionDate = document.querySelector("#date");
+const optionTitle = document.querySelector("#title");
+const logoLink = document.querySelector(".logo_link");
+const contactButton = document.querySelector(".contact_button");
 
 
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
+    const allMedia = (document.querySelectorAll(".media"));
+    const mediaVideos = document.querySelectorAll("video");
+    const likesCount = document.querySelectorAll(".likes");
 	modal.style.display = "block";
+    document.addEventListener("keydown", keyboardAccess);
     buttonClose.focus();
+    currentValue.tabIndex = -1;
+    options.tabIndex = -1;
+    optionPopularity.tabIndex = -1;
+    optionDate.tabIndex = -1;
+    optionTitle.tabIndex = -1;
+    logoLink.tabIndex = -1;
+    contactButton.tabIndex = -1;
+    allMedia.forEach(media => media.tabIndex = -1);
+    mediaVideos.forEach(media => media.tabIndex = -1);
+    likesCount.forEach(media => media.tabIndex = -1);
 }
 
 
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
+    const allMedia = (document.querySelectorAll(".media"));
+    const mediaVideos = document.querySelectorAll("video");
+    const likesCount = document.querySelectorAll(".likes");
+    const totalLikes = document.querySelector(".total-likes");
+    document.removeEventListener("keydown", keyboardAccess);
+    currentValue.tabIndex = 0;
+    optionPopularity.tabIndex = 0;
+    optionDate.tabIndex = 0;
+    optionTitle.tabIndex = 0;
+    logoLink.tabIndex = 0;
+    contactButton.tabIndex = 0;
+    allMedia.forEach(media => media.tabIndex = 0);
+    mediaVideos.forEach(media => media.tabIndex = 0);
+    likesCount.forEach(media => media.tabIndex = 0);
+    totalLikes.tabIndex = -1;
 }
 
 
@@ -39,8 +74,7 @@ function formValidate(event) {
 firstName.addEventListener("input", firstCheck);
 lastName.addEventListener("input", lastCheck);
 message.addEventListener("input", messageCheck);
-document.addEventListener("keydown", keyboardAccess);
-buttonClose.addEventListener("keydown", closeWithEnter);
+
 
 // input conditions
 function firstCheck() {
@@ -101,13 +135,12 @@ function inputValid(input) {
 
 
 function keyboardAccess(event) {
-    if (event.key == "Escape") {
-        closeModal();
-    }
-}
-
-function closeWithEnter(event) {
-    if (event.key == "Enter") {
-        closeModal();
+    switch (true) {
+        case (event.key == "Escape"):
+            closeModal();
+            break
+        case (event.key == "Enter" && event.target.className.includes("modal_button")):
+            closeModal();
+            break
     }
 }

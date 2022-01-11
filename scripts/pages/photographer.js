@@ -304,7 +304,6 @@ async function displayMedia(data, key) {
     const logoLink = document.querySelector(".logo_link");
     const contactButton = document.querySelector(".contact_button");
     const likesCount = document.querySelectorAll(".likes");
-    // const totalLikes = document.querySelector(".total-likes");
 
 
     function openLightboxWithKeyboard(event) {
