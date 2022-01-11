@@ -20,21 +20,34 @@ async function init() {
     const optionDate = document.querySelector("#date");
     const optionTitle = document.querySelector("#title");
     const sortButtons = document.querySelectorAll(".button_sort");
+    const logoLink = document.querySelector(".logo_link");
+    const contactButton = document.querySelector(".contact_button");
+    const allMedia = Array.from(document.querySelectorAll(".media"));
+    const mediaVideos = document.querySelectorAll("video");
+    const likesCount = document.querySelectorAll(".likes");
+    
 
-    sortButtons.forEach(button => button.addEventListener("click", select))
+    sortButtons.forEach(button => button.addEventListener("click", openDropdown))
     document.addEventListener("click", closeDropdown);
     let sortOptionsListener = new MutationObserver(mutationsReaction); // behave like event listener, detect when element change, define instructions when change detected with function in parameter
     sortOptionsListener.observe(sortOptions, { childList: true } ); // define the element to observe and the type of change, childlist true detect textContent
+    
 
-
-    function select(event) {
+    function openDropdown(event) {
         let choice = event.target;
+        
         currentValue.textContent = choice.textContent;
         currentValue.setAttribute("aria-expanded", "true");
         optionPopularity.style.display = "flex";
         optionDate.style.display = "flex";
         optionTitle.style.display = "flex";
         options.style.display = "block";
+        logoLink.tabIndex = -1;
+        contactButton.tabIndex = -1;
+        allMedia.forEach(media => media.tabIndex = -1);
+        mediaVideos.forEach(media => media.tabIndex = -1);
+        likesCount.forEach(media => media.tabIndex = -1);
+
         switch (true) {
             case (optionPopularity.textContent == currentValue.textContent):
                 optionPopularity.style.display = "none";
@@ -55,6 +68,11 @@ async function init() {
         } else {
             options.style.display = "none";
             currentValue.setAttribute("aria-expanded", "false");
+            logoLink.tabIndex = 0;
+            contactButton.tabIndex = 0;
+            allMedia.forEach(media => media.tabIndex = 0);
+            mediaVideos.forEach(media => media.tabIndex = 0);
+            likesCount.forEach(likes => likes.tabIndex = 0);
         }
     }
 
@@ -303,7 +321,7 @@ async function displayMedia(data, key) {
         lightboxCloseButton.addEventListener("click", closeLightbox);
         lightboxNextButton.addEventListener("click", nextMedia);
         lightboxPreviousButton.addEventListener("click", previousMedia);
-        document.addEventListener("keydown", keyboardAccess);
+        document.addEventListener("keydown", lightboxNavigationWithKeyboard);
         // Appearance
         lightbox.style.display = "flex";
         displayMediaInLightbox();
@@ -312,7 +330,7 @@ async function displayMedia(data, key) {
         function closeLightbox() {
             lightbox.style.display = "none";
             lightbox.remove();
-            document.removeEventListener("keydown", keyboardAccess);
+            document.removeEventListener("keydown", lightboxNavigationWithKeyboard);
         }
         
 
@@ -334,7 +352,7 @@ async function displayMedia(data, key) {
         }
 
 
-        function keyboardAccess(event) {
+        function lightboxNavigationWithKeyboard(event) {
             switch (true) {
                 case (event.key == "Escape"):
                     closeLightbox();
