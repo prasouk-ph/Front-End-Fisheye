@@ -3,7 +3,8 @@ const gallery = document.querySelector(".section-gallery");
 
 async function init() {
     // Récupère les datas des photographes
-    const currentPhotographerId = location.search.slice(4); // location search allows to get the url parameter, slice allow to keep only the id number
+    const searchParams = new URLSearchParams(location.search);
+    const currentPhotographerId = searchParams.get("id"); // location search allows to get the url parameter, slice allow to keep only the id number
     const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
     const { media } = await getMedia(); // collect every key/value from the key media
     const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
@@ -32,6 +33,14 @@ async function init() {
     let sortOptionsListener = new MutationObserver(mutationsReaction); // behave like event listener, detect when element change, define instructions when change detected with function in parameter
     sortOptionsListener.observe(sortOptions, { childList: true } ); // define the element to observe and the type of change, childlist true detect textContent
     
+
+    function mutationsReaction(mutationsList) {
+        for(let mutation of mutationsList) {
+            if (mutation.addedNodes.length > 0) { // when textContent change
+                sortMedia();
+            }
+        }
+    }
 
     function openDropdown(event) {
         let choice = event.target;
@@ -130,15 +139,6 @@ async function init() {
         }
         displayMedia(photographerMediaData, name);
     }
-
-
-    function mutationsReaction(mutationsList) {
-        for(let mutation of mutationsList) {
-            if (mutation.addedNodes.length > 0) { // when textContent change
-                sortMedia();
-            }
-        }
-    };
 };
 
 

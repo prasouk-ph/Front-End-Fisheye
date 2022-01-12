@@ -1,18 +1,18 @@
-const allMedia = Array.from(document.querySelectorAll(".media"));
-allMedia.forEach(media => media.addEventListener("click", openLightbox))
-allMedia.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
-const mediaVideos = document.querySelectorAll("video");
-mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
-mediaVideos.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
+// const allMedia = Array.from(document.querySelectorAll(".media"));
+// const mediaVideos = document.querySelectorAll("video");
+// allMedia.forEach(media => media.addEventListener("click", openLightbox))
+// allMedia.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
+// mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
+// mediaVideos.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
 
-var currentValue = document.querySelector(".current_value");
-var optionPopularity = document.querySelector("#popularity");
-var optionDate = document.querySelector("#date");
-var optionTitle = document.querySelector("#title");
-var sortButtons = document.querySelectorAll(".button_sort");
-var logoLink = document.querySelector(".logo_link");
-var contactButton = document.querySelector(".contact_button");
-var likesCount = document.querySelectorAll(".likes");
+const currentValue = document.querySelector(".current_value");
+const optionPopularity = document.querySelector("#popularity");
+const optionDate = document.querySelector("#date");
+const optionTitle = document.querySelector("#title");
+const sortButtons = document.querySelectorAll(".button_sort");
+const logoLink = document.querySelector(".logo_link");
+const contactButton = document.querySelector(".contact_button");
+const likesCount = document.querySelectorAll(".likes");
 
 
 function openLightboxWithKeyboard(event) {
@@ -66,6 +66,8 @@ function openLightbox(event) {
     
 
     function closeLightbox() {
+        const allMedia = Array.from(document.querySelectorAll(".media"));
+        const mediaVideos = document.querySelectorAll("video");
         lightbox.remove();
         document.removeEventListener("keydown", lightboxNavigationWithKeyboard);
         currentValue.tabIndex = 0;
@@ -119,6 +121,8 @@ function openLightbox(event) {
 
 
     function displayMediaInLightbox() {
+        const allMedia = Array.from(document.querySelectorAll(".media"));
+        const mediaVideos = document.querySelectorAll("video");
         lightboxContainer.innerHTML = "";
         if (allMedia[currentIndex].tagName == "IMG") {
             let currentMedia = document.createElement( "img" );
