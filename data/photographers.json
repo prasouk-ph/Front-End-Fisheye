@@ -131,7 +131,7 @@
 			"date": "2011-12-08",
 			"price": 100,
             "alt": "Cheval en bois dans un parc"
-		  },
+		},
 		{
 			"id": 7502053,
 			"photographerId": 82,
@@ -171,7 +171,7 @@
 			"likes": 52,
 			"date": "2013-02-30",
 			"price": 70,
-            "alt": ""
+            "alt": "Pratiquants d'aviron sur un fleuve sombre"
 		},
 		{
 			"id": 92758372,
@@ -181,7 +181,7 @@
 			"likes": 58,
 			"date": "2018-07-17",
 			"price": 70,
-            "alt": "Pratiquants d'aviron sur un fleuve sombre"
+            "alt": "Deux personnes posant côte à côte en levant une main pour former des ailes"
 		},
 		{
 			"id": 32958383,
@@ -191,7 +191,7 @@
 			"likes": 11,
 			"date": "2019-08-12",
 			"price": 70,
-            "alt": ""
+            "alt": "Femme portant des lunettes et habillée en rouge descendant des marches"
 		},
 		{
 			"id": 928587383,
@@ -201,7 +201,7 @@
 			"likes": 2,
 			"date": "2019-01-02",
 			"price": 70,
-            "alt": "Femme portant des lunettes et habillée en rouge descendant des marches"
+            "alt": "Femme dans un bureau en pleine conférence devant un groupe de personne"
 		},
 		{
 			"id": 725639493,
@@ -253,6 +253,7 @@
 			"price": 70,
             "alt": "Chien noir et blanc jouant sur la plage"
 		},
+        
 		{
 			"id": 394583434,
 			"photographerId": 527,
@@ -301,7 +302,7 @@
 			"likes": 23,
 			"date": "2017-03-18",
 			"price": 45,
-            "alt": ""
+            "alt": "Bâteau naviguant sur un fleuve vers une montagne"
 		},
 		{
 			"id": 92352352,
@@ -311,7 +312,7 @@
 			"likes": 66,
 			"date": "2018-05-24",
 			"price": 45,
-            "alt": "Bâteau naviguant sur un fleuve vers une montagne"
+            "alt": "Femme souriante dans une forêt"
 		},
 		{
 			"id": 34513453,
@@ -352,7 +353,7 @@
 			"likes": 88,
 			"date": "2019-02-03",
 			"price": 45,
-            "alt": ""
+            "alt": "Une femme seule sur une montagne de verdure"
 		},
 		{
 			"id": 625025343,
@@ -362,7 +363,7 @@
 			"likes": 85,
 			"date": "2019-04-03",
 			"price": 45,
-            "alt": "Une femme seule sur une montagne de verdure"
+            "alt": "Ville colorée sur une coline en bord de mer"
 		},
 		{
 			"id": 2525345343,
@@ -432,7 +433,7 @@
 			"likes": 142,
 			"date": "2019-08-23",
 			"price": 60,
-            "alt": ""
+            "alt": "Troupeau de chevaux galopant dans une prairie"
 		  },
 		{
 			"id": 95234343,
@@ -442,7 +443,7 @@
 			"likes": 59,
 			"date": "2019-07-02",
 			"price": 60,
-            "alt": "Troupeau de chevaux galopant dans une prairie"
+            "alt": "Oiseau multicolore sur une branche"
 		},
 
 		{
@@ -473,7 +474,7 @@
 			"likes": 33,
 			"date": "2019-05-12",
 			"price": 60,
-            "alt": ""
+            "alt": "Fleuve avec vue sur une montagne"
 		},
 		{
 			"id": 356234343,
@@ -483,7 +484,7 @@
 			"likes": 53,
 			"date": "2019-06-20",
 			"price": 60,
-            "alt": "Fleuve avec vue sur une montagne"
+            "alt": "Vélo dans une rue près d'un escalier"
 		},
 		{
 			"id": 235234343,
@@ -573,7 +574,7 @@
 			"likes": 103,
 			"date": "2018-03-10",
 			"price": 70,
-            "alt": ""
+            "alt": "Homme surfant sur une vague"
 		},
 		{
 			"id": 7775342343,
@@ -583,7 +584,7 @@
 			"likes": 77,
 			"date": "2018-04-16",
 			"price": 50,
-            "alt": "Homme surfant sur une vague"
+            "alt": "Personne sautant au ski"
 		},
 		{
 			"id": 9253445784,
@@ -593,7 +594,7 @@
 			"likes": 88,
 			"date": "2018-04-22",
 			"price": 65,
-            "alt": ""
+            "alt": "Femmes athlètes faisant une course sur une piste"
 		},
 		{
 			"id": 22299394,
@@ -603,7 +604,7 @@
 			"likes": 95,
 			"date": "2018-04-27",
 			"price": 70,
-            "alt": "Femmes athlètes faisant une course sur une piste"
+            "alt": "Jeune skateur effectuant une figure"
 		},
 		{
 			"id": 3452342633,
@@ -613,7 +614,7 @@
 			"likes": 52,
 			"date": "2018-05-03",
 			"price": 75,
-            "alt": ""
+            "alt": "Intérieur d'un bâtiment blanc avec vue vers le plafond"
 		},
 		{
 			"id": 939234243,
@@ -623,7 +624,7 @@
 			"likes": 55,
 			"date": "2018-05-10",
 			"price": 72,
-            "alt": ""
+            "alt": "Bâtiment d'architecte entouré d'eau"
 		},
 		{
 			"id": 222959233,
@@ -633,7 +634,7 @@
 			"likes": 85,
 			"date": "2018-05-15",
 			"price": 71,
-            "alt": "Architecture intérieur ressemblant à un fer à cheval blanc"
+            "alt": "Architecture ressemblant à un fer à cheval en noir et blanc"
 		},
 		{
 			"id": 965933434,

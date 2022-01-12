@@ -6,5 +6,5 @@ async function getData() {
     return ({
         photographers: [...result.photographers], // .photographers allow to select every data from key photographers from json file
         media: [...result.media] // .media allow to select every data from key media from json file
-    }) 
+    })
 }

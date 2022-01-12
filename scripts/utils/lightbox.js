@@ -1,20 +1,3 @@
-// const allMedia = Array.from(document.querySelectorAll(".media"));
-// const mediaVideos = document.querySelectorAll("video");
-// allMedia.forEach(media => media.addEventListener("click", openLightbox))
-// allMedia.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
-// mediaVideos.forEach(media => media.addEventListener("click", openLightbox))
-// mediaVideos.forEach(media => media.addEventListener("keydown", openLightboxWithKeyboard))
-
-const currentValue = document.querySelector(".current_value");
-const optionPopularity = document.querySelector("#popularity");
-const optionDate = document.querySelector("#date");
-const optionTitle = document.querySelector("#title");
-const sortButtons = document.querySelectorAll(".button_sort");
-const logoLink = document.querySelector(".logo_link");
-const contactButton = document.querySelector(".contact_button");
-const likesCount = document.querySelectorAll(".likes");
-
-
 function openLightboxWithKeyboard(event) {
     if (event.key == "Enter") {
         openLightbox(event);
@@ -28,6 +11,10 @@ function openLightbox(event) {
     if (result == "true") {
         return
     }
+
+    let allMediaUpdated = Array.from(document.querySelectorAll(".media"));
+    let mediaVideosUpdated = document.querySelectorAll("video");
+    let totalLikes = document.querySelector(".total-likes");
     
     const main = document.querySelector("#main");
     const header = document.querySelector("header");
@@ -66,8 +53,6 @@ function openLightbox(event) {
     
 
     function closeLightbox() {
-        const allMedia = Array.from(document.querySelectorAll(".media"));
-        const mediaVideos = document.querySelectorAll("video");
         lightbox.remove();
         document.removeEventListener("keydown", lightboxNavigationWithKeyboard);
         currentValue.tabIndex = 0;
@@ -77,8 +62,8 @@ function openLightbox(event) {
         sortButtons.tabIndex = 0;
         logoLink.tabIndex = 0;
         contactButton.tabIndex = 0;
-        allMedia.forEach(media => media.tabIndex = 0);
-        mediaVideos.forEach(media => media.tabIndex = 0);
+        allMediaUpdated.forEach(media => media.tabIndex = 0);
+        mediaVideosUpdated.forEach(media => media.tabIndex = 0);
         likesCount.forEach(media => media.tabIndex = 0);
         totalLikes.tabIndex = -1
     }
@@ -86,7 +71,7 @@ function openLightbox(event) {
 
     function nextMedia() {
         currentIndex++;
-        if (currentIndex > allMedia.length - 1) {
+        if (currentIndex > allMediaUpdated.length - 1) {
             currentIndex = 0;
         }
         displayMediaInLightbox();
@@ -96,7 +81,7 @@ function openLightbox(event) {
     function previousMedia() {
         currentIndex--;
         if (currentIndex < 0) {
-            currentIndex = allMedia.length - 1;
+            currentIndex = allMediaUpdated.length - 1;
         }
         displayMediaInLightbox();
     }
@@ -121,25 +106,23 @@ function openLightbox(event) {
 
 
     function displayMediaInLightbox() {
-        const allMedia = Array.from(document.querySelectorAll(".media"));
-        const mediaVideos = document.querySelectorAll("video");
         lightboxContainer.innerHTML = "";
-        if (allMedia[currentIndex].tagName == "IMG") {
+        if (allMediaUpdated[currentIndex].tagName == "IMG") {
             let currentMedia = document.createElement( "img" );
-            currentMedia.setAttribute("src", allMedia[currentIndex].src);
-            currentMedia.setAttribute("alt", allMedia[currentIndex].alt);
+            currentMedia.setAttribute("src", allMediaUpdated[currentIndex].src);
+            currentMedia.setAttribute("alt", allMediaUpdated[currentIndex].alt);
             lightboxContainer.appendChild(currentMedia);
         }
-        if (allMedia[currentIndex].tagName == "SOURCE") {
+        if (allMediaUpdated[currentIndex].tagName == "SOURCE") {
             let currentMedia = document.createElement( "video" );
-            currentMedia.setAttribute("src", allMedia[currentIndex].src);
+            currentMedia.setAttribute("src", allMediaUpdated[currentIndex].src);
             currentMedia.setAttribute("type", "video/mp4");
             currentMedia.setAttribute("controls", "controls");
-            currentMedia.setAttribute("title", allMedia[currentIndex].title);
+            currentMedia.setAttribute("title", allMediaUpdated[currentIndex].title);
             lightboxContainer.appendChild(currentMedia);
         }
         const mediaTitle = document.createElement( "h2" );
-        const titleAttr = allMedia[currentIndex].getAttribute("title")
+        const titleAttr = allMediaUpdated[currentIndex].getAttribute("title")
         mediaTitle.classList.add("media-title");
         mediaTitle.textContent = titleAttr;
         lightboxContainer.appendChild(mediaTitle);
@@ -152,8 +135,8 @@ function openLightbox(event) {
         sortButtons.tabIndex = -1;
         logoLink.tabIndex = -1;
         contactButton.tabIndex = -1;
-        allMedia.forEach(media => media.tabIndex = -1);
-        mediaVideos.forEach(media => media.tabIndex = -1);
+        allMediaUpdated.forEach(media => media.tabIndex = -1);
+        mediaVideosUpdated.forEach(media => media.tabIndex = -1);
         likesCount.forEach(media => media.tabIndex = -1);
     }
 }  
