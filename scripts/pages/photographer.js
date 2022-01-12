@@ -5,8 +5,8 @@ async function init() {
     // Récupère les datas des photographes
     const searchParams = new URLSearchParams(location.search);
     const currentPhotographerId = searchParams.get("id"); // location search allows to get the url parameter, slice allow to keep only the id number
-    const { photographers } = await getPhotographers(); // collect every key/value from the key photographers
-    const { media } = await getMedia(); // collect every key/value from the key media
+    const { photographers, media } = await getData(); // collect every key/value from the key photographers
+    // const { media } = await getMedia(); // collect every key/value from the key media
     const currentPhotographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
     const { name } = currentPhotographerData[0];
     const photographerMediaData = media.filter((media) => media.photographerId == currentPhotographerId);
