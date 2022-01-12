@@ -18,6 +18,7 @@ function photographerFactory(data) {
         slogan.classList.add("slogan");
         const priceContainer = document.createElement( 'p' );
         const link = document.createElement( 'a' );
+        link.setAttribute("target", "_self")
         h2.textContent = name;
         h3.textContent = `${city}, ${country}`;
         slogan.textContent = tagline;
