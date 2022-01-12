@@ -29,6 +29,7 @@ async function init() {
     photographer = {data: [...photographerData], medias: [...photographerMedias]};
     displayPhotographerData(photographer.data[0]);
     sortMedia(photographer.medias); // contain display photographer medias
+    initLikeListener();
 };
 
     
@@ -136,8 +137,6 @@ async function displayPhotographerMedias(data, key) {
         totalLikesCount += (parseInt(mediaLikes.getAttribute("count")));
         totalLikes.setAttribute("count", totalLikesCount);
         totalLikes.textContent = totalLikesCount;
-        mediaLikes.addEventListener("click", addLike);
-        mediaLikes.addEventListener("keydown", addLikeWithKeyboard);
         cardContent.appendChild(mediaLikes);
     });
 };
