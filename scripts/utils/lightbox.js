@@ -36,7 +36,6 @@ function openLightbox(event) {
     lightboxContainer.classList.add("lightbox__container");
     lightbox.append(lightboxTitle, lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
     let currentIndex = event.target.getAttribute("index");
-    console.log(currentIndex)
     // event
     lightboxCloseButton.addEventListener("click", closeLightbox);
     lightboxNextButton.addEventListener("click", nextMedia);
@@ -102,7 +101,6 @@ function openLightbox(event) {
 
     function displayMediaInLightbox() {
         lightboxContainer.innerHTML = "";
-
         if (allMedia[currentIndex].tagName == "IMG") {
             let currentMedia = document.createElement( "img" );
             currentMedia.setAttribute("src", allMedia[currentIndex].src);
@@ -110,7 +108,6 @@ function openLightbox(event) {
             lightboxContainer.appendChild(currentMedia);
         }
         if (allMedia[currentIndex].tagName == "VIDEO") {
-            console.log("une vidéo !")
             let currentMedia = document.createElement( "video" );
             currentMedia.setAttribute("src", allMedia[currentIndex].firstChild.src);
             currentMedia.setAttribute("type", "video/mp4");
