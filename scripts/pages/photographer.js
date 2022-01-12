@@ -31,9 +31,7 @@ async function init() {
     sortMedia(photographer.medias); // contain display photographer medias
     
     // initLikeListener
-    const likeButton = document.querySelectorAll(".likes");
-    likeButton.forEach(button => button.addEventListener("click", addLike))
-    likeButton.forEach(button => button.addEventListener("keydown", addLikeWithKeyboard))
+    const likeButtons = document.querySelectorAll(".likes");
 };
 
     

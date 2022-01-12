@@ -1,3 +1,6 @@
+likeButtons.forEach(button => button.addEventListener("click", addLike))
+likeButtons.forEach(button => button.addEventListener("keydown", addLikeWithKeyboard))
+
 function addLike(event) {
     const sumLikes = document.querySelector(".total-likes");
     let currentLikesCount = event.target.getAttribute("count");
