@@ -409,7 +409,7 @@ video ~ div::after {
     background-color: #DB8876;
 }
 
-.options {
+#options {
     margin: 0;
     padding: 0;
     display: none;
