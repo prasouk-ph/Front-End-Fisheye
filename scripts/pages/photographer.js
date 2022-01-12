@@ -4,7 +4,19 @@ const sortButtons = document.querySelectorAll(".button_sort");
 const allMedia = Array.from(document.querySelectorAll(".media"));
 const mediaVideos = Array.from(document.querySelectorAll("video"));
 const likesCount = Array.from(document.querySelectorAll(".likes"));
+const modal = document.querySelector("#contact_modal");
+const currentValue = document.querySelector(".current_value");
+const options = document.querySelector(".options");
+const optionPopularity = document.querySelector("#popularity");
+const optionDate = document.querySelector("#date");
+const optionTitle = document.querySelector("#title");
+const logoLink = document.querySelector(".logo_link");
+const contactButton = document.querySelector(".contact_button");
+const main = document.querySelector("#main");
+const header = document.querySelector("header");
+const totalLikes = document.querySelector(".total-likes");
 let photographer = {};
+let totalLikesCount = 0;
 
 
 async function init() {
@@ -43,7 +55,6 @@ async function displayPhotographerData(photographerData) {
     img.setAttribute("alt", alt);
     img.classList.add("photograph-portrait")
     photographHeader.appendChild(img);
-    const main = document.querySelector("main");
     const extraBox = document.createElement( "div" );
     extraBox.classList.add("photographer-extras");
     main.appendChild(extraBox);
@@ -59,7 +70,6 @@ async function displayPhotographerMedias(data, key) {
     const cardContainer = document.createElement( "div" );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
-    let totalLikesCount = 0;
     const totalLikes = document.createElement( "p" );
     totalLikes.classList.add("likes", "total-likes");
     totalLikes.setAttribute("count", totalLikesCount);
@@ -87,6 +97,7 @@ async function displayPhotographerMedias(data, key) {
             img.tabIndex = 0;
             img.classList.add("media");
             img.addEventListener("click", openLightbox);
+            img.addEventListener("keydown", openLightboxWithKeyboard);
             allMedia.push(img) // for modal focus
             card.appendChild(img);
             break;
@@ -102,7 +113,8 @@ async function displayPhotographerMedias(data, key) {
             cardVideo.tabIndex = 0;
             cardVideo.appendChild(sourceVideo);
             cardVideo.addEventListener("click", openLightbox);
-            mediaVideos.push(cardVideo) // for modal focus
+            cardVideo.addEventListener("keydown", openLightboxWithKeyboard);
+            allMedia.push(cardVideo) // for modal focus
             card.appendChild(cardVideo);        
             break;
         };
@@ -122,7 +134,6 @@ async function displayPhotographerMedias(data, key) {
         mediaLikes.textContent = likes;
         likesCount.push(mediaLikes); // for modal focus
         totalLikesCount += (parseInt(mediaLikes.getAttribute("count")));
-        const totalLikes = document.querySelector(".total-likes");
         totalLikes.setAttribute("count", totalLikesCount);
         totalLikes.textContent = totalLikesCount;
         mediaLikes.addEventListener("click", addLike);

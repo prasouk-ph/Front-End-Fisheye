@@ -6,17 +6,12 @@ function openLightboxWithKeyboard(event) {
 
 function openLightbox(event) {
     // to prevent opening when sort menu is open
-    const sortMenu = document.querySelector(".button_sort");
-    let result = sortMenu.getAttribute("aria-expanded");
+    let result = sortValue.getAttribute("aria-expanded");
     if (result == "true") {
         return
     }
 
-    let allMediaUpdated = Array.from(document.querySelectorAll(".media"));
-    let mediaVideosUpdated = document.querySelectorAll("video");
-    let totalLikes = document.querySelector(".total-likes");
     
-    const main = document.querySelector("#main");
     const header = document.querySelector("header");
     main.setAttribute("aria-hidden", "true");
     header.setAttribute("aria-hidden", "true");
@@ -41,6 +36,7 @@ function openLightbox(event) {
     lightboxContainer.classList.add("lightbox__container");
     lightbox.append(lightboxTitle, lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
     let currentIndex = event.target.getAttribute("index");
+    console.log(currentIndex)
     // event
     lightboxCloseButton.addEventListener("click", closeLightbox);
     lightboxNextButton.addEventListener("click", nextMedia);
@@ -62,16 +58,15 @@ function openLightbox(event) {
         sortButtons.tabIndex = 0;
         logoLink.tabIndex = 0;
         contactButton.tabIndex = 0;
-        allMediaUpdated.forEach(media => media.tabIndex = 0);
-        mediaVideosUpdated.forEach(media => media.tabIndex = 0);
+        allMedia.forEach(media => media.tabIndex = 0);
+        mediaVideos.forEach(media => media.tabIndex = 0);
         likesCount.forEach(media => media.tabIndex = 0);
-        totalLikes.tabIndex = -1
     }
     
 
     function nextMedia() {
         currentIndex++;
-        if (currentIndex > allMediaUpdated.length - 1) {
+        if (currentIndex > allMedia.length - 1) {
             currentIndex = 0;
         }
         displayMediaInLightbox();
@@ -81,7 +76,7 @@ function openLightbox(event) {
     function previousMedia() {
         currentIndex--;
         if (currentIndex < 0) {
-            currentIndex = allMediaUpdated.length - 1;
+            currentIndex = allMedia.length - 1;
         }
         displayMediaInLightbox();
     }
@@ -107,22 +102,24 @@ function openLightbox(event) {
 
     function displayMediaInLightbox() {
         lightboxContainer.innerHTML = "";
-        if (allMediaUpdated[currentIndex].tagName == "IMG") {
+
+        if (allMedia[currentIndex].tagName == "IMG") {
             let currentMedia = document.createElement( "img" );
-            currentMedia.setAttribute("src", allMediaUpdated[currentIndex].src);
-            currentMedia.setAttribute("alt", allMediaUpdated[currentIndex].alt);
+            currentMedia.setAttribute("src", allMedia[currentIndex].src);
+            currentMedia.setAttribute("alt", allMedia[currentIndex].alt);
             lightboxContainer.appendChild(currentMedia);
         }
-        if (allMediaUpdated[currentIndex].tagName == "SOURCE") {
+        if (allMedia[currentIndex].tagName == "VIDEO") {
+            console.log("une vidéo !")
             let currentMedia = document.createElement( "video" );
-            currentMedia.setAttribute("src", allMediaUpdated[currentIndex].src);
+            currentMedia.setAttribute("src", allMedia[currentIndex].firstChild.src);
             currentMedia.setAttribute("type", "video/mp4");
             currentMedia.setAttribute("controls", "controls");
-            currentMedia.setAttribute("title", allMediaUpdated[currentIndex].title);
+            currentMedia.setAttribute("title", allMedia[currentIndex].firstChild.src);
             lightboxContainer.appendChild(currentMedia);
         }
         const mediaTitle = document.createElement( "h2" );
-        const titleAttr = allMediaUpdated[currentIndex].getAttribute("title")
+        const titleAttr = allMedia[currentIndex].getAttribute("title")
         mediaTitle.classList.add("media-title");
         mediaTitle.textContent = titleAttr;
         lightboxContainer.appendChild(mediaTitle);
@@ -135,8 +132,8 @@ function openLightbox(event) {
         sortButtons.tabIndex = -1;
         logoLink.tabIndex = -1;
         contactButton.tabIndex = -1;
-        allMediaUpdated.forEach(media => media.tabIndex = -1);
-        mediaVideosUpdated.forEach(media => media.tabIndex = -1);
+        allMedia.forEach(media => media.tabIndex = -1);
+        mediaVideos.forEach(media => media.tabIndex = -1);
         likesCount.forEach(media => media.tabIndex = -1);
     }
 }  

@@ -5,16 +5,6 @@ const lastNameError = document.querySelector("#lastname-format");
 const message = document.querySelector("#message");
 const messageError = document.querySelector("#message-format");
 const buttonClose = document.querySelector(".modal_button");
-const modal = document.querySelector("#contact_modal");
-const currentValue = document.querySelector(".current_value");
-const options = document.querySelector(".options");
-const optionPopularity = document.querySelector("#popularity");
-const optionDate = document.querySelector("#date");
-const optionTitle = document.querySelector("#title");
-const logoLink = document.querySelector(".logo_link");
-const contactButton = document.querySelector(".contact_button");
-const main = document.querySelector("#main");
-const header = document.querySelector("header");
 
 
 function displayModal() {
@@ -24,10 +14,6 @@ function displayModal() {
     if (result == "true") {
         return
     }
-    
-    const allMedia = (document.querySelectorAll(".media"));
-    const mediaVideos = document.querySelectorAll("video");
-    const likesCount = document.querySelectorAll(".likes");
 	modal.style.display = "block";
     modal.setAttribute("aria-hidden", "false");
     main.setAttribute("aria-hidden", "true");
@@ -52,10 +38,8 @@ function closeModal() {
     modal.setAttribute("aria-hidden", "true");
     main.setAttribute("aria-hidden", "false");
     header.setAttribute("aria-hidden", "false");
-    const allMedia = (document.querySelectorAll(".media"));
-    const mediaVideos = document.querySelectorAll("video");
-    const likesCount = document.querySelectorAll(".likes");
-    const totalLikes = document.querySelector(".total-likes");
+
+    
     document.removeEventListener("keydown", keyboardAccess);
     currentValue.tabIndex = 0;
     optionPopularity.tabIndex = 0;
@@ -66,7 +50,6 @@ function closeModal() {
     allMedia.forEach(media => media.tabIndex = 0);
     mediaVideos.forEach(media => media.tabIndex = 0);
     likesCount.forEach(media => media.tabIndex = 0);
-    totalLikes.tabIndex = -1;
 }
 
 
