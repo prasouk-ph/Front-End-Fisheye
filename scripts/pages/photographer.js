@@ -18,6 +18,7 @@ const contactButton = document.querySelector(".contact_button");
 const main = document.querySelector("#main");
 const header = document.querySelector("header");
 const totalLikes = document.querySelector(".total-likes");
+
 let photographer = {};
 let totalLikesCount = 0;
 
@@ -34,9 +35,6 @@ async function init() {
     sortMedia(photographer.medias); // contain display photographer medias
     
     // initLikeListener
-    const likeButtons = document.querySelectorAll(".likes");
-    likeButtons.forEach(button => button.addEventListener("click", addLike));
-    likeButtons.forEach(button => button.addEventListener("keydown", addLikeWithKeyboard));
 }
 
     
@@ -145,9 +143,12 @@ async function displayPhotographerMedias(data, key) {
         totalLikes.setAttribute("count", totalLikesCount);
         totalLikes.textContent = totalLikesCount;
         cardContent.appendChild(mediaLikes);
+        mediaLikes.addEventListener("click", addLike);
+        mediaLikes.addEventListener("keydown", addLikeWithKeyboard);
     });
 }
-
+// likeButtons.forEach(button => button.addEventListener("click", addLike));
+// likeButtons.forEach(button => button.addEventListener("keydown", addLikeWithKeyboard));
 
 function addLike(event) {
     const sumLikes = document.querySelector(".total-likes");

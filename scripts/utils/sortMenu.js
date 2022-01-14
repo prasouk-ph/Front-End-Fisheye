@@ -31,14 +31,15 @@ function sortMedia() {
     const cardContainer = document.querySelector(".card-container");
     const extraBox = document.querySelector(".photographer-extras");
     const totalLikes = document.querySelector(".total-likes");
-    totalLikesCount = 0;
     
     if (document.body.contains(cardContainer)) {
         gallery.removeChild(cardContainer);
         extraBox.removeChild(totalLikes);
         allMedia.length = 0; // empty allMedia array
         mediaVideos.length = 0;
+        totalLikesCount = 0;
     }
+
 
     switch (true) {
         case (sortValue.textContent == "Titre"):
