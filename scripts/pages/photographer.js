@@ -95,7 +95,6 @@ async function displayPhotographerMedias(data, key) {
         // to display media ressource
         const picture = `assets/media/${key}/${image}`;
         const preview = `assets/media/${key}/${video}`;
-        console.log(media)
         switch (true) { 
             case (Object.prototype.hasOwnProperty.call(media, "image")): // when (data has key "image") is true
             const img = document.createElement( "img" );

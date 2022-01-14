@@ -31,6 +31,7 @@ function sortMedia() {
     const cardContainer = document.querySelector(".card-container");
     const extraBox = document.querySelector(".photographer-extras");
     const totalLikes = document.querySelector(".total-likes");
+    totalLikesCount = 0;
     
     if (document.body.contains(cardContainer)) {
         gallery.removeChild(cardContainer);
