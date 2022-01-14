@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 sortButtons.forEach(button => button.addEventListener("click", openDropdown))
     
 let sortOptionsListener = new MutationObserver(mutationsReaction); // behave like event listener, detect when element change, define instructions when change detected with function in parameter

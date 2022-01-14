@@ -1,3 +1,6 @@
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const gallery = document.querySelector(".section-gallery");
 const sortValue = document.querySelector(".current_value");
 const sortButtons = document.querySelectorAll(".button_sort");
@@ -34,7 +37,7 @@ async function init() {
     const likeButtons = document.querySelectorAll(".likes");
     likeButtons.forEach(button => button.addEventListener("click", addLike));
     likeButtons.forEach(button => button.addEventListener("keydown", addLikeWithKeyboard));
-};
+}
 
     
 async function displayPhotographerData(photographerData) {
@@ -67,7 +70,7 @@ async function displayPhotographerData(photographerData) {
     p.classList.add("price");
     p.textContent = `${price}€ / jour`;
     extraBox.appendChild(p);
-};
+}
 
 
 async function displayPhotographerMedias(data, key) {
@@ -92,8 +95,9 @@ async function displayPhotographerMedias(data, key) {
         // to display media ressource
         const picture = `assets/media/${key}/${image}`;
         const preview = `assets/media/${key}/${video}`;
+        console.log(media)
         switch (true) { 
-            case (media.hasOwnProperty("image")): // when (data has key "image") is true
+            case (Object.prototype.hasOwnProperty.call(media, "image")): // when (data has key "image") is true
             const img = document.createElement( "img" );
             img.setAttribute("src", picture);
             img.setAttribute("title", title);
@@ -106,7 +110,7 @@ async function displayPhotographerMedias(data, key) {
             allMedia.push(img) // for modal focus
             card.appendChild(img);
             break;
-            case (media.hasOwnProperty("video")): // when (data has key "video") is true
+            case (Object.prototype.hasOwnProperty.call(media, "video")): // when (data has key "video") is true
             const cardVideo = document.createElement( "video" );
             // cardVideo.setAttribute("controls", "controls"); // without controls can"t be played
             const sourceVideo = document.createElement( "source" );
@@ -122,7 +126,7 @@ async function displayPhotographerMedias(data, key) {
             allMedia.push(cardVideo) // for modal focus
             card.appendChild(cardVideo);        
             break;
-        };
+        }
         index++;
 
         // to display card content
@@ -143,7 +147,7 @@ async function displayPhotographerMedias(data, key) {
         totalLikes.textContent = totalLikesCount;
         cardContent.appendChild(mediaLikes);
     });
-};
+}
 
 
 function addLike(event) {

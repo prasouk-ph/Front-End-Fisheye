@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const firstName = document.querySelector("#firstname");
 const firstNameError = document.querySelector("#firstname-format");
 const lastName = document.querySelector("#lastname");

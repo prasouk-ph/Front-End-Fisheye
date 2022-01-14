@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 function openLightboxWithKeyboard(event) {
     if (event.key == "Enter") {
         openLightbox(event);

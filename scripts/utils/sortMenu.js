@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 function sortByTitle(array) {
     array.sort(function(x, y) {
         if (x.title < y.title) return -1;
