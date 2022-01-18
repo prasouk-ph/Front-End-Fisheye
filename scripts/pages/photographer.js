@@ -30,7 +30,7 @@ async function init() {
     const { photographers, media } = await getData(); // collect every key/value from the keys photographers and media
     const photographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
     if (photographerData.length == 0) {
-        return alert("Photographe inexistant !")
+        return console.log("ID inexistant !");
     }
     const photographerMedias = media.filter((media) => media.photographerId == currentPhotographerId);
     photographer = {data: [...photographerData], medias: [...photographerMedias]};
