@@ -353,7 +353,7 @@ textarea {
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: transparent;
     cursor: pointer;
 }
 
@@ -370,6 +370,8 @@ textarea {
     animation-duration: 0.4s;
     position: absolute;
     z-index: 2;
+    background-color: #901C1C;
+    border-radius: 0 0 5px 5px;
 }
 
 .options_value {
@@ -393,6 +395,12 @@ textarea {
 
 .current_value {
     position: relative;
+    background-color: #901C1C;
+    border-radius: 5px;
+}
+
+.current_value[aria-expanded="true"] {
+    border-radius: 5px 5px 0 0;
 }
 
 .current_value::after {
