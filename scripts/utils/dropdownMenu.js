@@ -16,7 +16,8 @@ function mutationsReaction(mutationsList) {
 
 function openDropdown(event) {
     let choice = event.target;
-    document.addEventListener("click", closeDropdown);
+    document.addEventListener("click", closeDropdownOnClick);
+    document.addEventListener("keydown", closeDropdownWithKeyboard);
     currentValue.textContent = choice.textContent;
     currentValue.setAttribute("aria-expanded", "true");
     optionPopularity.style.display = "flex";
@@ -43,12 +44,9 @@ function openDropdown(event) {
 }
 
 
-function closeDropdown(event) {
-    if (event.target.className.includes("current_value")) {
-        options.style.display = "block";
-    } else {
-        document.removeEventListener("keydown", closeDropdown);
-        document.removeEventListener("click", closeDropdown);
+function closeDropdown() {
+        document.removeEventListener("keydown", closeDropdownWithKeyboard);
+        document.removeEventListener("click", closeDropdownOnClick);
         options.style.display = "none";
         currentValue.setAttribute("aria-expanded", "false");
         logoLink.tabIndex = 0;
@@ -56,6 +54,19 @@ function closeDropdown(event) {
         allMedia.forEach(media => media.tabIndex = 0);
         mediaVideos.forEach(media => media.tabIndex  = 0);
         likesCount.forEach(likes => likes.tabIndex  = 0);
+}
+
+
+function closeDropdownWithKeyboard(event) {
+    if (event.key == "Escape") {
+        closeDropdown();
     }
-    
+}
+
+function closeDropdownOnClick(event) {
+    if (event.target.className.includes("current_value")) {
+        options.style.display = "block";
+    } else {
+        closeDropdown();
+    }
 }
