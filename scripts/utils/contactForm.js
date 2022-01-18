@@ -7,6 +7,7 @@ const lastNameError = document.querySelector("#lastname-format");
 const message = document.querySelector("#message");
 const messageError = document.querySelector("#message-format");
 const buttonClose = document.querySelector(".modal_button");
+const form = document.querySelector(".modal-form");
 
 
 function displayModal() {
@@ -68,6 +69,7 @@ function formValidate(event) {
     console.log(`Prénom : ${firstName.value}`);
     console.log(`Nom : ${lastName.value}`);
     console.log(`Message : ${message.value}`);
+    form.reset();
     closeModal();
     }
 }

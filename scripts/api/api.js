@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 async function getData() {
     // import data from json
     const response = await fetch("data/photographers.json"); 

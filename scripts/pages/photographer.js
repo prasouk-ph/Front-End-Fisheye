@@ -33,8 +33,6 @@ async function init() {
     photographer = {data: [...photographerData], medias: [...photographerMedias]};
     displayPhotographerData(photographer.data[0]);
     sortMedia(photographer.medias); // contain display photographer medias
-    
-    // initLikeListener
 }
 
     
@@ -147,8 +145,7 @@ async function displayPhotographerMedias(data, key) {
         mediaLikes.addEventListener("keydown", addLikeWithKeyboard);
     });
 }
-// likeButtons.forEach(button => button.addEventListener("click", addLike));
-// likeButtons.forEach(button => button.addEventListener("keydown", addLikeWithKeyboard));
+
 
 function addLike(event) {
     const sumLikes = document.querySelector(".total-likes");
