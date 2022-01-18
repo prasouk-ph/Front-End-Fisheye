@@ -26,9 +26,12 @@ let totalLikesCount = 0;
 async function init() {
     // Récupère les datas des photographes
     const searchParams = new URLSearchParams(location.search);
-    const currentPhotographerId = searchParams.get("id"); // location search allows to get the url parameter, slice allow to keep only the id number
+    const currentPhotographerId = searchParams.get("id");
     const { photographers, media } = await getData(); // collect every key/value from the keys photographers and media
     const photographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
+    if (photographerData.length == 0) {
+        return alert("Photographe inexistant !")
+    }
     const photographerMedias = media.filter((media) => media.photographerId == currentPhotographerId);
     photographer = {data: [...photographerData], medias: [...photographerMedias]};
     displayPhotographerData(photographer.data[0]);
