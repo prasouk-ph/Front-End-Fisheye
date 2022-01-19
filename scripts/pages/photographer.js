@@ -38,37 +38,12 @@ async function init() {
     sortMedia(photographer.medias); // contain display photographer medias
 }
 
-    
+
 async function displayPhotographerData(photographerData) {
-    const { name, portrait, city, country, tagline, price, alt } = photographerData;
-    const picture = `assets/photographers/${portrait}`;
     const photographHeader = document.querySelector(".photograph-header");
-    const photographData = document.createElement( "div" );
-    photographData.classList.add("photograph-data");
-    photographHeader.appendChild(photographData);
-    const h2 = document.createElement( "h2" );
-    h2.textContent = name;
-    const modalLabel = document.querySelector(".modal_label");
-    modalLabel.innerHTML = `Contactez-moi <br>${name}`;
-    photographData.appendChild(h2);
-    const h3 = document.createElement( "h3" );
-    h3.textContent = `${city}, ${country}`;
-    photographData.appendChild(h3);
-    const slogan = document.createElement( "p" );
-    slogan.textContent = tagline;
-    photographData.appendChild(slogan);
-    const img = document.createElement( "img" );
-    img.setAttribute("src", picture);
-    img.setAttribute("alt", alt);
-    img.classList.add("photograph-portrait")
-    photographHeader.appendChild(img);
-    const extraBox = document.createElement( "div" );
-    extraBox.classList.add("photographer-extras");
-    main.appendChild(extraBox);
-    const p = document.createElement( "p" );
-    p.classList.add("price");
-    p.textContent = `${price}€ / jour`;
-    extraBox.appendChild(p);
+    const photographerModel = photographerFactory(photographerData, "full");
+    const photographerDOM = photographerModel.getPhotographerData();
+    photographHeader.appendChild(photographerDOM);
 }
 
 

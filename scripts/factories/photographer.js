@@ -1,8 +1,16 @@
 /* eslint-disable no-unused-vars */
-function photographerFactory(data) {
+function photographerFactory(data, type) {
     const { name, portrait, city, country, tagline, price, id, alt } = data;
 
     const picture = `assets/photographers/${portrait}`;
+
+    if (type === "thumbnail") {
+        return { name, picture, getUserCardDOM }
+    }
+
+    if (type === "full") {
+        return { name, picture, getPhotographerData }
+    }
 
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
@@ -35,5 +43,35 @@ function photographerFactory(data) {
         cardContent.appendChild(priceContainer);
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+
+    function getPhotographerData() {
+        const photographHeader = document.querySelector(".photograph-header");
+        const photographData = document.createElement( "div" );
+        photographData.classList.add("photograph-data");
+        photographHeader.appendChild(photographData);
+        const h2 = document.createElement( "h2" );
+        h2.textContent = name;
+        const modalLabel = document.querySelector(".modal_label");
+        modalLabel.innerHTML = `Contactez-moi <br>${name}`;
+        photographData.appendChild(h2);
+        const h3 = document.createElement( "h3" );
+        h3.textContent = `${city}, ${country}`;
+        photographData.appendChild(h3);
+        const slogan = document.createElement( "p" );
+        slogan.textContent = tagline;
+        photographData.appendChild(slogan);
+        const img = document.createElement( "img" );
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", alt);
+        img.classList.add("photograph-portrait")
+        photographHeader.appendChild(img);
+        const extraBox = document.createElement( "div" );
+        extraBox.classList.add("photographer-extras");
+        photographData.appendChild(extraBox);
+        const p = document.createElement( "p" );
+        p.classList.add("price");
+        p.textContent = `${price}€ / jour`;
+        extraBox.appendChild(p);
+        return (photographData);
+    }
 }

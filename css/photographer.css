@@ -248,6 +248,11 @@ textarea {
     right: 20px;
     border-radius: 5px;
     font-size: 24px;
+    z-index: 2;
+}
+
+.photographer-extras p {
+    color: black;
 }
 
 .likes {
