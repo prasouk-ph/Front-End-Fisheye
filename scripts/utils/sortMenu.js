@@ -31,6 +31,7 @@ function sortMedia() {
     const cardContainer = document.querySelector(".card-container");
     const extraBox = document.querySelector(".photographer-extras");
     const totalLikes = document.querySelector(".total-likes");
+    const photographerName = photographer.data[0].name;
     
     if (document.body.contains(cardContainer)) {
         gallery.removeChild(cardContainer);
@@ -52,5 +53,5 @@ function sortMedia() {
             sortByPopularity(photographer.medias);
             break
     }
-    displayPhotographerMedias(photographer.medias, photographer.data[0].name);
+    displayPhotographerMedias(photographer.medias, photographerName);
 }

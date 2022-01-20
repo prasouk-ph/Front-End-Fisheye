@@ -47,99 +47,26 @@ async function displayPhotographerData(photographerData) {
 }
 
 
-async function displayPhotographerMedias(data, key) {
-    // to generate new section tag
+async function displayPhotographerMedias(medias, photographerName) {
+    // to generate new section tag that will contains card
     const cardContainer = document.createElement( "div" );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
+    // to generate total likes count
     const totalLikes = document.createElement( "p" );
     totalLikes.classList.add("likes", "total-likes");
     totalLikes.setAttribute("count", totalLikesCount);
     totalLikes.textContent = totalLikesCount;
     document.querySelector(".photographer-extras").appendChild(totalLikes);
 
+    // to create media card
     let index = 0;
-    data.forEach(media => {
-        const { image, likes, title, video, alt } = media;
-        // to create a new media card
-        const card = document.createElement( "article" );
-        card.classList.add("card");
-        cardContainer.appendChild(card);
-
-        // to display media ressource
-        const picture = `assets/media/${key}/${image}`;
-        const preview = `assets/media/${key}/${video}`;
-        switch (true) { 
-            case (Object.prototype.hasOwnProperty.call(media, "image")): // when (data has key "image") is true
-            const img = document.createElement( "img" );
-            img.setAttribute("src", picture);
-            img.setAttribute("title", title);
-            img.setAttribute("index", index);
-            img.setAttribute("alt", alt);
-            img.tabIndex = 0;
-            img.classList.add("media");
-            img.addEventListener("click", openLightbox);
-            img.addEventListener("keydown", openLightboxWithKeyboard);
-            allMedia.push(img) // for modal focus
-            card.appendChild(img);
-            break;
-            case (Object.prototype.hasOwnProperty.call(media, "video")): // when (data has key "video") is true
-            const cardVideo = document.createElement( "video" );
-            // cardVideo.setAttribute("controls", "controls"); // without controls can"t be played
-            const sourceVideo = document.createElement( "source" );
-            sourceVideo.setAttribute("src", preview);
-            sourceVideo.setAttribute("type", "video/mp4");
-            sourceVideo.setAttribute("title", title);
-            sourceVideo.classList.add("media");
-            cardVideo.setAttribute("index", index); // should be on cardVideo and not sourceVideo
-            cardVideo.tabIndex = 0;
-            cardVideo.appendChild(sourceVideo);
-            cardVideo.addEventListener("click", openLightbox);
-            cardVideo.addEventListener("keydown", openLightboxWithKeyboard);
-            allMedia.push(cardVideo) // for modal focus
-            card.appendChild(cardVideo);        
-            break;
-        }
+    medias.forEach(media => {
+        const mediaModel = mediaCardFactory(media, photographerName, index);
+        const mediaCard = mediaModel.getMediaCard();
+        cardContainer.appendChild(mediaCard);
         index++;
-
-        // to display card content
-        const cardContent = document.createElement( "div" );
-        cardContent.classList.add("card-content");
-        card.appendChild(cardContent);
-        const h2 = document.createElement( "h2" );
-        h2.textContent = title;
-        cardContent.appendChild(h2);
-        const mediaLikes = document.createElement( "p" );
-        mediaLikes.classList.add("likes");
-        mediaLikes.setAttribute("count", likes);
-        mediaLikes.tabIndex = 0;
-        mediaLikes.textContent = likes;
-        likesCount.push(mediaLikes); // for modal focus
-        totalLikesCount += (parseInt(mediaLikes.getAttribute("count")));
-        totalLikes.setAttribute("count", totalLikesCount);
-        totalLikes.textContent = totalLikesCount;
-        cardContent.appendChild(mediaLikes);
-        mediaLikes.addEventListener("click", addLike);
-        mediaLikes.addEventListener("keydown", addLikeWithKeyboard);
-    });
-}
-
-
-function addLike(event) {
-    const sumLikes = document.querySelector(".total-likes");
-    let currentLikesCount = event.target.getAttribute("count");
-    let newCount = parseInt(currentLikesCount) + 1;
-    totalLikesCount ++;
-    event.target.setAttribute("count", newCount);
-    event.target.textContent = newCount;
-    sumLikes.setAttribute("count", totalLikesCount);
-    sumLikes.textContent = totalLikesCount;
-}
-
-function addLikeWithKeyboard(event) {
-    if (event.key == "Enter") {
-        addLike(event);
-    }
+    })
 }
 
 
