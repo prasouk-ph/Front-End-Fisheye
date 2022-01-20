@@ -235,7 +235,6 @@ textarea {
 }
 
 
-
 .photographer-extras {
     background-color: #DB8876;
     width: 400px;
@@ -383,26 +382,29 @@ textarea {
 .options_value {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     font-weight: bold;
     position: relative;
+    padding-left: 20px;
 }
 
 
 .options_value::after {
     content: "";
     height: 1px;
-    width: 140px;
+    width: 150px;
     background-color: white;
     position: absolute;
     top: 0;
+    left: 10px;
 }
 
 .current_value {
     position: relative;
     background-color: #901C1C;
     border-radius: 5px;
+    text-align: left;
+    padding-left: 20px;
 }
 
 .current_value[aria-expanded="true"] {
@@ -413,9 +415,9 @@ textarea {
     font-family: "Font Awesome 5 Free";
     content: "\f078";
     font-weight: bold;
-    font-size: 10px;
+    font-size: 18px;
     position: absolute;
-    right: 5px;
+    right: 15px;
 }
 
 .current_value[aria-expanded="true"]::after {
