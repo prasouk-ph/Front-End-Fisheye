@@ -10,7 +10,7 @@ function openLightbox(event) {
     // to prevent opening when sort menu is open
     let result = sortValue.getAttribute("aria-expanded");
     if (result == "true") {
-        return
+        return // stop openLightbox function
     }
 
     

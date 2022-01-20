@@ -11,11 +11,13 @@ function mediaCardFactory(media, photographerName, index) {
     card.classList.add("card");
     return { getMediaCard }
 
+
     function getMediaCard() {
         createMedia();
         createCardContent();
         return (card)
     }
+
 
     function createMedia() {
         switch (true) { 
@@ -34,7 +36,6 @@ function mediaCardFactory(media, photographerName, index) {
             allMedia.push(img) // for modal focus
             card.appendChild(img);
             return (img);
-            // break;
             case (Object.prototype.hasOwnProperty.call(media, "video")): // when (data has key "video") is true
             // eslint-disable-next-line no-case-declarations
             const cardVideo = document.createElement( "video" );
@@ -51,9 +52,8 @@ function mediaCardFactory(media, photographerName, index) {
             cardVideo.addEventListener("click", openLightbox);
             cardVideo.addEventListener("keydown", openLightboxWithKeyboard);
             allMedia.push(cardVideo) // for modal focus
-            card.appendChild(cardVideo);   
-            return (cardVideo);     
-            // break;
+            card.appendChild(cardVideo);
+            return (cardVideo);
         }
     }
 
@@ -80,6 +80,8 @@ function mediaCardFactory(media, photographerName, index) {
         return (cardContent);
     }
 
+    
+    // like function
     function addLike(event) {
         let currentLikesCount = event.target.getAttribute("count");
         let newCount = parseInt(currentLikesCount) + 1;
@@ -90,6 +92,7 @@ function mediaCardFactory(media, photographerName, index) {
         totalLikes.textContent = totalLikesCount;
     }
     
+
     function addLikeWithKeyboard(event) {
         if (event.key == "Enter") {
             addLike(event);

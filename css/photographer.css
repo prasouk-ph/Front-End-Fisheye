@@ -238,17 +238,18 @@ textarea {
 
 .photographer-extras {
     background-color: #DB8876;
-    width: 376px;
+    width: 400px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     position: -webkit-fixed;
     position: fixed;
     bottom: 0;
-    right: 20px;
-    border-radius: 5px;
+    right: 40px;
+    border-radius: 5px 5px 0 0;
     font-size: 24px;
     z-index: 2;
+    font-weight: 900;
 }
 
 .photographer-extras p {
