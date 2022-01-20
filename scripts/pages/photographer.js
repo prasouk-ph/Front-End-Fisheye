@@ -42,8 +42,10 @@ async function init() {
 async function displayPhotographerData(photographerData) {
     const photographHeader = document.querySelector(".photograph-header");
     const photographerModel = photographerFactory(photographerData, "full");
-    const photographerDOM = photographerModel.getPhotographerData();
-    photographHeader.appendChild(photographerDOM);
+    const photographerInfo = photographerModel.getPhotographerInfo();
+    const photographerPicture = photographerModel.getPhotographerPicture()
+    photographHeader.appendChild(photographerPicture);
+    photographHeader.appendChild(photographerInfo);
 }
 
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 function mediaCardFactory(media, photographerName, index) {
     const { image, likes, title, video, alt } = media;
@@ -39,7 +40,6 @@ function mediaCardFactory(media, photographerName, index) {
             case (Object.prototype.hasOwnProperty.call(media, "video")): // when (data has key "video") is true
             // eslint-disable-next-line no-case-declarations
             const cardVideo = document.createElement( "video" );
-            // cardVideo.setAttribute("controls", "controls"); // without controls can"t be played
             // eslint-disable-next-line no-case-declarations
             const sourceVideo = document.createElement( "source" );
             sourceVideo.setAttribute("src", preview);

@@ -5,11 +5,11 @@ function photographerFactory(data, type) {
     const picture = `assets/photographers/${portrait}`;
 
     if (type === "thumbnail") {
-        return { name, picture, getUserCardDOM }
+        return { getUserCardDOM }
     }
 
     if (type === "full") {
-        return { name, picture, getPhotographerData }
+        return { getPhotographerInfo, getPhotographerPicture }
     }
 
     function getUserCardDOM() {
@@ -44,11 +44,9 @@ function photographerFactory(data, type) {
         return (article);
     }
 
-    function getPhotographerData() {
-        const photographHeader = document.querySelector(".photograph-header");
+    function getPhotographerInfo() {
         const photographData = document.createElement( "div" );
         photographData.classList.add("photograph-data");
-        photographHeader.appendChild(photographData);
         const h2 = document.createElement( "h2" );
         h2.textContent = name;
         const modalLabel = document.querySelector(".modal_label");
@@ -60,11 +58,6 @@ function photographerFactory(data, type) {
         const slogan = document.createElement( "p" );
         slogan.textContent = tagline;
         photographData.appendChild(slogan);
-        const img = document.createElement( "img" );
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", alt);
-        img.classList.add("photograph-portrait")
-        photographHeader.appendChild(img);
         const extraBox = document.createElement( "div" );
         extraBox.classList.add("photographer-extras");
         photographData.appendChild(extraBox);
@@ -73,5 +66,13 @@ function photographerFactory(data, type) {
         p.textContent = `${price}€ / jour`;
         extraBox.appendChild(p);
         return (photographData);
+    }
+
+    function getPhotographerPicture() {
+        const img = document.createElement( "img" );
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", alt);
+        img.classList.add("photograph-portrait")
+        return (img);
     }
 }
