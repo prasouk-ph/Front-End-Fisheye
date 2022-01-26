@@ -17,11 +17,14 @@ function displayModal() {
     if (result == "true") {
         return
     }
+
 	modal.style.display = "block";
     modal.setAttribute("aria-hidden", "false");
     main.setAttribute("aria-hidden", "true");
     header.setAttribute("aria-hidden", "true");
     document.addEventListener("keydown", keyboardAccess);
+
+    // focus management
     buttonClose.focus();
     currentValue.tabIndex = -1;
     options.tabIndex = -1;
@@ -41,9 +44,9 @@ function closeModal() {
     modal.setAttribute("aria-hidden", "true");
     main.setAttribute("aria-hidden", "false");
     header.setAttribute("aria-hidden", "false");
-
-    
     document.removeEventListener("keydown", keyboardAccess);
+
+    // focus management
     currentValue.tabIndex = 0;
     optionPopularity.tabIndex = 0;
     optionDate.tabIndex = 0;
@@ -61,6 +64,7 @@ function formValidate(event) {
     firstCheck();
     lastCheck();
     messageCheck(); 
+
     if (
     firstCheck() &&
     lastCheck() &&
@@ -69,6 +73,7 @@ function formValidate(event) {
     console.log(`Prénom : ${firstName.value}`);
     console.log(`Nom : ${lastName.value}`);
     console.log(`Message : ${message.value}`);
+
     form.reset();
     closeModal();
     }
@@ -87,6 +92,7 @@ function firstCheck() {
     // regex interpretation: start with any letter, after the first letter can contains 0 or 1 "-" , should finish with a letter
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.querySelector("#firstname-input");
+
     if (value.length < 2 || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
         firstNameError.setAttribute("aria-hidden", "false");
@@ -103,6 +109,7 @@ function lastCheck() {
     let value = lastName.value;
     let letters = /^[A-Za-zÀ-ÿ]+(-{0,1})[A-Za-zÀ-ÿ]+$/;
     let input = document.querySelector("#lastname-input");
+
     if (value.length < 2 || letters.test(value) == false) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
         lastNameError.setAttribute("aria-hidden", "false");
@@ -118,6 +125,7 @@ function lastCheck() {
 function messageCheck() {
     let value = message.value;
     let input = document.querySelector("#message-input");
+
     if (value.length < 2) {
         inputIsNotvalid(input, "Veuillez entrer 2 caractères ou plus");
         messageError.setAttribute("aria-hidden", "false");

@@ -270,6 +270,20 @@ textarea {
     font-size: 24px;
 }
 
+.total-likes {
+    font-size: 24px;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.total-likes::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f004";
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 24px;
+}
+
 .card .likes:active {
     transform: scale(1.2);
 }

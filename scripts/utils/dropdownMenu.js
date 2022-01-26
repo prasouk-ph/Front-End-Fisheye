@@ -21,12 +21,15 @@ function openDropdown(event) {
     let choice = event.target;
     document.addEventListener("click", closeDropdownOnClick);
     document.addEventListener("keydown", closeDropdownWithKeyboard);
+
     currentValue.textContent = choice.textContent;
     currentValue.setAttribute("aria-expanded", "true");
     optionPopularity.style.display = "flex";
     optionDate.style.display = "flex";
     optionTitle.style.display = "flex";
     options.style.display = "block";
+
+    // focus management
     logoLink.tabIndex = -1;
     contactButton.tabIndex = -1;
     allMedia.forEach(media => media.tabIndex = -1);
@@ -50,8 +53,11 @@ function openDropdown(event) {
 function closeDropdown() {
         document.removeEventListener("keydown", closeDropdownWithKeyboard);
         document.removeEventListener("click", closeDropdownOnClick);
+
         options.style.display = "none";
         currentValue.setAttribute("aria-expanded", "false");
+
+        // focus management
         logoLink.tabIndex = 0;
         contactButton.tabIndex = 0;
         allMedia.forEach(media => media.tabIndex = 0);

@@ -42,10 +42,10 @@ async function init() {
 async function displayPhotographerData(photographerData) {
     const photographHeader = document.querySelector(".photograph-header");
     const photographerModel = photographerFactory(photographerData, "full");
+    // const photographerModel = new Photographer(photographerData, "full");
     const photographerInfo = photographerModel.getPhotographerInfo();
     const photographerPicture = photographerModel.getPhotographerPicture()
-    photographHeader.appendChild(photographerPicture);
-    photographHeader.appendChild(photographerInfo);
+    photographHeader.append(photographerPicture, photographerInfo);
 }
 
 
@@ -54,9 +54,10 @@ async function displayPhotographerMedias(medias, photographerName) {
     const cardContainer = document.createElement( "div" );
     cardContainer.classList.add("card-container");
     gallery.appendChild(cardContainer);
+    
     // to generate total likes count
     const totalLikes = document.createElement( "p" );
-    totalLikes.classList.add("likes", "total-likes");
+    totalLikes.classList.add("total-likes");
     totalLikes.setAttribute("count", totalLikesCount);
     totalLikes.textContent = totalLikesCount;
     document.querySelector(".photographer-extras").appendChild(totalLikes);
@@ -65,6 +66,7 @@ async function displayPhotographerMedias(medias, photographerName) {
     let index = 0;
     medias.forEach(media => {
         const mediaModel = mediaCardFactory(media, photographerName, index);
+        // const mediaModel = new MediaFactory(media, photographerName, index);
         const mediaCard = mediaModel.getMediaCard();
         cardContainer.appendChild(mediaCard);
         index++;

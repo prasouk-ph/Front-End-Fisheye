@@ -17,32 +17,40 @@ function openLightbox(event) {
     const header = document.querySelector("header");
     main.setAttribute("aria-hidden", "true");
     header.setAttribute("aria-hidden", "true");
+
     const lightbox = document.createElement( "div" );
     lightbox.classList.add("lightbox");
     main.after(lightbox);
+
     const lightboxTitle = document.createElement( "h2" );
     lightboxTitle.setAttribute("aria-label", "Galerie");
     lightboxTitle.classList.add("hidden-for-at");
     lightboxTitle.textContent = "Galerie";
+
     const lightboxCloseButton = document.createElement( "img" );
     lightboxCloseButton.classList.add("lightbox__close");
     lightboxCloseButton.setAttribute("src", "assets/icons/redclose.svg");
     lightboxCloseButton.tabIndex = 0;
+
     const lightboxNextButton = document.createElement( "button" );
     lightboxNextButton.classList.add("lightbox__next");
     lightboxNextButton.textContent = String.fromCharCode(10095); // unicode for next sign
+
     const lightboxPreviousButton = document.createElement( "button" );
     lightboxPreviousButton.classList.add("lightbox__prev");
     lightboxPreviousButton.textContent = String.fromCharCode(10094); // unicode for previous sign
+
     const lightboxContainer = document.createElement( "div" );
     lightboxContainer.classList.add("lightbox__container");
     lightbox.append(lightboxTitle, lightboxCloseButton, lightboxNextButton, lightboxPreviousButton, lightboxContainer);
     let currentIndex = event.target.getAttribute("index");
+
     // event
     lightboxCloseButton.addEventListener("click", closeLightbox);
     lightboxNextButton.addEventListener("click", nextMedia);
     lightboxPreviousButton.addEventListener("click", previousMedia);
     document.addEventListener("keydown", lightboxNavigationWithKeyboard);
+
     // Appearance
     lightbox.style.display = "flex";
     lightboxCloseButton.focus();
@@ -52,6 +60,8 @@ function openLightbox(event) {
     function closeLightbox() {
         lightbox.remove();
         document.removeEventListener("keydown", lightboxNavigationWithKeyboard);
+
+        // focus management
         currentValue.tabIndex = 0;
         optionPopularity.tabIndex = 0;
         optionDate.tabIndex = 0;
@@ -103,12 +113,14 @@ function openLightbox(event) {
 
     function displayMediaInLightbox() {
         lightboxContainer.innerHTML = "";
+
         if (allMedia[currentIndex].tagName == "IMG") {
             let currentMedia = document.createElement( "img" );
             currentMedia.setAttribute("src", allMedia[currentIndex].src);
             currentMedia.setAttribute("alt", allMedia[currentIndex].alt);
             lightboxContainer.appendChild(currentMedia);
         }
+
         if (allMedia[currentIndex].tagName == "VIDEO") {
             let currentMedia = document.createElement( "video" );
             currentMedia.setAttribute("src", allMedia[currentIndex].firstChild.src);
@@ -117,12 +129,14 @@ function openLightbox(event) {
             currentMedia.setAttribute("title", allMedia[currentIndex].firstChild.src);
             lightboxContainer.appendChild(currentMedia);
         }
+
         const mediaTitle = document.createElement( "h2" );
         const titleAttr = allMedia[currentIndex].getAttribute("title")
         mediaTitle.classList.add("media-title");
         mediaTitle.textContent = titleAttr;
         lightboxContainer.appendChild(mediaTitle);
 
+        // focus management
         currentValue.tabIndex = -1;
         options.tabIndex = -1;
         optionPopularity.tabIndex = -1;
@@ -135,4 +149,4 @@ function openLightbox(event) {
         mediaVideos.forEach(media => media.tabIndex = -1);
         likesCount.forEach(media => media.tabIndex = -1);
     }
-}  
+}
