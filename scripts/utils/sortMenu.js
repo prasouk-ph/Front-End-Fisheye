@@ -53,5 +53,7 @@ function sortMedia() {
             sortByPopularity(photographer.medias);
             break
     }
+
+    
     displayPhotographerMedias(photographer.medias, photographerName);
 }

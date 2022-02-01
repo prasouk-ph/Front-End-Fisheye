@@ -72,6 +72,7 @@ function closeDropdownWithKeyboard(event) {
     }
 }
 
+
 function closeDropdownOnClick(event) {
     if (event.target.className.includes("current_value")) {
         options.style.display = "block";

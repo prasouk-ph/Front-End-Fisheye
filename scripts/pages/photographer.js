@@ -29,22 +29,26 @@ async function init() {
     const currentPhotographerId = searchParams.get("id");
     const { photographers, media } = await getData(); // collect every key/value from the keys photographers and media
     const photographerData = photographers.filter((photograph) => photograph.id == currentPhotographerId); // filter allows to collect every key and value from every array including key: photograph.id with value corresponding to the const photographerId or filter allows to collect all data from array when the array has the same photographId as the current photographer id
+    
     if (photographerData.length == 0) {
         return console.log("ID inexistant !");
     }
+
     const photographerMedias = media.filter((media) => media.photographerId == currentPhotographerId);
     photographer = {data: [...photographerData], medias: [...photographerMedias]};
+
     displayPhotographerData(photographer.data[0]);
+
     sortMedia(photographer.medias); // contain display photographer medias
 }
 
 
 async function displayPhotographerData(photographerData) {
     const photographHeader = document.querySelector(".photograph-header");
-    const photographerModel = photographerFactory(photographerData, "full");
-    // const photographerModel = new Photographer(photographerData, "full");
+    const photographerModel = new Photographer(photographerData, "full");
     const photographerInfo = photographerModel.getPhotographerInfo();
     const photographerPicture = photographerModel.getPhotographerPicture()
+
     photographHeader.append(photographerPicture, photographerInfo);
 }
 
@@ -65,9 +69,9 @@ async function displayPhotographerMedias(medias, photographerName) {
     // to create media card
     let index = 0;
     medias.forEach(media => {
-        const mediaModel = mediaCardFactory(media, photographerName, index);
-        // const mediaModel = new MediaFactory(media, photographerName, index);
+        const mediaModel = new MediaFactory(media, photographerName, index);
         const mediaCard = mediaModel.getMediaCard();
+        
         cardContainer.appendChild(mediaCard);
         index++;
     })

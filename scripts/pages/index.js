@@ -5,19 +5,20 @@ async function displayData(photographers) {
 
         photographers.forEach((photographer) => {
             // eslint-disable-next-line no-undef
-            const photographerModel = photographerFactory(photographer, "thumbnail");
-            const userCardDOM = photographerModel.getUserCardDOM();
-            // const photographerModel = new Photographer(photographer, "thumbnail");
-            // const userCardDOM = photographerModel.getCard();
+            const photographerModel = new Photographer(photographer, "thumbnail");
+            const userCardDOM = photographerModel.getCard();
             photographersSection.appendChild(userCardDOM);
         });
     }
+
 
 async function init() {
     // Récupère les datas des photographes        
     // eslint-disable-next-line no-undef
     const { photographers } = await getData();
+    
     displayData(photographers);
 }
+
 
 init();

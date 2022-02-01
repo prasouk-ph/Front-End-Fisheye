@@ -9,6 +9,7 @@ function openLightboxWithKeyboard(event) {
 function openLightbox(event) {
     // to prevent opening when sort menu is open
     let result = sortValue.getAttribute("aria-expanded");
+    
     if (result == "true") {
         return // stop openLightbox function
     }
@@ -54,6 +55,7 @@ function openLightbox(event) {
     // Appearance
     lightbox.style.display = "flex";
     lightboxCloseButton.focus();
+
     displayMediaInLightbox();
     
 
@@ -77,18 +79,22 @@ function openLightbox(event) {
 
     function nextMedia() {
         currentIndex++;
+
         if (currentIndex > allMedia.length - 1) {
             currentIndex = 0;
         }
+
         displayMediaInLightbox();
     }
 
 
     function previousMedia() {
         currentIndex--;
+
         if (currentIndex < 0) {
             currentIndex = allMedia.length - 1;
         }
+
         displayMediaInLightbox();
     }
 
