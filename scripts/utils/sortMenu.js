@@ -36,7 +36,7 @@ function sortMedia() {
     if (document.body.contains(cardContainer)) {
         gallery.removeChild(cardContainer);
         extraBox.removeChild(totalLikes);
-        allMedia.length = 0; // empty allMedia array
+        allMedia.length = 0; // clear allMedia array
         mediaVideos.length = 0;
         totalLikesCount = 0;
     }
