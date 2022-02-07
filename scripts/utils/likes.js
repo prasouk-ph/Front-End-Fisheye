@@ -3,7 +3,7 @@
 function addLike(event) {
     const totalLikes = document.querySelector(".total-likes");
     let currentLikesCount = event.target.getAttribute("count");
-    let newCount = parseInt(currentLikesCount) + 1;
+    let newCount = parseInt(currentLikesCount) + 1; // parseInt convert string to number
 
     totalLikesCount ++;
 

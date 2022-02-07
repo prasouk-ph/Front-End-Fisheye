@@ -4,6 +4,8 @@ const firstName = document.querySelector("#firstname");
 const firstNameError = document.querySelector("#firstname-format");
 const lastName = document.querySelector("#lastname");
 const lastNameError = document.querySelector("#lastname-format");
+const email = document.querySelector("#email");
+const emailError = document.querySelector("#email-format");
 const message = document.querySelector("#message");
 const messageError = document.querySelector("#message-format");
 const buttonClose = document.querySelector(".modal_button");
@@ -63,11 +65,13 @@ function formValidate(event) {
     event.preventDefault();
     firstCheck();
     lastCheck();
+    emailCheck();
     messageCheck(); 
 
     if (
     firstCheck() &&
     lastCheck() &&
+    emailCheck() &&
     messageCheck() 
     ) {
     console.log(`Prénom : ${firstName.value}`);
@@ -83,6 +87,7 @@ function formValidate(event) {
 // event
 firstName.addEventListener("input", firstCheck);
 lastName.addEventListener("input", lastCheck);
+email.addEventListener("input", emailCheck);
 message.addEventListener("input", messageCheck);
 
 
@@ -117,6 +122,20 @@ function lastCheck() {
     } else {
         inputValid(input);
         lastNameError.setAttribute("aria-hidden", "true");
+        return true;
+    }
+}
+
+
+function emailCheck() {
+    let value = email.value;
+	let regex = /^[A-Za-z0-9_.-]+@[A-Za-z]+\.[A-Za-z]+$/;
+    let input = document.querySelector("#email-input");
+    if (regex.test(value) == false) {
+        inputIsNotvalid(input, "Veuillez entrer un email valide");
+        return false;
+    } else {
+        inputValid(input);
         return true;
     }
 }

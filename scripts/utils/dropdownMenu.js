@@ -7,7 +7,7 @@ sortOptionsListener.observe(sortValue, { childList: true } ); // define the elem
 
 function mutationsReaction(mutationsList) {
     for(let mutation of mutationsList) {
-        if (mutation.addedNodes.length > 0 && Object.entries(photographer).length > 0) { // when textContent change and if photographer is empty
+        if (mutation.addedNodes.length > 0 && Object.entries(photographer).length > 0) { // when textContent change and if photographer is not empty
             sortMedia();
         } else {
             console.log("Aucune donnée trouvée")

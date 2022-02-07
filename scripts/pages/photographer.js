@@ -47,7 +47,7 @@ async function displayPhotographerData(photographerData) {
     const photographHeader = document.querySelector(".photograph-header");
     const photographerModel = new Photographer(photographerData, "full");
     const photographerInfo = photographerModel.getPhotographerInfo();
-    const photographerPicture = photographerModel.getPhotographerPicture()
+    const photographerPicture = photographerModel.getPhotographerPicture();
 
     photographHeader.append(photographerPicture, photographerInfo);
 }
